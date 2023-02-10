@@ -1,0 +1,1 @@
+"./ezdsp5502.obj" "./ezdsp5502_gpio.obj" "./ezdsp5502_i2c.obj" "./ezdsp5502_i2cgpio.obj" "./lcd.obj" "./main.obj" "./oled_test.obj" "../lnkx.cmd" -l"csl5502x.lib" -l"rts55x.lib" 

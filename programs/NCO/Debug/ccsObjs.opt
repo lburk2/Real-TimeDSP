@@ -1,0 +1,1 @@
+"./aic3204.obj" "./ezdsp5502.obj" "./ezdsp5502_gpio.obj" "./ezdsp5502_i2c.obj" "./ezdsp5502_i2cgpio.obj" "./ezdsp5502_mcbsp.obj" "./main.obj" "./myNCO.obj" "../lnkx.cmd" -l"csl5502x.lib" -l"ezdsp5502bsl.lib" -l"rts55x.lib" 

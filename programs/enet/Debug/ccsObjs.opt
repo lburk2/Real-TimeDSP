@@ -1,0 +1,1 @@
+"./enet.obj" "./enet_test.obj" "./main.obj" "../lnkx.cmd" -lezdsp5502bsl.lib -lcsl5502x.lib -lrts55x.lib 

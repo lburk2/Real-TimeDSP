@@ -1,0 +1,1 @@
+"./aic3204.obj" "./dma.obj" "./i2cgpio.obj" "./lcd.obj" "./main.obj" "./oled.obj" "./pll.obj" "./timer.obj" "./vectors.obj" "../lnkx.cmd" -lezdsp5502bsl.lib -lcsl5502x.lib -lrts55x.lib 

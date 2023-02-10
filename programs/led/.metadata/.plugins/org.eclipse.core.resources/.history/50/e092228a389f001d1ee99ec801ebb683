@@ -1,0 +1,69 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+# Each subdirectory must supply rules for building sources it contributes
+aic3204.obj: ../src/aic3204.c $(GEN_OPTS) | $(GEN_HDRS)
+	@echo 'Building file: $<'
+	@echo 'Invoking: C5500 Compiler'
+	"D:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 -g --define="_DEBUG" --define="C55X" --include_path="D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include" --include_path="../inc" --include_path="../../../C55xxCSL/include" --include_path="../../../include" --diag_warning=225 --ptrdiff_size=32 --algebraic --memory_model=large --asm_source=algebraic --preproc_with_compile --preproc_dependency="src/aic3204.d" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+dma.obj: ../src/dma.c $(GEN_OPTS) | $(GEN_HDRS)
+	@echo 'Building file: $<'
+	@echo 'Invoking: C5500 Compiler'
+	"D:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 -g --define="_DEBUG" --define="C55X" --include_path="D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include" --include_path="../inc" --include_path="../../../C55xxCSL/include" --include_path="../../../include" --diag_warning=225 --ptrdiff_size=32 --algebraic --memory_model=large --asm_source=algebraic --preproc_with_compile --preproc_dependency="src/dma.d" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+i2cgpio.obj: ../src/i2cgpio.c $(GEN_OPTS) | $(GEN_HDRS)
+	@echo 'Building file: $<'
+	@echo 'Invoking: C5500 Compiler'
+	"D:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 -g --define="_DEBUG" --define="C55X" --include_path="D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include" --include_path="../inc" --include_path="../../../C55xxCSL/include" --include_path="../../../include" --diag_warning=225 --ptrdiff_size=32 --algebraic --memory_model=large --asm_source=algebraic --preproc_with_compile --preproc_dependency="src/i2cgpio.d" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+lcd.obj: ../src/lcd.c $(GEN_OPTS) | $(GEN_HDRS)
+	@echo 'Building file: $<'
+	@echo 'Invoking: C5500 Compiler'
+	"D:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 -g --define="_DEBUG" --define="C55X" --include_path="D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include" --include_path="../inc" --include_path="../../../C55xxCSL/include" --include_path="../../../include" --diag_warning=225 --ptrdiff_size=32 --algebraic --memory_model=large --asm_source=algebraic --preproc_with_compile --preproc_dependency="src/lcd.d" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+main.obj: ../src/main.c $(GEN_OPTS) | $(GEN_HDRS)
+	@echo 'Building file: $<'
+	@echo 'Invoking: C5500 Compiler'
+	"D:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 -g --define="_DEBUG" --define="C55X" --include_path="D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include" --include_path="../inc" --include_path="../../../C55xxCSL/include" --include_path="../../../include" --diag_warning=225 --ptrdiff_size=32 --algebraic --memory_model=large --asm_source=algebraic --preproc_with_compile --preproc_dependency="src/main.d" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+oled.obj: ../src/oled.c $(GEN_OPTS) | $(GEN_HDRS)
+	@echo 'Building file: $<'
+	@echo 'Invoking: C5500 Compiler'
+	"D:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 -g --define="_DEBUG" --define="C55X" --include_path="D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include" --include_path="../inc" --include_path="../../../C55xxCSL/include" --include_path="../../../include" --diag_warning=225 --ptrdiff_size=32 --algebraic --memory_model=large --asm_source=algebraic --preproc_with_compile --preproc_dependency="src/oled.d" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+pll.obj: ../src/pll.c $(GEN_OPTS) | $(GEN_HDRS)
+	@echo 'Building file: $<'
+	@echo 'Invoking: C5500 Compiler'
+	"D:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 -g --define="_DEBUG" --define="C55X" --include_path="D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include" --include_path="../inc" --include_path="../../../C55xxCSL/include" --include_path="../../../include" --diag_warning=225 --ptrdiff_size=32 --algebraic --memory_model=large --asm_source=algebraic --preproc_with_compile --preproc_dependency="src/pll.d" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+timer.obj: ../src/timer.c $(GEN_OPTS) | $(GEN_HDRS)
+	@echo 'Building file: $<'
+	@echo 'Invoking: C5500 Compiler'
+	"D:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 -g --define="_DEBUG" --define="C55X" --include_path="D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include" --include_path="../inc" --include_path="../../../C55xxCSL/include" --include_path="../../../include" --diag_warning=225 --ptrdiff_size=32 --algebraic --memory_model=large --asm_source=algebraic --preproc_with_compile --preproc_dependency="src/timer.d" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+vectors.obj: ../src/vectors.asm $(GEN_OPTS) | $(GEN_HDRS)
+	@echo 'Building file: $<'
+	@echo 'Invoking: C5500 Compiler'
+	"D:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 -g --define="_DEBUG" --define="C55X" --include_path="D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include" --include_path="../inc" --include_path="../../../C55xxCSL/include" --include_path="../../../include" --diag_warning=225 --ptrdiff_size=32 --algebraic --memory_model=large --asm_source=algebraic --preproc_with_compile --preproc_dependency="src/vectors.d" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+
