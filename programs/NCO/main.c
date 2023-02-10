@@ -16,8 +16,6 @@
 #include "ezdsp5502_i2cgpio.h"
 #include "myNCO.h"
 
-
-//extern Int16 aic3204_test( );
 extern Int16 aic3204_setup( );
 extern void aic3204_process(void);
 void aic3204_output_sample(int16_t left, int16_t right);
@@ -38,7 +36,7 @@ void main( void )
 
     aic3204_setup();
 
-    nco_set_frequency(100);
+    nco_set_frequency(200);
     nco_set_attenuation(0);
 
     int16_t outputSample;
@@ -61,5 +59,6 @@ void main( void )
 			}
 			f += 1;
     	}
+
     }
 }
