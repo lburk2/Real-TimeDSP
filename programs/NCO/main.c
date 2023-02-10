@@ -6,7 +6,7 @@
 //													//
 //	Created: 2023-02-08								//
 //													//
-//	Last Revision: 2023-02-08						//
+//	Last Revision: 2023-02-10						//
 //													//
 //////////////////////////////////////////////////////
 
@@ -36,29 +36,33 @@ void main( void )
 
     aic3204_setup();
 
+    /* Set frequency and attenuation factor*/
     nco_set_frequency(200);
     nco_set_attenuation(0);
 
+    /* Variable Declaration */
     int16_t outputSample;
     int16_t f = 20;
     int i = 0;
 
     while(1)
     {
-//    	outputSample = nco_run_sinusoid();
-//    	outputSample = nco_run_triangle();
-//    	aic3204_output_sample(outputSample, outputSample);
+    	outputSample = nco_run_sinusoid(); //get next sinusoid sample
+//    	outputSample = nco_run_triangle(); //get enxt triangle sample
+    	aic3204_output_sample(outputSample, outputSample);	//output sample
 
-    	 if (f < 1000){
-			nco_set_frequency(f);
-			for (i = 0; i<=255; i++)
-			{
-				outputSample = nco_run_sinusoid();
-
-				aic3204_output_sample(outputSample, outputSample);
-			}
-			f += 1;
-    	}
+    	/* Chirp */
+//    	 if (f < 1000) // limit max frequency to 1000 Hz
+//    	{
+//			nco_set_frequency(f); // set frequecy
+//			for (i = 0; i<=255; i++) // loop an entire period of the signal
+//			{
+//				outputSample = nco_run_sinusoid(); // get samples
+//
+//				aic3204_output_sample(outputSample, outputSample);// output samples
+//			}
+//			f += 1;//increment frequency by 1 Hz
+//    	}
 
     }
 }
