@@ -38,25 +38,28 @@ void main( void )
 
     aic3204_setup();
 
-    nco_set_frequency(1000);
+    nco_set_frequency(100);
+    nco_set_attenuation(0);
 
     int16_t outputSample;
     int16_t f = 20;
+    int i = 0;
 
     while(1)
     {
-    	// outputSample = nco_run_sinusoid();
-    	// outputSample = nco_run_triangle();
+//    	outputSample = nco_run_sinusoid();
+//    	outputSample = nco_run_triangle();
+//    	aic3204_output_sample(outputSample, outputSample);
 
-    	if (f < 10000){
+    	 if (f < 1000){
 			nco_set_frequency(f);
-			for (int i = 0; i<=255)
+			for (i = 0; i<=255; i++)
 			{
 				outputSample = nco_run_sinusoid();
 
 				aic3204_output_sample(outputSample, outputSample);
 			}
-			f += 100;
+			f += 1;
     	}
     }
 }
