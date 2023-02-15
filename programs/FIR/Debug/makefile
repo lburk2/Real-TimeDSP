@@ -10,14 +10,15 @@ GEN_OPTS__FLAG :=
 GEN_CMDS__FLAG := 
 
 ORDERED_OBJS += \
-"./aic3204.obj" \
+"./aic3204_loop_linein.obj" \
+"./aic3204_test.obj" \
+"./aic3204_tone_headphone.obj" \
 "./ezdsp5502.obj" \
 "./ezdsp5502_gpio.obj" \
 "./ezdsp5502_i2c.obj" \
 "./ezdsp5502_i2cgpio.obj" \
 "./ezdsp5502_mcbsp.obj" \
 "./main.obj" \
-"./myNCO.obj" \
 "../lnkx.cmd" \
 $(GEN_CMDS__FLAG) \
 -l"csl5502x.lib" \
@@ -158,8 +159,8 @@ aic3204.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(EXE_OUTPUTS__QUOTED)$(BIN_OUTPUTS__QUOTED)
-	-$(RM) "aic3204.pp" "ezdsp5502.pp" "ezdsp5502_gpio.pp" "ezdsp5502_i2c.pp" "ezdsp5502_i2cgpio.pp" "ezdsp5502_mcbsp.pp" "main.pp" "myNCO.pp" 
-	-$(RM) "aic3204.obj" "ezdsp5502.obj" "ezdsp5502_gpio.obj" "ezdsp5502_i2c.obj" "ezdsp5502_i2cgpio.obj" "ezdsp5502_mcbsp.obj" "main.obj" "myNCO.obj" 
+	-$(RM) "aic3204_loop_linein.pp" "aic3204_test.pp" "aic3204_tone_headphone.pp" "ezdsp5502.pp" "ezdsp5502_gpio.pp" "ezdsp5502_i2c.pp" "ezdsp5502_i2cgpio.pp" "ezdsp5502_mcbsp.pp" "main.pp" 
+	-$(RM) "aic3204_loop_linein.obj" "aic3204_test.obj" "aic3204_tone_headphone.obj" "ezdsp5502.obj" "ezdsp5502_gpio.obj" "ezdsp5502_i2c.obj" "ezdsp5502_i2cgpio.obj" "ezdsp5502_mcbsp.obj" "main.obj" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
