@@ -15,11 +15,14 @@
 #include "ezdsp5502.h"
 #include "ezdsp5502_i2cgpio.h"
 #include "myFIR.h"
+#include "testVector.h"
 
-extern Int16 aic3204_setup( );
+extern int16_t aic3204_setup( );
 extern void aic3204_process(void);
 void aic3204_output_sample(int16_t left, int16_t right);
-
+int16_t fir1_delayLine[62];
+int16_t testVectorOutput[240];
+const int16_t fir1Coeffs[62] = {};
 
 void main( void )
 {
@@ -36,11 +39,15 @@ void main( void )
 
     aic3204_setup();
 
+    memset(dl,0,siteof(dl))
 
     while(1)
     {
-
-
+    	for(int k=0,k<240,i++) //check on 240, need length of test vector
+    	{
+    		myFIR(*testVector[k],*h,*testVectorOutput[k],*delayLine,1,62);
+    	}
 
     }
 }
+
