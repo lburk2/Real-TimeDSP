@@ -10,9 +10,7 @@ GEN_OPTS__FLAG :=
 GEN_CMDS__FLAG := 
 
 ORDERED_OBJS += \
-"./aic3204_loop_linein.obj" \
-"./aic3204_test.obj" \
-"./aic3204_tone_headphone.obj" \
+"./aic3204.obj" \
 "./ezdsp5502.obj" \
 "./ezdsp5502_gpio.obj" \
 "./ezdsp5502_i2c.obj" \
@@ -141,15 +139,15 @@ all: aic3204.out
 aic3204.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: C5500 Linker'
-	"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 -g --diag_warning=225 --ptrdiff_size=32 --memory_model=large -z -m"aic3204.map" --warn_sections -i"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/lib" -i"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include" -i"Z:/Documents/Real-Time DSP/Real-TimeDSP/lib" -i"Z:/Documents/Real-Time DSP/Real-TimeDSP/C55xxCSL/lib" --reread_libs --xml_link_info="aic3204_linkInfo.xml" --rom_model -o "aic3204.out" $(ORDERED_OBJS)
+	"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 -g --diag_warning=225 --ptrdiff_size=32 --memory_model=large -z -m"aic3204.map" --warn_sections -i"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/lib" -i"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include" -i"C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/lib" -i"C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/lib" --reread_libs --xml_link_info="aic3204_linkInfo.xml" --rom_model -o "aic3204.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
 # Other Targets
 clean:
 	-$(RM) $(EXE_OUTPUTS__QUOTED)
-	-$(RM) "aic3204_loop_linein.pp" "aic3204_test.pp" "aic3204_tone_headphone.pp" "ezdsp5502.pp" "ezdsp5502_gpio.pp" "ezdsp5502_i2c.pp" "ezdsp5502_i2cgpio.pp" "ezdsp5502_mcbsp.pp" "main.pp" "myFIR.pp" 
-	-$(RM) "aic3204_loop_linein.obj" "aic3204_test.obj" "aic3204_tone_headphone.obj" "ezdsp5502.obj" "ezdsp5502_gpio.obj" "ezdsp5502_i2c.obj" "ezdsp5502_i2cgpio.obj" "ezdsp5502_mcbsp.obj" "main.obj" "myFIR.obj" 
+	-$(RM) "aic3204.pp" "ezdsp5502.pp" "ezdsp5502_gpio.pp" "ezdsp5502_i2c.pp" "ezdsp5502_i2cgpio.pp" "ezdsp5502_mcbsp.pp" "main.pp" "myFIR.pp" 
+	-$(RM) "aic3204.obj" "ezdsp5502.obj" "ezdsp5502_gpio.obj" "ezdsp5502_i2c.obj" "ezdsp5502_i2cgpio.obj" "ezdsp5502_mcbsp.obj" "main.obj" "myFIR.obj" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
