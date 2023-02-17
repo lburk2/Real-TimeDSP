@@ -139,7 +139,7 @@ all: aic3204.out
 aic3204.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: C5500 Linker'
-	"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 -g --diag_warning=225 --ptrdiff_size=32 --memory_model=large -z -m"aic3204.map" --warn_sections -i"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/lib" -i"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include" -i"C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/lib" -i"C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/lib" --reread_libs --xml_link_info="aic3204_linkInfo.xml" --rom_model -o "aic3204.out" $(ORDERED_OBJS)
+	"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 -g --diag_warning=225 --ptrdiff_size=32 --memory_model=large -z -m"aic3204.map" --warn_sections -i"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/lib" -i"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include" -i"Z:/Documents/Real-Time DSP/Real-TimeDSP/lib" -i"Z:/Documents/Real-Time DSP/Real-TimeDSP/C55xxCSL/lib" --reread_libs --xml_link_info="aic3204_linkInfo.xml" --rom_model -o "aic3204.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
