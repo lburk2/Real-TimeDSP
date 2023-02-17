@@ -15,7 +15,8 @@ C_SRCS += \
 ../ezdsp5502_i2c.c \
 ../ezdsp5502_i2cgpio.c \
 ../ezdsp5502_mcbsp.c \
-../main.c 
+../main.c \
+../myFIR.c 
 
 OBJS += \
 ./aic3204_loop_linein.obj \
@@ -26,7 +27,8 @@ OBJS += \
 ./ezdsp5502_i2c.obj \
 ./ezdsp5502_i2cgpio.obj \
 ./ezdsp5502_mcbsp.obj \
-./main.obj 
+./main.obj \
+./myFIR.obj 
 
 C_DEPS += \
 ./aic3204_loop_linein.pp \
@@ -37,7 +39,8 @@ C_DEPS += \
 ./ezdsp5502_i2c.pp \
 ./ezdsp5502_i2cgpio.pp \
 ./ezdsp5502_mcbsp.pp \
-./main.pp 
+./main.pp \
+./myFIR.pp 
 
 C_DEPS__QUOTED += \
 "aic3204_loop_linein.pp" \
@@ -48,7 +51,8 @@ C_DEPS__QUOTED += \
 "ezdsp5502_i2c.pp" \
 "ezdsp5502_i2cgpio.pp" \
 "ezdsp5502_mcbsp.pp" \
-"main.pp" 
+"main.pp" \
+"myFIR.pp" 
 
 OBJS__QUOTED += \
 "aic3204_loop_linein.obj" \
@@ -59,7 +63,8 @@ OBJS__QUOTED += \
 "ezdsp5502_i2c.obj" \
 "ezdsp5502_i2cgpio.obj" \
 "ezdsp5502_mcbsp.obj" \
-"main.obj" 
+"main.obj" \
+"myFIR.obj" 
 
 C_SRCS__QUOTED += \
 "../aic3204_loop_linein.c" \
@@ -70,6 +75,7 @@ C_SRCS__QUOTED += \
 "../ezdsp5502_i2c.c" \
 "../ezdsp5502_i2cgpio.c" \
 "../ezdsp5502_mcbsp.c" \
-"../main.c" 
+"../main.c" \
+"../myFIR.c" 
 
 

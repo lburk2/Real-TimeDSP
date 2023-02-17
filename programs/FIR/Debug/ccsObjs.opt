@@ -1,1 +1,1 @@
-"./aic3204_loop_linein.obj" "./aic3204_test.obj" "./aic3204_tone_headphone.obj" "./ezdsp5502.obj" "./ezdsp5502_gpio.obj" "./ezdsp5502_i2c.obj" "./ezdsp5502_i2cgpio.obj" "./ezdsp5502_mcbsp.obj" "./main.obj" "../lnkx.cmd" -l"csl5502x.lib" -l"ezdsp5502bsl.lib" -l"rts55x.lib" 
+"./aic3204_loop_linein.obj" "./aic3204_test.obj" "./aic3204_tone_headphone.obj" "./ezdsp5502.obj" "./ezdsp5502_gpio.obj" "./ezdsp5502_i2c.obj" "./ezdsp5502_i2cgpio.obj" "./ezdsp5502_mcbsp.obj" "./main.obj" "./myFIR.obj" "../lnkx.cmd" -l"csl5502x.lib" -l"ezdsp5502bsl.lib" -l"rts55x.lib" 
