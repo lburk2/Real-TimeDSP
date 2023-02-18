@@ -25,10 +25,22 @@ Rstop = [-Rp -Rs -Rs];
 
 ws = fdco/Fsby2; %vector of stop band frequencies 
 
-win = window(@hann,N+1);
-
+% win = window(@hann,N+1);
+win = window(@hamming,N+1);
 b3 = fir1(N, ws,win); %creae filter coefficients
+
 b3Good = round(b3*32767);
+
+str = sprintf('int16_t data[] = \n{');
+
+for i = 1:16:length(b3Good)
+    strln = sprintf('%6d, ', b3Good(i:min(i+15,length(b3Good))));
+    str = [str sprintf('\n    ') strln];
+end
+str = [str(1:end-1) sprintf('\n};')];
+clipboard('copy', str);
+
+
 
 [H3,w3] = freqz(b3,1,2^16,Fs); % generate freqeuency response
 

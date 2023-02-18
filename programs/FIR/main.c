@@ -6,7 +6,7 @@
 //													//
 //	Created: 2023-02-15								//
 //													//
-//	Last Revision: 2023-02-15						//
+//	Last Revision: 2023-02-17						//
 //													//
 //////////////////////////////////////////////////////
 
@@ -20,17 +20,15 @@
 extern Int16 aic3204_setup( );
 extern void aic3204_process(void);
 void aic3204_output_sample(int16_t left, int16_t right);
-int16_t *fir1_delayLine[62];
-int16_t *testVectorOutput;
-int16_t *testVectorptr;
 
-const int16_t fir1Coeffs[62] = {0,	1,	3,	9,	17,	25,	32,	33,	25,	5, -30, -79,
-								-141, -208, -273, -325, -351, -339, -275, -152, 36, 289,
-								602, 962, 1352, 1752, 2137, 2482 ,2765, 2965, 3069, 3069,
-								2965, 2765, 2482, 2137, 1752, 1352, 962, 602, 289, 36, -152,
-								-275, -339, -351, -325, -273, -208, -141, -79, -30, 5, 25, 33,
-								32, 25, 17, 9, 3, 1, 0};
-const int16_t *fir1Coeffsptr;
+const  int16_t fir1Coeffs[62] =
+{
+        12,     20,     28,     37,     46,     54,     56,     51,     35,      6,    -37,    -95,   -162,   -234,   -300,   -351,
+      -373,   -356,   -286,   -157,     37,    294,    609,    969,   1358,   1754,   2135,   2475,   2754,   2951,   3053,   3053,
+      2951,   2754,   2475,   2135,   1754,   1358,    969,    609,    294,     37,   -157,   -286,   -356,   -373,   -351,   -300,
+      -234,   -162,    -95,    -37,      6,     35,     51,     56,     54,     46,     37,     28,     20,     12,
+};
+
 
 void main( void )
 {
@@ -46,45 +44,53 @@ void main( void )
     EZDSP5502_I2CGPIO_writeLine(  BSP_SEL1_ENn, LOW );
 
     aic3204_setup();
+
+    const int16_t* restrict fir1Coeffsptr;
+    int16_t *testVectorOutput;
+    int16_t *testVectorptr;
+    int16_t fir1_delayLine[62];
+    int16_t* restrict fir1_delayLineptr;
+
     testVectorptr=testVector;
     fir1Coeffsptr=fir1Coeffs;
 
     volatile int k,i;
     k=0;
-    for(i=0;i<62;i++)
+    for(i=0; i<62; i++)
     {
     	fir1_delayLine[i]=0;
     }
 
-   // volatile int16_t datOutput[240];
-//    for(i=0;i<240;i++)
-//       {
-//       	datOutput[i]=0;
-//       }
-//    int16_t *datOutputptr;
-//
-//    datOutputptr=datOutput;
+    fir1_delayLineptr = fir1_delayLine;
 
-    while(1)
-    {
-    	for( k=0; k < INPUT_TEST_VECTOR_LENGTH ; k++)
+    int16_t datOutput[240];
+    for(i=0;i<240;i++)
+       {
+       	datOutput[i]=0;
+       }
+    int16_t *datOutputptr;
+    datOutputptr=datOutput;
+
+   while(1)
+   {
+    	for( k=0; k < INPUT_TEST_VECTOR_LENGTH*10 ; k++)
     	{
     		myFIR(&testVectorptr[k],
     				fir1Coeffsptr,
 					testVectorOutput,
-					*fir1_delayLine,
+					fir1_delayLineptr,
 					1,
 					62);
-    		aic3204_output_sample(*testVectorOutput, *testVectorOutput);
+    		datOutputptr = testVectorOutput;
 
-    		//datOutput[k]=testVectorOutput[k];
+    		aic3204_output_sample(*testVectorOutput, testVectorptr[k]);
 
     	}
 
-//    	for( k=0; k < INPUT_TEST_VECTOR_LENGTH ; k++) //check on 240, need length of test vector
-//    	    {
-//    	    		aic3204_output_sample(testVectorptr[k], testVectorptr[k]);
-//    	    	}
+//    	for( k=0; k < INPUT_TEST_VECTOR_LENGTH ; k++)
+//    	{
+//    	    aic3204_output_sample(testVectorptr[k], testVectorptr[k]);
+//    	}
     }
 }
 
