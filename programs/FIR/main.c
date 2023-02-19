@@ -21,7 +21,7 @@ extern Int16 aic3204_setup( );
 extern void aic3204_process(void);
 void aic3204_output_sample(int16_t left, int16_t right);
 
-const  int16_t fir1Coeffs[62] =
+const int16_t fir1Coeffs[62] =
 {
         12,     20,     28,     37,     46,     54,     56,     51,     35,      6,    -37,    -95,   -162,   -234,   -300,   -351,
       -373,   -356,   -286,   -157,     37,    294,    609,    969,   1358,   1754,   2135,   2475,   2754,   2951,   3053,   3053,
@@ -45,35 +45,33 @@ void main( void )
 
     aic3204_setup();
 
+    // Pointer + Variable Declaration
     const int16_t* restrict fir1Coeffsptr;
-    int16_t *testVectorOutput;
-    int16_t *testVectorptr;
-    int16_t fir1_delayLine[62];
     int16_t* restrict fir1_delayLineptr;
+    int16_t* testVectorOutput;
+    int16_t* testVectorptr;
+    int16_t fir1_delayLine[62];
 
+    //Assing Arrays to Pointers
     testVectorptr=testVector;
     fir1Coeffsptr=fir1Coeffs;
 
     volatile int k,i;
-    k=0;
+    //fill delay line with zero
     for(i=0; i<62; i++)
-    {
     	fir1_delayLine[i]=0;
-    }
 
+    //Assign delayline to pointer
     fir1_delayLineptr = fir1_delayLine;
 
+    //Dummy variable for watching output
     int16_t datOutput[240];
     for(i=0;i<240;i++)
-       {
        	datOutput[i]=0;
-       }
-    int16_t *datOutputptr;
-    datOutputptr=datOutput;
 
    while(1)
-   {
-    	for( k=0; k < INPUT_TEST_VECTOR_LENGTH*10 ; k++)
+   {	//Filter and output signal (also output original signal for fun)
+    	for( k=0; k < INPUT_TEST_VECTOR_LENGTH ; k++)
     	{
     		myFIR(&testVectorptr[k],
     				fir1Coeffsptr,
@@ -81,16 +79,12 @@ void main( void )
 					fir1_delayLineptr,
 					1,
 					62);
-    		datOutputptr = testVectorOutput;
+    		datOutput[k] = *testVectorOutput;
 
     		aic3204_output_sample(*testVectorOutput, testVectorptr[k]);
 
     	}
-
-//    	for( k=0; k < INPUT_TEST_VECTOR_LENGTH ; k++)
-//    	{
-//    	    aic3204_output_sample(testVectorptr[k], testVectorptr[k]);
-//    	}
+    	k=0;//dummy instruction for debugging
     }
 }
 
