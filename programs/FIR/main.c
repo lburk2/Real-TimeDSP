@@ -14,6 +14,7 @@
 #include "stdint.h"
 #include "ezdsp5502.h"
 #include "ezdsp5502_i2cgpio.h"
+#include "ezdsp5502_mcbsp.h"
 #include "myFIR.h"
 #include "testVector.h"
 
@@ -51,10 +52,13 @@ void main( void )
     int16_t* testVectorOutput;
     int16_t* testVectorptr;
     int16_t fir1_delayLine[62];
+    Int16 dataLeft;
+
 
     //Assing Arrays to Pointers
     testVectorptr=testVector;
     fir1Coeffsptr=fir1Coeffs;
+
 
     volatile int k,i;
     //fill delay line with zero
@@ -68,12 +72,15 @@ void main( void )
     int16_t datOutput[240];
     for(i=0;i<240;i++)
        	datOutput[i]=0;
-
+    dataLeft = 0;
    while(1)
    {	//Filter and output signal (also output original signal for fun)
     	for( k=0; k < INPUT_TEST_VECTOR_LENGTH ; k++)
     	{
+    		EZDSP5502_MCBSP_read(&dataLeft);      // RX left channel
+
     		myFIR(&testVectorptr[k],
+    				//(int16_t*)&dataLeft,
     				fir1Coeffsptr,
 					testVectorOutput,
 					fir1_delayLineptr,
@@ -81,7 +88,8 @@ void main( void )
 					62);
     		datOutput[k] = *testVectorOutput;
 
-    		aic3204_output_sample(*testVectorOutput, testVectorptr[k]);
+    		aic3204_output_sample(*testVectorOutput, *testVector);
+    		//aic3204_output_sample(*testVectorOutput, (int16_t)&dataLeft); //output original and filtered signal
 
     	}
     	k=0;//dummy instruction for debugging

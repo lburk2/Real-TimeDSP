@@ -22,7 +22,8 @@ void myFIR(int16_t* x, const int16_t* restrict  h, int16_t* y, int16_t* restrict
 	delayLine[0] = *x;
 
 	//Filter
-	//#pragma MUST_ITERATE(2,,2) //commented out for the first part
+
+	#pragma MUST_ITERATE(2,,2) //commented out for the first part
 	for(i = 0; i < nh; i++)
 		sum = _smac(sum, (int)delayLine[i], (int)h[i]);
 

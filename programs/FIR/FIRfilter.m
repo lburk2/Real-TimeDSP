@@ -27,7 +27,7 @@ ws = fdco/Fsby2; %vector of stop band frequencies
 
 % win = window(@hann,N+1);
 win = window(@hamming,N+1);
-b3 = fir1(N, ws,win); %creae filter coefficients
+b3 = fir1(N, ws,win); %create filter coefficients
 
 b3Good = round(b3*32767);
 
