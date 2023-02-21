@@ -46,6 +46,7 @@ main.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp550
 main.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp5502_mcbsp.h
 main.obj: ../myFIR.h
 main.obj: ../testVector.h
+main.obj: ../demo_filt.h
 
 ../main.c: 
 C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stdio.h: 
@@ -93,3 +94,4 @@ C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp5502_i2cgpio.
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp5502_mcbsp.h: 
 ../myFIR.h: 
 ../testVector.h: 
+../demo_filt.h: 
