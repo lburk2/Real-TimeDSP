@@ -63,7 +63,6 @@ C_SRCS__QUOTED += \
 "../ezdsp5502_i2c.c" \
 "../ezdsp5502_i2cgpio.c" \
 "../ezdsp5502_mcbsp.c" \
-"../main.c" \
-"../myFIR.c" 
+"../main.c" 
 
 

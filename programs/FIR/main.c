@@ -17,6 +17,7 @@
 #include "ezdsp5502_mcbsp.h"
 #include "myFIR.h"
 #include "testVector.h"
+#include "demo_filt.h"
 
 extern Int16 aic3204_setup( );
 extern void aic3204_process(void);
@@ -29,7 +30,7 @@ const int16_t fir1Coeffs[62] =
       2951,   2754,   2475,   2135,   1754,   1358,    969,    609,    294,     37,   -157,   -286,   -356,   -373,   -351,   -300,
       -234,   -162,    -95,    -37,      6,     35,     51,     56,     54,     46,     37,     28,     20,     12,
 };
-
+const int16_t demoFilter[244];
 
 void main( void )
 {
@@ -48,6 +49,7 @@ void main( void )
 
     // Pointer + Variable Declaration
     const int16_t* restrict fir1Coeffsptr;
+    const int16_t* restrict demoFilterptr;
     int16_t* restrict fir1_delayLineptr;
     int16_t* testVectorOutput;
     int16_t* testVectorptr;
@@ -58,7 +60,7 @@ void main( void )
     //Assing Arrays to Pointers
     testVectorptr=testVector;
     fir1Coeffsptr=fir1Coeffs;
-
+    demoFilterptr=demoFilter;
 
     volatile int k,i;
     //fill delay line with zero
@@ -82,6 +84,7 @@ void main( void )
     		myFIR(&testVectorptr[k],
     				//(int16_t*)&dataLeft,
     				fir1Coeffsptr,
+    				//demoFilterptr,
 					testVectorOutput,
 					fir1_delayLineptr,
 					1,
@@ -89,7 +92,7 @@ void main( void )
     		datOutput[k] = *testVectorOutput;
 
     		aic3204_output_sample(*testVectorOutput, *testVector);
-    		//aic3204_output_sample(*testVectorOutput, (int16_t)&dataLeft); //output original and filtered signal
+    		//aic3204_output_sample(*testVectorOutput, (int16_t)&dataLeft);
 
     	}
     	k=0;//dummy instruction for debugging
