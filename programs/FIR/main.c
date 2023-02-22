@@ -19,9 +19,13 @@
 #include "testVector.h"
 #include "demo_filt.h"
 
+#define NH (68)
+
+
 extern Int16 aic3204_setup( );
 extern void aic3204_process(void);
 void aic3204_output_sample(int16_t left, int16_t right);
+
 
 const int16_t fir1Coeffs[62] =
 {
@@ -30,7 +34,7 @@ const int16_t fir1Coeffs[62] =
       2951,   2754,   2475,   2135,   1754,   1358,    969,    609,    294,     37,   -157,   -286,   -356,   -373,   -351,   -300,
       -234,   -162,    -95,    -37,      6,     35,     51,     56,     54,     46,     37,     28,     20,     12,
 };
-const int16_t demoFilter[244];
+const int16_t demoFilter[];
 
 void main( void )
 {
@@ -53,18 +57,18 @@ void main( void )
     int16_t* restrict fir1_delayLineptr;
     int16_t* testVectorOutput;
     int16_t* testVectorptr;
-    int16_t fir1_delayLine[62];
+    int16_t fir1_delayLine[NH];
     Int16 dataLeft;
 
 
-    //Assing Arrays to Pointers
+    //Passing Arrays to Pointers
     testVectorptr=testVector;
     fir1Coeffsptr=fir1Coeffs;
     demoFilterptr=demoFilter;
 
     volatile int k,i;
     //fill delay line with zero
-    for(i=0; i<62; i++)
+    for(i=0; i<NH; i++)
     	fir1_delayLine[i]=0;
 
     //Assign delayline to pointer
@@ -74,25 +78,27 @@ void main( void )
     int16_t datOutput[240];
     for(i=0;i<240;i++)
        	datOutput[i]=0;
-    dataLeft = 0;
+
+   //Start with left channel input at 0
+   dataLeft = 0;
    while(1)
    {	//Filter and output signal (also output original signal for fun)
     	for( k=0; k < INPUT_TEST_VECTOR_LENGTH ; k++)
     	{
-    		EZDSP5502_MCBSP_read(&dataLeft);      // RX left channel
+    		EZDSP5502_MCBSP_read(&dataLeft);
 
-    		myFIR(&testVectorptr[k],
-    				//(int16_t*)&dataLeft,
-    				fir1Coeffsptr,
-    				//demoFilterptr,
+    		myFIR(//&testVectorptr[k], //function takes a vector or realtime input and outputs to testVectorOutput
+    				(int16_t*)&dataLeft,
+    				//fir1Coeffsptr,
+    				demoFilterptr,
 					testVectorOutput,
 					fir1_delayLineptr,
 					1,
-					62);
+					NH);
     		datOutput[k] = *testVectorOutput;
 
-    		aic3204_output_sample(*testVectorOutput, *testVector);
-    		//aic3204_output_sample(*testVectorOutput, (int16_t)&dataLeft);
+    		//aic3204_output_sample(*testVectorOutput, *testVector);
+    		aic3204_output_sample(*testVectorOutput, (int16_t)&dataLeft);
 
     	}
     	k=0;//dummy instruction for debugging
