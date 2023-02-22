@@ -53,7 +53,7 @@ plot(w3, 20*log10(abs(H3)), 'b' ...
     Fstop,Rstop,'r','LineWidth',2)
 axis([0 8000 -2*Rs,5])
 grid
-xlabel('Matlab normalized freq.')
+xlabel('Frequency (Hz)')
 ylabel('Magnitude in dB')
 title('FIR Magnitude')
 
