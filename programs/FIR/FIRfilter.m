@@ -30,7 +30,7 @@ ws = fdco/Fsby2; %vector of stop band frequencies
 
 % win = window(@hann,N+1);
 win = window(@hamming,N+1);
-b3 = fir1(N, ws,win); %creae filter coefficients
+b3 = fir1(N, ws,win); %create filter coefficients
 
 % rounded for integer math on the board
 b3Good = round(b3*32767);
@@ -59,14 +59,13 @@ title('FIR Magnitude')
 
 
 % COMPARING A MATLAB SIGNAL FILTERED TO THE ACTUAL DSP FIR
-% datOutput(singed) file. Done on 2/19/23 :)
+% datOutput(signed) file. Done on 2/19/23 :)
 xbad = sin(2*pi*1000*t) + sin(2*pi*4000*t);
 y = filter(b3Good, 1, xbad);
 
 % data from the DSP filter
 y_struct = importdata('datOutput(singedint).dat', '', 1);
 y_CC15 = y_struct.data;
-
 
 figure
 subplot(2,1,1)
@@ -81,9 +80,15 @@ title('Data from the DSP board')
 xlabel('samples')
 ylabel('magnitude')
 
-% Messi
-y_MSE = mean((y(1:240) - y_CC15').^2, 'all');
 
+% Messi
+y_MSE = mean((round(y(1:240)) - y_CC15').^2, 'all');
+
+figure
+plot(y(1:240) - y_CC15')
+title('Error')
+xlabel('samples')
+ylabel('magnitude')
 
 
 

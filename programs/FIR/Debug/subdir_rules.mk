@@ -55,7 +55,7 @@ main.obj: ../main.c $(GEN_OPTS) $(GEN_HDRS)
 myFIR.obj: ../myFIR.c $(GEN_OPTS) $(GEN_HDRS)
 	@echo 'Building file: $<'
 	@echo 'Invoking: C5500 Compiler'
-	"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 --symdebug:coff -O1 --include_path="C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include" --include_path="C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include" --include_path="C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include" --diag_warning=225 --ptrdiff_size=32 --memory_model=large --opt_for_speed=5 --preproc_with_compile --preproc_dependency="myFIR.pp" $(GEN_OPTS__FLAG) "$<"
+	"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 --symdebug:coff -O3 --include_path="C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include" --include_path="C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include" --include_path="C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include" --diag_warning=225 --ptrdiff_size=32 --memory_model=large --opt_for_speed=5 --preproc_with_compile --preproc_dependency="myFIR.pp" $(GEN_OPTS__FLAG) "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

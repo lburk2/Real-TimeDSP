@@ -19,7 +19,7 @@
 #include "testVector.h"
 #include "demo_filt.h"
 
-#define NH (68)
+#define NH (68) //change to number of coeffs in filter being used
 
 
 extern Int16 aic3204_setup( );
@@ -98,7 +98,7 @@ void main( void )
     		datOutput[k] = *testVectorOutput;
 
     		//aic3204_output_sample(*testVectorOutput, *testVector);
-    		aic3204_output_sample(*testVectorOutput, (int16_t)&dataLeft);
+    		aic3204_output_sample(*testVectorOutput, *testVectorOutput);
 
     	}
     	k=0;//dummy instruction for debugging
