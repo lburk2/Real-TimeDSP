@@ -6,25 +6,25 @@
 /*                                                                         */
 /***************************************************************************/
 
-#include <std.h>
-
-#include <log.h>
-#include <clk.h>
-#include <tsk.h>
-#include <gbl.h>
-//#include "clkcfg.h"
-
+//#include <std.h>
 #include "hellocfg.h"
 #include "ezdsp5502.h"
 #include "stdint.h"
+#include "stdbool.h"
 #include "aic3204.h"
 #include "ezdsp5502_mcbsp.h"
 #include "csl_mcbsp.h"
 #include "ezdsp5502_i2cgpio.h"
 #include "csl_gpio.h"
+#include "highPassCoeffs.h"
+
 
 extern void audioProcessingInit(void);
 extern void ConfigureAic3204(void);
+
+int filterMode=0;
+_Bool NCO=false;
+
 
 int counter = 0;
 
@@ -45,12 +45,61 @@ void main(void)
 
     audioProcessingInit();
 
+    //initializing buttons
+    EZDSP5502_I2CGPIO_configLine( SW0, IN)
+    EZDSP5502_I2CGPIO_configLine( SW1, IN)
+
+	//initializing LED
+    EZDSP5502_I2CGPIO_configLine(  LED0, OUT );
+    EZDSP5502_I2CGPIO_configLine(  LED1, OUT );
+    EZDSP5502_I2CGPIO_configLine(  LED2, OUT );
+
     // after main() exits the DSP/BIOS scheduler starts
 }
 
 void myIDLThread(void){
 	counter++;
+
+	int SW0=EZDSP5502_I2CGPIO_readLine( SW0, IN);
+	int SW1=EZDSP5502_I2CGPIO_readLine( SW0, IN);
+
+	if(SW1)
+	{
+		NCO=true;
+	}
+	else NCO=false;
+
+
+	if(SW0)
+	{
+		filterMode++;
+		if filterMode=4
+		{
+			filterMode=0;
+		}
+	}
+
+	switch (filterMode){
+	case 0:
+	    EZDSP5502_I2CGPIO_writeLine(   LED0, LOW );
+	    EZDSP5502_I2CGPIO_writeLine(   LED1, HIGH );
+	    EZDSP5502_I2CGPIO_writeLine(   LED2, HIGH );
+	    break;
+	case 1:
+		EZDSP5502_I2CGPIO_writeLine(   LED0, HIGH );
+		EZDSP5502_I2CGPIO_writeLine(   LED1, LOW );
+	    EZDSP5502_I2CGPIO_writeLine(   LED2, HIGH );
+	    break;
+	case 2:
+		EZDSP5502_I2CGPIO_writeLine(   LED0, HIGH );
+		EZDSP5502_I2CGPIO_writeLine(   LED1, HIGH );
+	    EZDSP5502_I2CGPIO_writeLine(   LED2, LOW );
+	    break;
+	}
+
 }
+
+void
 
 #if 0
 Void taskFxn(Arg value_arg)
