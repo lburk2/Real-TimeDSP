@@ -18,7 +18,9 @@ C_SRCS += \
 ../ezdsp5502_i2cgpio.c \
 ../ezdsp5502_mcbsp.c \
 ./hellocfg_c.c \
-../main.c 
+../main.c \
+../myFIR.c \
+../myNCO.c 
 
 OBJS += \
 ./aic3204.obj \
@@ -30,7 +32,9 @@ OBJS += \
 ./ezdsp5502_mcbsp.obj \
 ./hellocfg.obj \
 ./hellocfg_c.obj \
-./main.obj 
+./main.obj \
+./myFIR.obj \
+./myNCO.obj 
 
 GEN_MISC_FILES += \
 ./hello.cdb 
@@ -40,18 +44,20 @@ GEN_HDRS += \
 ./hellocfg.h?? 
 
 S??_DEPS += \
-./hellocfg.d 
+./hellocfg.pp 
 
 C_DEPS += \
-./aic3204.d \
-./audioProcessing.d \
-./ezdsp5502.d \
-./ezdsp5502_gpio.d \
-./ezdsp5502_i2c.d \
-./ezdsp5502_i2cgpio.d \
-./ezdsp5502_mcbsp.d \
-./hellocfg_c.d \
-./main.d 
+./aic3204.pp \
+./audioProcessing.pp \
+./ezdsp5502.pp \
+./ezdsp5502_gpio.pp \
+./ezdsp5502_i2c.pp \
+./ezdsp5502_i2cgpio.pp \
+./ezdsp5502_mcbsp.pp \
+./hellocfg_c.pp \
+./main.pp \
+./myFIR.pp \
+./myNCO.pp 
 
 GEN_CMDS += \
 ./hellocfg.cmd 
@@ -74,18 +80,20 @@ GEN_FILES__QUOTED += \
 "hellocfg_c.c" 
 
 C_DEPS__QUOTED += \
-"aic3204.d" \
-"audioProcessing.d" \
-"ezdsp5502.d" \
-"ezdsp5502_gpio.d" \
-"ezdsp5502_i2c.d" \
-"ezdsp5502_i2cgpio.d" \
-"ezdsp5502_mcbsp.d" \
-"hellocfg_c.d" \
-"main.d" 
+"aic3204.pp" \
+"audioProcessing.pp" \
+"ezdsp5502.pp" \
+"ezdsp5502_gpio.pp" \
+"ezdsp5502_i2c.pp" \
+"ezdsp5502_i2cgpio.pp" \
+"ezdsp5502_mcbsp.pp" \
+"hellocfg_c.pp" \
+"main.pp" \
+"myFIR.pp" \
+"myNCO.pp" 
 
 S??_DEPS__QUOTED += \
-"hellocfg.d" 
+"hellocfg.pp" 
 
 OBJS__QUOTED += \
 "aic3204.obj" \
@@ -97,7 +105,9 @@ OBJS__QUOTED += \
 "ezdsp5502_mcbsp.obj" \
 "hellocfg.obj" \
 "hellocfg_c.obj" \
-"main.obj" 
+"main.obj" \
+"myFIR.obj" \
+"myNCO.obj" 
 
 C_SRCS__QUOTED += \
 "../aic3204.c" \
@@ -108,7 +118,9 @@ C_SRCS__QUOTED += \
 "../ezdsp5502_i2cgpio.c" \
 "../ezdsp5502_mcbsp.c" \
 "./hellocfg_c.c" \
-"../main.c" 
+"../main.c" \
+"../myFIR.c" \
+"../myNCO.c" 
 
 S??_SRCS__QUOTED += \
 "./hellocfg.s??" 
