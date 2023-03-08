@@ -21,6 +21,7 @@
 
 extern void audioProcessingInit(void);
 extern void ConfigureAic3204(void);
+//extern void C55_enableInt();
 
 int filterMode=0;
 _Bool NCO=false;
@@ -46,8 +47,8 @@ void main(void)
     audioProcessingInit();
 
     //initializing buttons
-    EZDSP5502_I2CGPIO_configLine( SW0, IN)
-    EZDSP5502_I2CGPIO_configLine( SW1, IN)
+    EZDSP5502_I2CGPIO_configLine( SW0, IN);
+    EZDSP5502_I2CGPIO_configLine( SW1, IN);
 
 	//initializing LED
     EZDSP5502_I2CGPIO_configLine(  LED0, OUT );
@@ -60,20 +61,20 @@ void main(void)
 void myIDLThread(void){
 	counter++;
 
-	int SW0=EZDSP5502_I2CGPIO_readLine( SW0, IN);
-	int SW1=EZDSP5502_I2CGPIO_readLine( SW0, IN);
+	int switch0 = EZDSP5502_I2CGPIO_readLine( SW0);
+	int switch1 = EZDSP5502_I2CGPIO_readLine( SW1);
 
-	if(SW1)
+	if(switch1)
 	{
 		NCO=true;
 	}
 	else NCO=false;
 
 
-	if(SW0)
+	if(switch0)
 	{
 		filterMode++;
-		if filterMode=4
+		if(filterMode==4)
 		{
 			filterMode=0;
 		}

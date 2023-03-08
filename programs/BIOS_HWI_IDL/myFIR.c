@@ -24,7 +24,7 @@ void davesFIR(int16_t* x, int16_t* restrict  h, int16_t* y, int16_t* restrict d,
 
 	}
 	//copy nx new samples to bottom of delayline
-	for(i=0;i<nx,i++)
+	for(i=0;i<nx;i++)
 	{
 		d[i+nh-1]=x[i];
 	}
@@ -32,10 +32,10 @@ void davesFIR(int16_t* x, int16_t* restrict  h, int16_t* y, int16_t* restrict d,
 	for(i=0;i<nx;i++)
 	{
 		sum = 0x4000;
-	#pragma SP_LOOP(2, ,2) //will run minimum 2 times will have maximum 2 iterations?
+	//#pragma MUST ITERATE(2,,2) //will run minimum 2 times will have maximum 2 iterations?
 		for(k=0;k<nh;k++)
 		{
-			sum=_smpy(sum, h[k], d[k+i])
+			sum=_smac(sum, h[k], d[k+i]);
 		}
 		y[i]=sum >> 15;
 	}
