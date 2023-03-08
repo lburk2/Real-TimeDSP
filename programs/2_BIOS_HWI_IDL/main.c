@@ -1,3 +1,10 @@
+/*
+ *  Copyright 2010 by Texas Instruments Incorporated.
+ *  All rights reserved. Property of Texas Instruments Incorporated.
+ *  Restricted rights to use, duplicate or disclose this code are
+ *  granted through contract.
+ *
+ */
 /***************************************************************************/
 /*                                                                         */
 /*     H E L L O . C                                                       */
@@ -7,39 +14,30 @@
 /***************************************************************************/
 
 #include <std.h>
+
 #include <log.h>
 #include <clk.h>
 #include <tsk.h>
 #include <gbl.h>
+//#include "clkcfg.h"
 
 #include "hellocfg.h"
 #include "ezdsp5502.h"
 #include "stdint.h"
-#include "stdbool.h"
 #include "aic3204.h"
 #include "ezdsp5502_mcbsp.h"
 #include "csl_mcbsp.h"
-#include "ezdsp5502_i2cgpio.h"
-#include "csl_gpio.h"
-#include "highPassCoeffs.h"
-
 
 extern void audioProcessingInit(void);
-extern void ConfigureAic3204(void);
-//extern void C55_enableInt();
-
-int filterMode=0;
-_Bool NCO=false;
-
 
 volatile int counter = 0;
 
 void main(void)
 {
-	/* Initialize BSL */
+    /* Initialize BSL */
     EZDSP5502_init( );
 
-    /* configure the Codec chip */
+    // configure the Codec chip
     ConfigureAic3204();
 
     /* Initialize I2S */
@@ -49,65 +47,11 @@ void main(void)
     C55_enableInt(7); // reference technical manual, I2S2 tx interrupt
     C55_enableInt(6); // reference technical manual, I2S2 rx interrupt
 
-    audioProcessingInit();
-
-    //initializing buttons
-    EZDSP5502_I2CGPIO_configLine( SW0, IN);
-    EZDSP5502_I2CGPIO_configLine( SW1, IN);
-
-	//initializing LED
-    EZDSP5502_I2CGPIO_configLine(  LED0, OUT );
-    EZDSP5502_I2CGPIO_configLine(  LED1, OUT );
-    EZDSP5502_I2CGPIO_configLine(  LED2, OUT );
+    //audioProcessingInit();
 
     // after main() exits the DSP/BIOS scheduler starts
 }
 
-void myIDLThread(void){
-	counter++;
-
-	int switch0 = EZDSP5502_I2CGPIO_readLine( SW0);
-	int switch1 = EZDSP5502_I2CGPIO_readLine( SW1);
-
-	if(switch1)
-	{
-		NCO=true;
-	}
-	else NCO=false;
-
-
-	if(switch0)
-	{
-		filterMode++;
-		if(filterMode==4)
-		{
-			filterMode=0;
-		}
-	}
-
-	switch (filterMode){
-	case 0:
-	    EZDSP5502_I2CGPIO_writeLine(   LED0, LOW );
-	    EZDSP5502_I2CGPIO_writeLine(   LED1, HIGH );
-	    EZDSP5502_I2CGPIO_writeLine(   LED2, HIGH );
-	    break;
-	case 1:
-		EZDSP5502_I2CGPIO_writeLine(   LED0, HIGH );
-		EZDSP5502_I2CGPIO_writeLine(   LED1, LOW );
-	    EZDSP5502_I2CGPIO_writeLine(   LED2, HIGH );
-	    break;
-	case 2:
-		EZDSP5502_I2CGPIO_writeLine(   LED0, HIGH );
-		EZDSP5502_I2CGPIO_writeLine(   LED1, HIGH );
-	    EZDSP5502_I2CGPIO_writeLine(   LED2, LOW );
-	    break;
-	}
-
-}
-
-void
-
-#if 0
 Void taskFxn(Arg value_arg)
 {
     LgUns prevHtime, currHtime;
@@ -130,6 +74,9 @@ Void taskFxn(Arg value_arg)
 
     }
 }
-#endif
 
+void myIDLThread(void)
+{
+	counter++;
+}
 
