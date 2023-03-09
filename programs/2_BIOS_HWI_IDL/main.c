@@ -69,9 +69,8 @@ void main(void)
     EZDSP5502_MCBSP_init();
 
     /* enable the interrupt with BIOS call */
-    C55_enableInt(17); // reference technical manual, I2S2 tx interrupt
-    C55_enableInt(18);
-    //C55_enableInt(6); // reference technical manual, I2S2 rx interrupt
+    C55_enableInt(7); // reference technical manual, I2S2 tx interrupt
+    C55_enableInt(6); // reference technical manual, I2S2 rx interrupt
 
     //audioProcessingInit();
 
@@ -88,42 +87,9 @@ void main(void)
     nco_set_frequency(1000);
 
     //initialize FIR
-    if(!EZDSP5502_I2CGPIO_readLine(SW0))
-    {
-    	EZDSP5502_I2CGPIO_writeLine(   LED0, LOW );
-    					EZDSP5502_I2CGPIO_writeLine(   LED1, HIGH );
-    					EZDSP5502_I2CGPIO_writeLine(   LED2, HIGH );
-    }
 
     // after main() exits the DSP/BIOS scheduler starts
 }
-
-Void taskFxn(Arg value_arg)
-{
-    LgUns prevHtime, currHtime;
-    uint32_t delta;
-    float ncycles;
-
-    /* get cpu cycles per htime count */
-    ncycles = CLK_cpuCyclesPerHtime();
-
-
-    while(1)
-    {
-        TSK_sleep(1);
-        LOG_printf(&trace, "task running! Time is: %d ticks", (Int)TSK_time());
-
-        prevHtime = currHtime;
-        currHtime = CLK_gethtime();
-
-        delta = (currHtime - prevHtime) * ncycles;
-        LOG_printf(&trace, "CPU cycles = 0x%x %x", (uint16_t)(delta >> 16), (uint16_t)(delta));
-
-
-
-    }
-}
-
 
 void myIDLThread(void)
 {
@@ -132,16 +98,16 @@ void myIDLThread(void)
 	switch0 = EZDSP5502_I2CGPIO_readLine(SW0);
 	switch1 = EZDSP5502_I2CGPIO_readLine(SW1);
 
-	if(!switch1)
+	if(!switch0)
 	{
 		NCO=1; //has to connect to interrupt?
 	}
 	else NCO=0;
 
 
-	if(switch0 != switch0_prev)
+	if(switch1 != switch1_prev)
 	{
-		if(!switch0 )
+		if(!switch1)
 		{
 			filterMode++;
 			if(filterMode==3)
@@ -170,12 +136,29 @@ void myIDLThread(void)
 		}
 	}
 }
-void hwi_NCO(void)
-{
-	output=nco_run_sinusoid();
-	aic3204_output_sample(output, output);
-}
-void hwi_FIR(void)
-{
 
-}
+//Void taskFxn(Arg value_arg)
+//{
+//    LgUns prevHtime, currHtime;
+//    uint32_t delta;
+//    float ncycles;
+//
+//    /* get cpu cycles per htime count */
+//    ncycles = CLK_cpuCyclesPerHtime();
+//
+//
+//    while(1)
+//    {
+//        TSK_sleep(1);
+//        LOG_printf(&trace, "task running! Time is: %d ticks", (Int)TSK_time());
+//
+//        prevHtime = currHtime;
+//        currHtime = CLK_gethtime();
+//
+//        delta = (currHtime - prevHtime) * ncycles;
+//        LOG_printf(&trace, "CPU cycles = 0x%x %x", (uint16_t)(delta >> 16), (uint16_t)(delta));
+//
+//
+//
+//    }
+//}

@@ -26,6 +26,7 @@ void audioProcessingInit(void)
 
 void HWI_I2S_Rx(void)
 {
+
 	if (leftRightFlag == 0)
 	{
 		rxLeftSample = MCBSP_read16(aicMcbsp);
@@ -40,9 +41,31 @@ void HWI_I2S_Rx(void)
 
 void HWI_I2S_Tx(void)
 {
+	if(NC0)
+	{
+		output=nco_run_sinusoid() //then have to change bottom to output just the tone
+	}
+
+	if(filterMode==2)
+	{
+		fir((int16_t*)&dataLeft,
+			demoFilterptr,
+			testVectorOutput,
+			fir1_delayLineptr,
+			1,
+			NH);
+		datOutput[k] = *testVectorOutput;
+	}
+	if(filterMode==1)
+	{
+
+	}
+
+
 	if (txleftRightFlag == 0)
 	{
 		MCBSP_write16(aicMcbsp,rxLeftSample);
+		aic3204_output_sample(*testVectorOutput, *testVectorOutput); //perhaps use this instead?? not sure yet
 		txleftRightFlag = 1;
 	}
 	else
