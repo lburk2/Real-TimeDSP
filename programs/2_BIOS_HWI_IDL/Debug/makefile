@@ -4,7 +4,7 @@
 
 SHELL = cmd.exe
 
-CG_TOOL_ROOT := D:/ti/ccsv6/tools/compiler/c5500_4.4.1
+CG_TOOL_ROOT := C:/ti/ccsv6/tools/compiler/c5500_4.4.1
 
 GEN_OPTS__FLAG := 
 GEN_CMDS__FLAG := -l"./hellocfg.cmd"
@@ -20,10 +20,12 @@ ORDERED_OBJS += \
 "./hellocfg.obj" \
 "./hellocfg_c.obj" \
 "./main.obj" \
+"./myFIR.obj" \
+"./myNCO.obj" \
 $(GEN_CMDS__FLAG) \
--llibc.a \
--lcsl5502x.lib \
--lrts55x.lib \
+-l"libc.a" \
+-l"csl5502x.lib" \
+-l"rts55x.lib" \
 
 -include ../makefile.init
 
@@ -54,9 +56,6 @@ ifneq ($(strip $(ASM_DEPS)),)
 endif
 ifneq ($(strip $(CC_DEPS)),)
 -include $(CC_DEPS)
-endif
-ifneq ($(strip $(SV7A_DEPS)),)
--include $(SV7A_DEPS)
 endif
 ifneq ($(strip $(S55_DEPS)),)
 -include $(S55_DEPS)
@@ -149,22 +148,22 @@ all: biosExample.out
 biosExample.out: $(OBJS) $(GEN_CMDS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: C5500 Linker'
-	"D:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 --memory_model=large -g --define=c5502 --display_error_number --diag_warning=225 --ptrdiff_size=32 -z -m"biosExample.map" --stack_size=0x200 --heap_size=0x400 -i"D:/ti/ccsv6/tools/compiler/c5500_4.4.1/lib" -i"C:/Users/lando/iCloudDrive/Documents/Semester8/Real-Time DSP/ezdsp5502_v1_spring2023/ezdsp5502_v1_spring2023/c55xx_csl/ccs_v4.0_examples/cslVC5505/Debug" -i"C:/Users/lando/iCloudDrive/Documents/Semester8/Real-Time DSP/ezdsp5502_v1_spring2023/ezdsp5502_v1_spring2023/C55xxCSL/lib" -i"D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include" -i"D:/ti/bios_5_42_01_09/packages/ti/rtdx/lib/c5500" -i"D:/ti/bios_5_42_01_09/packages/ti/bios/lib" --reread_libs --display_error_number --warn_sections --xml_link_info="biosExample_linkInfo.xml" --rom_model --sys_stacksize=0x200 -o "biosExample.out" $(ORDERED_OBJS)
+	"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 --memory_model=large -g --define=c5502 --display_error_number --diag_warning=225 --ptrdiff_size=32 -z -m"biosExample.map" --stack_size=0x200 --heap_size=0x400 -i"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/lib" -i"C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/c55xx_csl/ccs_v4.0_examples/cslVC5505/Debug" -i"C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/lib" -i"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include" -i"C:/ti/bios_5_42_01_09/packages/ti/rtdx/lib/c5500" -i"C:/ti/bios_5_42_01_09/packages/ti/bios/lib" -i"C:/ti/bios_5_42_01_09/packages/ti/bios/include" --reread_libs --display_error_number --warn_sections --xml_link_info="biosExample_linkInfo.xml" --rom_model --sys_stacksize=0x200 -o "biosExample.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
 biosExample.hex: $(EXE_OUTPUTS)
 	@echo 'Invoking: C5500 Hex Utility'
-	"D:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/hex55"  -o "biosExample.hex" $(EXE_OUTPUTS__QUOTED)
+	"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/hex55"  -o "biosExample.hex" $(EXE_OUTPUTS__QUOTED)
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
 	-$(RM) $(GEN_HDRS__QUOTED)$(GEN_MISC_FILES__QUOTED)$(EXE_OUTPUTS__QUOTED)$(GEN_FILES__QUOTED)$(BIN_OUTPUTS__QUOTED)$(GEN_CMDS__QUOTED)
-	-$(RM) "aic3204.d" "audioProcessing.d" "ezdsp5502.d" "ezdsp5502_gpio.d" "ezdsp5502_i2c.d" "ezdsp5502_i2cgpio.d" "ezdsp5502_mcbsp.d" "hellocfg_c.d" "main.d" 
-	-$(RM) "hellocfg.d" 
-	-$(RM) "aic3204.obj" "audioProcessing.obj" "ezdsp5502.obj" "ezdsp5502_gpio.obj" "ezdsp5502_i2c.obj" "ezdsp5502_i2cgpio.obj" "ezdsp5502_mcbsp.obj" "hellocfg.obj" "hellocfg_c.obj" "main.obj" 
+	-$(RM) "aic3204.pp" "audioProcessing.pp" "ezdsp5502.pp" "ezdsp5502_gpio.pp" "ezdsp5502_i2c.pp" "ezdsp5502_i2cgpio.pp" "ezdsp5502_mcbsp.pp" "hellocfg_c.pp" "main.pp" "myFIR.pp" "myNCO.pp" 
+	-$(RM) "hellocfg.pp" 
+	-$(RM) "aic3204.obj" "audioProcessing.obj" "ezdsp5502.obj" "ezdsp5502_gpio.obj" "ezdsp5502_i2c.obj" "ezdsp5502_i2cgpio.obj" "ezdsp5502_mcbsp.obj" "hellocfg.obj" "hellocfg_c.obj" "main.obj" "myFIR.obj" "myNCO.obj" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

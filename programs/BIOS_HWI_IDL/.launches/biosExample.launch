@@ -5,7 +5,7 @@
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_PROGRAM.Texas Instruments XDS100v2 USB Debug Probe/C55xx" value="${build_artifact:biosExample}"/>
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_PROJECT.Texas Instruments XDS100v2 USB Debug Probe/C55xx" value="biosExample"/>
 <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_TARGET_CONFIG" value="${target_config_active_default:biosExample}"/>
-<stringAttribute key="com.ti.ccstudio.debug.debugModel.MRU_PROGRAM.Texas Instruments XDS100v2 USB Debug Probe/C55xx" value="Z:/Documents\Academics\temp\ezdsp5502_v1\tests\biosStarter\Debug\biosExample.out"/>
+<stringAttribute key="com.ti.ccstudio.debug.debugModel.MRU_PROGRAM.Texas Instruments XDS100v2 USB Debug Probe/C55xx" value="C:/Users\jisat\OneDrive\Documents\GitHub\Real-TimeDSP\programs\2_BIOS_HWI_IDL\Debug\biosExample.out"/>
 <mapAttribute key="com.ti.ccstudio.debug.ui.displayFormats">
 <mapEntry key="Texas Instruments XDS100v2 USB Debug Probe/C55xx@##separator##@1" value="16-Bit Hex - TI Style"/>
 </mapAttribute>

@@ -1,39 +1,22 @@
-/*******************************************************************************
-****                            I N C L U D E S
-*******************************************************************************/
+
+
+#include "stdio.h"
 #include "ezdsp5502.h"
+#include "ezdsp5502_mcbsp.h"
+#include "csl_mcbsp.h"
 #include "ezdsp5502_i2c.h"
 #include "ezdsp5502_i2cgpio.h"
-#include "stdio.h"
+#include "stdint.h"
 
-/*******************************************************************************
-****                         D E F I N I T I O N S
-*******************************************************************************/
 #define AIC3204_I2C_ADDR 0x18
 
-void aic3204_init(void);
-Int16 AIC3204_rget(Uint16 regnum, Uint16* regval);
-Int16 AIC3204_rset(Uint16 regnum, Uint16 regval);
-
-/*******************************************************************************
-****                   S T A T I C   V A R I A B L E S
-*******************************************************************************/
-
-/*******************************************************************************
-****                    G L O B A L   V A R I A B L E S
-*******************************************************************************/
-
-/*******************************************************************************
-****          F U N C T I O N   I M P L E M E N T A T I O N
-*******************************************************************************/
-
-/* ------------------------------------------------------------------------ *
- *                                                                          *
- *  _AIC3204_rget( regnum, regval )                                         *
- *                                                                          *
- *      Return value of codec register regnum                               *
- *                                                                          *
- * ------------------------------------------------------------------------ */
+/*
+ *
+ *  AIC3204_rget( regnum, *regval )
+ *
+ *      Return value of codec register regnum
+ *
+ */
 Int16 AIC3204_rget(  Uint16 regnum, Uint16* regval )
 {
     Int16  retcode = 0;
@@ -42,54 +25,38 @@ Int16 AIC3204_rget(  Uint16 regnum, Uint16* regval )
     cmd[0] = regnum & 0x007F;       // 7-bit Device Register
     cmd[1] = 0;
 
+    /* Send AIC3204 register name */
     retcode |= EZDSP5502_I2C_write( AIC3204_I2C_ADDR, cmd, 1 );
-    retcode |= EZDSP5502_I2C_read( AIC3204_I2C_ADDR, cmd, 1 );
 
+    /* Return AIC3204 register value */
+    retcode |= EZDSP5502_I2C_read( AIC3204_I2C_ADDR, cmd, 1 );
     *regval = cmd[0];
-    EZDSP5502_wait( 10 );
+    EZDSP5502_waitusec( 50 );
+
     return retcode;
 }
 
-/* ------------------------------------------------------------------------ *
- *                                                                          *
- *  _AIC3204_rset( regnum, regval )                                         *
- *                                                                          *
- *      Set codec register regnum to value regval                           *
- *                                                                          *
- * ------------------------------------------------------------------------ */
+/*
+ *
+ *  AIC3204_rset( regnum, regval )
+ *
+ *      Set codec register regnum to value regval
+ *
+ */
 Int16 AIC3204_rset( Uint16 regnum, Uint16 regval )
 {
     Uint16 cmd[2];
     cmd[0] = regnum & 0x007F;       // 7-bit Device Register
     cmd[1] = regval;                // 8-bit Register Data
 
-    EZDSP5502_waitusec( 300 );
+    EZDSP5502_waitusec( 100 );
 
+    /* Write to AIC3204 Register */
     return EZDSP5502_I2C_write( AIC3204_I2C_ADDR, cmd, 2 );
 }
 
-/* ------------------------------------------------------------------------ *
- *                                                                          *
- *  aic3204_init( )                                                           *
- *                                                                          *
- * ------------------------------------------------------------------------ */
-void aic3204_init(void)
+Int16 aic3204_setup( )
 {
-	//SYS_EXBUSSEL = 0x6100;        // Enable I2C bus
-    EZDSP5502_I2C_init();        	// Initialize I2C
-}
-
-void ConfigureAic3204(void)
-{
-    //aic3204_init();
-
-    /* Set to McBSP1 mode */
-    EZDSP5502_I2CGPIO_configLine( BSP_SEL1, OUT );
-    EZDSP5502_I2CGPIO_writeLine(  BSP_SEL1, LOW );
-
-    /* Enable McBSP1 */
-    EZDSP5502_I2CGPIO_configLine( BSP_SEL1_ENn, OUT );
-    EZDSP5502_I2CGPIO_writeLine(  BSP_SEL1_ENn, LOW );
 
     /* ---------------------------------------------------------------- *
      *  Configure AIC3204                                               *
@@ -148,4 +115,18 @@ void ConfigureAic3204(void)
     AIC3204_rset( 0x52, 0 );   // Unmute Left and Right ADC
     AIC3204_rset( 0, 0 );
     EZDSP5502_waitusec( 200 ); // Wait
+
+    /* Initialize McBSP */
+    EZDSP5502_MCBSP_init( );
+
+    return 0;
 }
+
+void aic3204_output_sample(int16_t left, int16_t right)
+{
+    EZDSP5502_MCBSP_write(left);      // TX left channel first (FS Low)
+    EZDSP5502_MCBSP_write(right);     // TX left channel first (FS Low)
+}
+
+
+
