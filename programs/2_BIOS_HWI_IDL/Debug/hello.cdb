@@ -75,7 +75,7 @@ type GlobalStatus {
         prop Visible :: 0
         prop Writable :: 1
     }
-    global DATE :: "Thu Mar 09 10:36:29 2023" { 
+    global DATE :: "Thu Mar 09 19:55:51 2023" { 
         prop Type :: "{21455EA3-B96A-11cf-9BFE-0000C0AC14C7}"
         prop Visible :: 0
         prop Writable :: 0
@@ -3839,7 +3839,7 @@ object HWI_INT2 :: HWI {
     param iId :: 2
     param iDelUser :: "HWI"
     param iDelMsg :: "Hardware interrupt objects cannot be deleted"
-    param function :: @_hwi_NCO
+    param function :: @HWI_unused
     param iSTSObj :: HWI_INT2_STS
     param monitor :: "Nothing"
     param saveAddr :: 0
@@ -4279,7 +4279,7 @@ object HWI_INT12 :: HWI {
     param iId :: 12
     param iDelUser :: "HWI"
     param iDelMsg :: "Hardware interrupt objects cannot be deleted"
-    param function :: @HWI_
+    param function :: @HWI_unused
     param iSTSObj :: HWI_INT12_STS
     param monitor :: "Nothing"
     param saveAddr :: 0
@@ -4499,7 +4499,7 @@ object HWI_INT17 :: HWI {
     param iId :: 17
     param iDelUser :: "HWI"
     param iDelMsg :: "Hardware interrupt objects cannot be deleted"
-    param function :: @_hwi_NCO
+    param function :: @HWI_unused
     param iSTSObj :: HWI_INT17_STS
     param monitor :: "Nothing"
     param saveAddr :: 0
@@ -4543,7 +4543,7 @@ object HWI_INT18 :: HWI {
     param iId :: 18
     param iDelUser :: "HWI"
     param iDelMsg :: "Hardware interrupt objects cannot be deleted"
-    param function :: @_hwi_FIR
+    param function :: @HWI_unused
     param iSTSObj :: HWI_INT18_STS
     param monitor :: "Nothing"
     param saveAddr :: 0

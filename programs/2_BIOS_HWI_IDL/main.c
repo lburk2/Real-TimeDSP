@@ -35,7 +35,7 @@
 #include "myFIR.h"
 #include "myNCO.h"
 #include "demo_filt.h"
-#include "highPassCoeffs.h"
+//#include "highPassCoeffs.h"
 
 extern void audioProcessingInit(void);
 //extern void ConfigureAic3204(void);
@@ -46,23 +46,29 @@ void aic3204_output_sample(int16_t left, int16_t right);
 
 //define global variables
 int filterMode=0;
-int NCO=0;//sorry about bool landon
+int NCO;//sorry about bool landon
 volatile int counter = 0;
-int switch0_prev=1;
+int switch1_prev=1;
 int switch0;
 int switch1;
-int16_t output;
+//int16_t output;
 
-const int16_t demoFilter[];
-const int16_t highPassCoeffs[];
+int16_t* restrict fir1_delayLineptr;
+int16_t* restrict fir1_delayLine;
+
+int16_t* restrict demoFilterptr;
+
+//int16_t demoFilter[];
+//const int16_t highPassCoeffs[];
 
 void main(void)
 {
     /* Initialize BSL */
     EZDSP5502_init( );
 
+    audioProcessingInit();
     // configure the Codec chip
-    //ConfigureAic3204();
+    ConfigureAic3204();
     aic3204_setup();
 
     /* Initialize I2S */
@@ -86,8 +92,14 @@ void main(void)
     //initialize nco
     nco_set_frequency(1000);
 
+    int i;
     //initialize FIR
+    //demoFilterptr=demoFilter;
 
+    for(i=0; i<68; i++)
+    	fir1_delayLine[i]=0;
+    //Assign delayline to pointer
+    fir1_delayLineptr = fir1_delayLine;
     // after main() exits the DSP/BIOS scheduler starts
 }
 
@@ -100,17 +112,17 @@ void myIDLThread(void)
 
 	if(!switch0)
 	{
-		NCO=1; //has to connect to interrupt?
+		NCO=1;
 	}
 	else NCO=0;
 
 
-	if(switch1 != switch1_prev)
-	{
+//	if(switch1 != switch1_prev)
+//	{
 		if(!switch1)
 		{
 			filterMode++;
-			if(filterMode==3)
+			if(filterMode>2)
 			{
 				filterMode=0;
 			}
@@ -132,13 +144,13 @@ void myIDLThread(void)
 				EZDSP5502_I2CGPIO_writeLine(   LED2, LOW );
 				break;
 			}
-		switch0_prev=switch0;
-		}
+//		switch1_prev=switch1;
+//		}
 	}
 }
 
-//Void taskFxn(Arg value_arg)
-//{
+Void taskFxn(Arg value_arg)
+{
 //    LgUns prevHtime, currHtime;
 //    uint32_t delta;
 //    float ncycles;
@@ -161,4 +173,4 @@ void myIDLThread(void)
 //
 //
 //    }
-//}
+}

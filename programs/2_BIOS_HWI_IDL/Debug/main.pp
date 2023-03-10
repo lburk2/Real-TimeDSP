@@ -84,7 +84,6 @@ main.obj: C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stdarg.h
 main.obj: ../myFIR.h
 main.obj: ../myNCO.h
 main.obj: ../demo_filt.h
-main.obj: ../highPassCoeffs.h
 
 ../main.c: 
 C:/ti/bios_5_42_01_09/packages/ti/bios/include/std.h: 
@@ -170,4 +169,3 @@ C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stdarg.h:
 ../myFIR.h: 
 ../myNCO.h: 
 ../demo_filt.h: 
-../highPassCoeffs.h: 

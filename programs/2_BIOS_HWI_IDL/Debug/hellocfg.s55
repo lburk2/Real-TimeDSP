@@ -5,7 +5,7 @@
 ;; INPUT hello.cdb
 
 ;; CONFIGURATION/VERSION INFORMATION
-	.asg "Thu Mar 09 10:36:29 2023", VERS$DATE
+	.asg "Thu Mar 09 19:55:51 2023", VERS$DATE
 
 ;; PROLOGUE
 	.include hellocfg.h55
@@ -653,7 +653,7 @@ HOOK$SETOF          .set 00H
 ;;
 ;; HWI_Obj HWI_INT2 (function, monitor, addr, dataType, operation, client, iUseDispatcher, iArg, Ier0Mask, Ier1Mask)
 	.global HWI_INT2
-	.asg _hwi_NCO, _function
+	.asg HWI_unused, _function
 	.asg "Nothing", _monitor
 	.asg 00H, _addr
 	.asg "signed", _dataType
@@ -823,7 +823,7 @@ HOOK$SETOF          .set 00H
 ;;
 ;; HWI_Obj HWI_INT12 (function, monitor, addr, dataType, operation, client, iUseDispatcher, iArg, Ier0Mask, Ier1Mask)
 	.global HWI_INT12
-	.asg HWI_, _function
+	.asg HWI_unused, _function
 	.asg "Nothing", _monitor
 	.asg 00H, _addr
 	.asg "signed", _dataType
@@ -908,7 +908,7 @@ HOOK$SETOF          .set 00H
 ;;
 ;; HWI_Obj HWI_INT17 (function, monitor, addr, dataType, operation, client, iUseDispatcher, iArg, Ier0Mask, Ier1Mask)
 	.global HWI_INT17
-	.asg _hwi_NCO, _function
+	.asg HWI_unused, _function
 	.asg "Nothing", _monitor
 	.asg 00H, _addr
 	.asg "signed", _dataType
@@ -925,7 +925,7 @@ HOOK$SETOF          .set 00H
 ;;
 ;; HWI_Obj HWI_INT18 (function, monitor, addr, dataType, operation, client, iUseDispatcher, iArg, Ier0Mask, Ier1Mask)
 	.global HWI_INT18
-	.asg _hwi_FIR, _function
+	.asg HWI_unused, _function
 	.asg "Nothing", _monitor
 	.asg 00H, _addr
 	.asg "signed", _dataType
