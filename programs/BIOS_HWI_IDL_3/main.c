@@ -37,7 +37,8 @@ extern void audioProcessingInit(void);
 volatile int counter = 0;
 int switch0;
 int switch1;
-int switchPrev=1;
+int switch0Prev=1;
+int switch1Prev=1;
 int NCO;
 int filterMode=0;
 
@@ -58,6 +59,11 @@ void main(void)
     C55_enableInt(6); // reference technical manual, I2S2 rx interrupt
 
     //audioProcessingInit();
+
+    //init leds
+    EZDSP5502_I2CGPIO_configLine(  LED0, OUT );
+    EZDSP5502_I2CGPIO_configLine(  LED1, OUT );
+    EZDSP5502_I2CGPIO_configLine(  LED2, OUT );
 
     //init NCO
     nco_set_frequency(1000);
@@ -93,16 +99,45 @@ void myIDLThread(void)
 	counter++;
 
 	switch0=EZDSP5502_I2CGPIO_readLine(SW0);
-	if(switch0 != switchPrev)
+	switch1=EZDSP5502_I2CGPIO_readLine(SW1);
+	if(switch0 != switch0Prev)
 	{
 		if(!switch0)
 		{
 			NCO=1;
 		}
-		switchPrev=switch0;
+		switch0Prev=switch0;
 	}
 	else NCO=0;
 
-
+	if(switch1 != switch1Prev)
+	{
+		if(!switch1)
+		{
+			filterMode++;
+			if(filterMode>2)
+			{
+				filterMode=0;
+			}
+			switch(filterMode){
+			case 0:
+			    EZDSP5502_I2CGPIO_writeLine(   LED0, LOW );
+			    EZDSP5502_I2CGPIO_writeLine(   LED1, HIGH );
+			    EZDSP5502_I2CGPIO_writeLine(   LED2, HIGH );
+			break;
+			case 1:
+			    EZDSP5502_I2CGPIO_writeLine(   LED0, HIGH );
+			    EZDSP5502_I2CGPIO_writeLine(   LED1, LOW );
+			    EZDSP5502_I2CGPIO_writeLine(   LED2, HIGH );
+			break;
+			case 2:
+			    EZDSP5502_I2CGPIO_writeLine(   LED0, HIGH );
+			    EZDSP5502_I2CGPIO_writeLine(   LED1, HIGH );
+			    EZDSP5502_I2CGPIO_writeLine(   LED2, LOW );
+			break;
+			}
+		}
+		switch1Prev=switch1;
+	}
 }
 

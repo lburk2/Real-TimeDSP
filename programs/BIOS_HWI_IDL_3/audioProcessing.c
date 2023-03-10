@@ -57,6 +57,14 @@ void HWI_I2S_Tx(void)
 			NCO=0;
 
 	}
+	else
+	{
+		switch(filterMode){
+
+
+		}
+	}
+
 
 	if (txleftRightFlag == 0)
 	{
