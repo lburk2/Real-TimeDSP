@@ -31,6 +31,8 @@
 #include "csl_mcbsp.h"
 
 #include "myNCO.h"
+#include "demo_filt.h"
+#include "highPass.h"
 
 extern void audioProcessingInit(void);
 
@@ -41,7 +43,13 @@ int switch0Prev=1;
 int switch1Prev=1;
 int NCO;
 int filterMode=0;
-
+int16_t delayLineLP[];
+int16_t delayLineHP[];
+const int16_t* restrict demoFilterptr;
+int16_t* restrict delayLineLPptr;
+int16_t* restrict delayLineHPptr;
+const int16_t highPass[];
+const int16_t* restrict highPassptr;
 
 void main(void)
 {
@@ -60,6 +68,8 @@ void main(void)
 
     //audioProcessingInit();
 
+    EZDSP5502_I2CGPIO_configLine(  SW0, IN );
+    EZDSP5502_I2CGPIO_configLine(  SW1, IN );
     //init leds
     EZDSP5502_I2CGPIO_configLine(  LED0, OUT );
     EZDSP5502_I2CGPIO_configLine(  LED1, OUT );
@@ -68,6 +78,20 @@ void main(void)
     //init NCO
     nco_set_frequency(1000);
     nco_set_attenuation(0);
+
+//    //init FIR
+//    volatile int i;
+//    for(i=0; i<68; i++)
+//    	delayLineLP[i]=0;
+//
+//    volatile int k;
+//    for(k=0; k<67; k++)
+//        delayLineHP[i]=0;
+//
+//    delayLineLPptr=delayLineLP;
+//    delayLineHPptr=delayLineHP;
+//    demoFilterptr=demoFilter;
+//    highPassptr=highPass;
     // after main() exits the DSP/BIOS scheduler starts
 }
 

@@ -18,8 +18,9 @@
 #include "myFIR.h"
 #include "testVector.h"
 #include "demo_filt.h"
+#include "highPass.h"
 
-#define NH (68) //change to number of coeffs in filter being used
+#define NH (67) //change to number of coeffs in filter being used
 
 
 extern Int16 aic3204_setup( );
@@ -35,6 +36,7 @@ const int16_t fir1Coeffs[62] =
       -234,   -162,    -95,    -37,      6,     35,     51,     56,     54,     46,     37,     28,     20,     12,
 };
 const int16_t demoFilter[];
+const int16_t highPass[];
 
 void main( void )
 {
@@ -54,6 +56,7 @@ void main( void )
     // Pointer + Variable Declaration
     const int16_t* restrict fir1Coeffsptr;
     const int16_t* restrict demoFilterptr;
+    const int16_t* restrict highPassptr;
     int16_t* restrict fir1_delayLineptr;
     int16_t* testVectorOutput;
     int16_t* testVectorptr;
@@ -65,6 +68,7 @@ void main( void )
     testVectorptr=testVector;
     fir1Coeffsptr=fir1Coeffs;
     demoFilterptr=demoFilter;
+    highPassptr=highPass;
 
     volatile int k,i;
     //fill delay line with zero
@@ -90,7 +94,8 @@ void main( void )
     		myFIR(//&testVectorptr[k], //function takes a vector or realtime input and outputs to testVectorOutput
     				(int16_t*)&dataLeft,
     				//fir1Coeffsptr,
-    				demoFilterptr,
+    				//demoFilterptr,
+					highPassptr,
 					testVectorOutput,
 					fir1_delayLineptr,
 					1,

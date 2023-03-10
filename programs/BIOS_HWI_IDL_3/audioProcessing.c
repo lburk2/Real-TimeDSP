@@ -11,6 +11,8 @@
 #include "csl_mcbsp.h"
 
 #include "myNCO.h"
+#include "myFIR.h"
+
 
 extern MCBSP_Handle aicMcbsp;
 
@@ -19,7 +21,12 @@ int16_t rxLeftSample;
 int16_t leftRightFlag = 0;
 int16_t txleftRightFlag = 0;
 
+int16_t output;
+
 extern int NCO;
+extern int filterMode;
+extern int16_t* delayLineLPptr;
+extern const int16_t* demoFilterptr;
 int i;
 
 void audioProcessingInit(void)
@@ -47,33 +54,42 @@ void HWI_I2S_Tx(void)
 {
 	if(NCO)
 	{
-
 		for(i=0;i<24000;i++)
 		{
 			rxLeftSample=nco_run_sinusoid();
 			EZDSP5502_MCBSP_write(rxLeftSample);
 		}
-
 			NCO=0;
-
 	}
-	else
-	{
-		switch(filterMode){
 
+//		switch(filterMode){
+//		case 1:
+//			myFIR(&rxLeftSample,
+//				  demoFilterptr,
+//				  &output,
+//				  delayLineLPptr,
+//				  1,
+//				  68);
 
-		}
-	}
+//			break;
+//		case 2:
+//			break;
+//		default:
+//			break;
+
+//		}
 
 
 	if (txleftRightFlag == 0)
 	{
-		MCBSP_write16(aicMcbsp,rxLeftSample);
+		EZDSP5502_MCBSP_write(rxRightSample);
+		//MCBSP_write16(aicMcbsp,rxLeftSample);
 		txleftRightFlag = 1;
 	}
 	else
 	{
-		MCBSP_write16(aicMcbsp,rxRightSample);
+		EZDSP5502_MCBSP_write(rxRightSample);
+		//MCBSP_write16(aicMcbsp,rxRightSample);
 		txleftRightFlag = 0;
 	}
 

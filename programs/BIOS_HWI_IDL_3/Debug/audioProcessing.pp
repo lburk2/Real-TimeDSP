@@ -76,6 +76,7 @@ audioProcessing.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/inclu
 audioProcessing.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_mcbsp.h
 audioProcessing.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_mcbsphal.h
 audioProcessing.obj: ../myNCO.h
+audioProcessing.obj: ../myFIR.h
 
 ../audioProcessing.c: 
 C:/ti/bios_5_42_01_09/packages/ti/bios/include/std.h: 
@@ -153,3 +154,4 @@ C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp5502_mcbsp.h:
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_mcbsp.h: 
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_mcbsphal.h: 
 ../myNCO.h: 
+../myFIR.h: 

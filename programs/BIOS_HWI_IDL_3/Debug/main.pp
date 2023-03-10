@@ -80,6 +80,8 @@ main.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp550
 main.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_mcbsp.h
 main.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_mcbsphal.h
 main.obj: ../myNCO.h
+main.obj: ../demo_filt.h
+main.obj: ../highPass.h
 
 ../main.c: 
 C:/ti/bios_5_42_01_09/packages/ti/bios/include/std.h: 
@@ -161,3 +163,5 @@ C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp5502_mcbsp.h:
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_mcbsp.h: 
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_mcbsphal.h: 
 ../myNCO.h: 
+../demo_filt.h: 
+../highPass.h: 
