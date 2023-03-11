@@ -22,12 +22,17 @@ int16_t leftRightFlag = 0;
 int16_t txleftRightFlag = 0;
 
 int16_t output;
+int16_t outputLP;
+int16_t outputHP;
+int16_t filteredLeftSample;
 
 extern int NCO;
 extern int filterMode;
 extern int16_t* delayLineLPptr;
+extern int16_t* delayLineHPptr;
 extern const int16_t* demoFilterptr;
-int i;
+extern const int16_t* highPassptr;
+volatile int NCO_counter=0;
 
 void audioProcessingInit(void)
 {
@@ -42,6 +47,32 @@ void HWI_I2S_Rx(void)
 	{
 		rxLeftSample = MCBSP_read16(aicMcbsp);
 		leftRightFlag = 1;
+
+		switch(filterMode){
+		case 1:
+			myFIR(&rxLeftSample,
+					demoFilterptr,
+					&filteredLeftSample,
+					delayLineLPptr,
+					1,
+					70);
+				EZDSP5502_MCBSP_write(filteredLeftSample);
+				break;
+			case 2:
+				myFIR(&rxLeftSample,
+						highPassptr,
+						&filteredLeftSample,
+						delayLineHPptr,
+						1,
+						67);
+				EZDSP5502_MCBSP_write(filteredLeftSample);
+				break;
+			default:
+				filteredLeftSample=rxLeftSample;
+				EZDSP5502_MCBSP_write(filteredLeftSample);
+				break;
+			}
+
 	}
 	else
 	{
@@ -52,46 +83,21 @@ void HWI_I2S_Rx(void)
 
 void HWI_I2S_Tx(void)
 {
-	if(NCO)
-	{
-		for(i=0;i<24000;i++)
+		if(NCO)
 		{
-			rxLeftSample=nco_run_sinusoid();
-			EZDSP5502_MCBSP_write(rxLeftSample);
+			if(NCO_counter<24000)
+			{
+				filteredLeftSample=nco_run_sinusoid();
+				EZDSP5502_MCBSP_write(filteredLeftSample);
+				NCO_counter++;
+			}
+			if(NCO_counter>=24000)
+			{
+				NCO_counter=0;
+				NCO=0;
+			}
 		}
-			NCO=0;
-	}
 
-//		switch(filterMode){
-//		case 1:
-//			myFIR(&rxLeftSample,
-//				  demoFilterptr,
-//				  &output,
-//				  delayLineLPptr,
-//				  1,
-//				  68);
-
-//			break;
-//		case 2:
-//			break;
-//		default:
-//			break;
-
-//		}
-
-
-	if (txleftRightFlag == 0)
-	{
-		EZDSP5502_MCBSP_write(rxRightSample);
-		//MCBSP_write16(aicMcbsp,rxLeftSample);
-		txleftRightFlag = 1;
-	}
-	else
-	{
-		EZDSP5502_MCBSP_write(rxRightSample);
-		//MCBSP_write16(aicMcbsp,rxRightSample);
-		txleftRightFlag = 0;
-	}
 
 }
 

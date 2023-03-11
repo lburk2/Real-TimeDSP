@@ -43,14 +43,17 @@ int switch0Prev=1;
 int switch1Prev=1;
 int NCO;
 int filterMode=0;
-int16_t delayLineLP[];
-int16_t delayLineHP[];
+int16_t delayLineLP[70]={0};
+int16_t delayLineHP[67]={0};
 const int16_t* restrict demoFilterptr;
 int16_t* restrict delayLineLPptr;
 int16_t* restrict delayLineHPptr;
 const int16_t highPass[];
 const int16_t* restrict highPassptr;
 
+volatile int k;
+
+void *memset(void *str, int c, size_t n);
 void main(void)
 {
     /* Initialize BSL */
@@ -77,21 +80,15 @@ void main(void)
 
     //init NCO
     nco_set_frequency(1000);
-    nco_set_attenuation(0);
+    nco_set_attenuation(3);
 
-//    //init FIR
-//    volatile int i;
-//    for(i=0; i<68; i++)
-//    	delayLineLP[i]=0;
-//
-//    volatile int k;
-//    for(k=0; k<67; k++)
-//        delayLineHP[i]=0;
-//
-//    delayLineLPptr=delayLineLP;
-//    delayLineHPptr=delayLineHP;
-//    demoFilterptr=demoFilter;
-//    highPassptr=highPass;
+    memset(delayLineLP, 0, sizeof delayLineLP);
+    memset(delayLineHP, 0, sizeof delayLineHP);
+
+    delayLineLPptr=delayLineLP;
+    delayLineHPptr=delayLineHP;
+    demoFilterptr=demoFilter;
+    highPassptr=highPass;
     // after main() exits the DSP/BIOS scheduler starts
 }
 
@@ -122,6 +119,7 @@ void myIDLThread(void)
 {
 	counter++;
 
+
 	switch0=EZDSP5502_I2CGPIO_readLine(SW0);
 	switch1=EZDSP5502_I2CGPIO_readLine(SW1);
 	if(switch0 != switch0Prev)
@@ -132,7 +130,6 @@ void myIDLThread(void)
 		}
 		switch0Prev=switch0;
 	}
-	else NCO=0;
 
 	if(switch1 != switch1Prev)
 	{
