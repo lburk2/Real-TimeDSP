@@ -3,7 +3,6 @@
 	<name>aic3204</name>
 	<comment></comment>
 	<projects>
-		<project>ezdsp5502bsl</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

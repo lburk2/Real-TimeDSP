@@ -15,12 +15,12 @@ OBJS += \
 ./setmac.obj 
 
 C_DEPS += \
-./enet.d \
-./setmac.d 
+./enet.pp \
+./setmac.pp 
 
 C_DEPS__QUOTED += \
-"enet.d" \
-"setmac.d" 
+"enet.pp" \
+"setmac.pp" 
 
 OBJS__QUOTED += \
 "enet.obj" \

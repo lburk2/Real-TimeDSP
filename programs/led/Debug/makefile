@@ -143,7 +143,7 @@ all: led.out
 led.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: C5500 Linker'
-	"D:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 --memory_model=large -g --define=c5502 --diag_warning=225 --ptrdiff_size=32 -z -m"led.map" --stack_size=0x200 --heap_size=0x400 -i"D:/ti/ccsv6/tools/compiler/c5500_4.4.1/lib" -i"Z:/Documents/Academics/temp/ezdsp5502_v1/lib" -i"D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include" -i"C:/Users/lando/iCloudDrive/Documents/Semester8/Real-Time DSP/ezdsp5502_v1_spring2023/C55xxCSL/lib" -i"C:/Users/lando/iCloudDrive/Documents/Semester8/Real-Time DSP/ezdsp5502_v1_spring2023/lib" --reread_libs --warn_sections --xml_link_info="led_linkInfo.xml" --rom_model --sys_stacksize=0x200 -o "led.out" $(ORDERED_OBJS)
+	"D:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 --memory_model=large -g --define=c5502 --diag_warning=225 --ptrdiff_size=32 -z -m"led.map" --stack_size=0x200 --heap_size=0x400 -i"D:/ti/ccsv6/tools/compiler/c5500_4.4.1/lib" -i"Z:/Documents/Academics/temp/ezdsp5502_v1/lib" -i"D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include" -i"Z:/Semester8/Real-Time DSP/Projects/Real-TimeDSP/C55xxCSL/lib" -i"Z:/Semester8/Real-Time DSP/Projects/Real-TimeDSP/lib" --reread_libs --warn_sections --xml_link_info="led_linkInfo.xml" --rom_model --sys_stacksize=0x200 -o "led.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 

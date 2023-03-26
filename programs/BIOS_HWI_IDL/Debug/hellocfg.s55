@@ -5,7 +5,7 @@
 ;; INPUT hello.cdb
 
 ;; CONFIGURATION/VERSION INFORMATION
-	.asg "Wed Mar 08 09:31:24 2023", VERS$DATE
+	.asg "Fri Mar 10 10:04:49 2023", VERS$DATE
 
 ;; PROLOGUE
 	.include hellocfg.h55
@@ -63,9 +63,9 @@ HST$NUMOF           .set 2
 HST$SETOF           .set 03H
 HWI$NUMOF           .set 32
 HWI$SETOF           .set 0ffffH
-SWI$NUMOF           .set 2
+SWI$NUMOF           .set 1
 SWI$SETOF           .set 00H
-TSK$NUMOF           .set 1
+TSK$NUMOF           .set 2
 TSK$SETOF           .set 00H
 IDL$NUMOF           .set 4
 IDL$SETOF           .set 00H
@@ -1179,27 +1179,6 @@ HOOK$SETOF          .set 00H
 	.asg 00H, _unittype
 	SWI_Obj 1, KNL_swi, 0, _function, _pri, _mailbox, _arg0, _arg1, _dorta, _Order, _filter, _maxformat, _sumformat, _avgformat, _filtmaxmult, _filtsummult, _unittype
 
-;; ======== SWI_Obj SWI_Audio ========
-;; <add comments here>
-;;
-;; SWI_Obj SWI_Audio (function, pri, mailbox, arg0, arg1, dorta, Order, filter, maxformat, sumformat, avgformat, filtmaxmult, filtsummult, unittype)
-	.global SWI_Audio
-	.asg _SWI_AudioProc, _function
-	.asg 01H, _pri
-	.asg 00H, _mailbox
-	.asg 00H, _arg0
-	.asg 00H, _arg1
-	.asg 01H, _dorta
-	.asg 04H, _Order
-	.asg 02H, _filter
-	.asg "%g inst", _maxformat
-	.asg "%g inst", _sumformat
-	.asg "%.2f inst", _avgformat
-	.asg 01H, _filtmaxmult
-	.asg 01H, _filtsummult
-	.asg 00H, _unittype
-	SWI_Obj 1, SWI_Audio, 0, _function, _pri, _mailbox, _arg0, _arg1, _dorta, _Order, _filter, _maxformat, _sumformat, _avgformat, _filtmaxmult, _filtsummult, _unittype
-
 ;; ======== TSK_Obj TSK_idle ========
 ;; This is the idle task; it only runs when no other task is ready
 ;;
@@ -1224,7 +1203,7 @@ HOOK$SETOF          .set 00H
 	.asg 01H, _iEXITFLAG
 	.asg 00H, _iUSETSKNAME
 	.asg 00H, _iSTATREG
-	.asg 01H, _Order
+	.asg 00H, _Order
 	.asg 02H, _filter
 	.asg "%g inst", _maxformat
 	.asg "%g inst", _sumformat
@@ -1233,6 +1212,40 @@ HOOK$SETOF          .set 00H
 	.asg 01H, _filtsummult
 	.asg 00H, _unittype
 	TSK_Obj 1, TSK_idle, 0, _iFXN, _iARG0, _iARG1, _iARG2, _iARG3, _iARG4, _iARG5, _iARG6, _iARG7, _iAUTOSTK, _iMANSTK, _iSTKSZ, _iSYSTKSZ, _iSTKSEG, _iPRI, _iENV, _iEXITFLAG, _iUSETSKNAME, _iSTATREG, _Order, _filter, _maxformat, _sumformat, _avgformat, _filtmaxmult, _filtsummult, _unittype
+
+;; ======== TSK_Obj task ========
+;; <add comments here>
+;;
+;; TSK_Obj task (iFXN, iARG0, iARG1, iARG2, iARG3, iARG4, iARG5, iARG6, iARG7, iAUTOSTK, iMANSTK, iSTKSZ, iSYSTKSZ, iSTKSEG, iPRI, iENV, iEXITFLAG, iUSETSKNAME, iSTATREG, Order, filter, maxformat, sumformat, avgformat, filtmaxmult, filtsummult, unittype)
+	.global task
+	.asg _taskFxn, _iFXN
+	.asg 0aH, _iARG0
+	.asg 00H, _iARG1
+	.asg 00H, _iARG2
+	.asg 00H, _iARG3
+	.asg 00H, _iARG4
+	.asg 00H, _iARG5
+	.asg 00H, _iARG6
+	.asg 00H, _iARG7
+	.asg 01H, _iAUTOSTK
+	.asg null, _iMANSTK
+	.asg 0400H, _iSTKSZ
+	.asg 0100H, _iSYSTKSZ
+	.asg DARAM, _iSTKSEG
+	.asg 01H, _iPRI
+	.asg 00H, _iENV
+	.asg 01H, _iEXITFLAG
+	.asg 00H, _iUSETSKNAME
+	.asg 00H, _iSTATREG
+	.asg 00H, _Order
+	.asg 02H, _filter
+	.asg "%g inst", _maxformat
+	.asg "%g inst", _sumformat
+	.asg "%.2f inst", _avgformat
+	.asg 01H, _filtmaxmult
+	.asg 01H, _filtsummult
+	.asg 00H, _unittype
+	TSK_Obj 1, task, 0, _iFXN, _iARG0, _iARG1, _iARG2, _iARG3, _iARG4, _iARG5, _iARG6, _iARG7, _iAUTOSTK, _iMANSTK, _iSTKSZ, _iSYSTKSZ, _iSTKSEG, _iPRI, _iENV, _iEXITFLAG, _iUSETSKNAME, _iSTATREG, _Order, _filter, _maxformat, _sumformat, _avgformat, _filtmaxmult, _filtsummult, _unittype
 
 ;; ======== IDL_Obj LNK_dataPump ========
 ;; This object cannot be deleted

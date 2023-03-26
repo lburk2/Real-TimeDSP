@@ -6,7 +6,7 @@ audioProcessing.obj: C:/ti/bios_5_42_01_09/packages/ti/bios/include/tistdtypes.h
 audioProcessing.obj: C:/ti/bios_5_42_01_09/packages/ti/bios/include/log.h
 audioProcessing.obj: C:/ti/bios_5_42_01_09/packages/ti/bios/include/_log.h
 audioProcessing.obj: C:/ti/bios_5_42_01_09/packages/ti/bios/include/trc.h
-audioProcessing.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/programs/BIOS_HWI_IDL/Debug/hellocfg.h
+audioProcessing.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/programs/BIOS_HWI_IDL_3/Debug/hellocfg.h
 audioProcessing.obj: C:/ti/bios_5_42_01_09/packages/ti/bios/include/hst.h
 audioProcessing.obj: C:/ti/bios_5_42_01_09/packages/ti/bios/include/pip.h
 audioProcessing.obj: C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stddef.h
@@ -32,7 +32,7 @@ audioProcessing.obj: C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stdarg.h
 audioProcessing.obj: C:/ti/bios_5_42_01_09/packages/ti/bios/include/trg.h
 audioProcessing.obj: C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stddef.h
 audioProcessing.obj: C:/ti/bios_5_42_01_09/packages/ti/bios/include/_hook.h
-audioProcessing.obj: ../ezdsp5502.h
+audioProcessing.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp5502.h
 audioProcessing.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl.h
 audioProcessing.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/_csl.h
 audioProcessing.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_chiphal.h
@@ -72,9 +72,11 @@ audioProcessing.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xx
 audioProcessing.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_err.h
 audioProcessing.obj: C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stdint.h
 audioProcessing.obj: ../aic3204.h
-audioProcessing.obj: ../ezdsp5502_mcbsp.h
+audioProcessing.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp5502_mcbsp.h
 audioProcessing.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_mcbsp.h
 audioProcessing.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_mcbsphal.h
+audioProcessing.obj: ../myNCO.h
+audioProcessing.obj: ../myFIR.h
 
 ../audioProcessing.c: 
 C:/ti/bios_5_42_01_09/packages/ti/bios/include/std.h: 
@@ -82,7 +84,7 @@ C:/ti/bios_5_42_01_09/packages/ti/bios/include/tistdtypes.h:
 C:/ti/bios_5_42_01_09/packages/ti/bios/include/log.h: 
 C:/ti/bios_5_42_01_09/packages/ti/bios/include/_log.h: 
 C:/ti/bios_5_42_01_09/packages/ti/bios/include/trc.h: 
-C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/programs/BIOS_HWI_IDL/Debug/hellocfg.h: 
+C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/programs/BIOS_HWI_IDL_3/Debug/hellocfg.h: 
 C:/ti/bios_5_42_01_09/packages/ti/bios/include/hst.h: 
 C:/ti/bios_5_42_01_09/packages/ti/bios/include/pip.h: 
 C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stddef.h: 
@@ -108,7 +110,7 @@ C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stdarg.h:
 C:/ti/bios_5_42_01_09/packages/ti/bios/include/trg.h: 
 C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stddef.h: 
 C:/ti/bios_5_42_01_09/packages/ti/bios/include/_hook.h: 
-../ezdsp5502.h: 
+C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp5502.h: 
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl.h: 
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/_csl.h: 
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_chiphal.h: 
@@ -148,6 +150,8 @@ C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_irqha
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_err.h: 
 C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stdint.h: 
 ../aic3204.h: 
-../ezdsp5502_mcbsp.h: 
+C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp5502_mcbsp.h: 
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_mcbsp.h: 
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_mcbsphal.h: 
+../myNCO.h: 
+../myFIR.h: 

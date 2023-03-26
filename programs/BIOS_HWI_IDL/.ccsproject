@@ -10,5 +10,4 @@
 	<createSlaveProjects value=""/>
 	<templateProperties value="id=com.ti.rtsc.DSPBIOS.example_50,type=bios5,products=com.ti.rtsc.DSPBIOS,"/>
 	<isTargetManual value="false"/>
-	<origin value="C:/Users/wulfm/Documents/School/RT DSP/ezdsp5502_v1/tests/biosStarter"/>
 </projectOptions>

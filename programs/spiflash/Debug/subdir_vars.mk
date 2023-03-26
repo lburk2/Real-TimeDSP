@@ -17,14 +17,14 @@ OBJS += \
 ./spiflash_test.obj 
 
 C_DEPS += \
-./main.d \
-./spiflash.d \
-./spiflash_test.d 
+./main.pp \
+./spiflash.pp \
+./spiflash_test.pp 
 
 C_DEPS__QUOTED += \
-"main.d" \
-"spiflash.d" \
-"spiflash_test.d" 
+"main.pp" \
+"spiflash.pp" \
+"spiflash_test.pp" 
 
 OBJS__QUOTED += \
 "main.obj" \

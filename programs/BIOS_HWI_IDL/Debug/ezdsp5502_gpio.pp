@@ -1,8 +1,8 @@
 # FIXED
 
 ezdsp5502_gpio.obj: ../ezdsp5502_gpio.c
-ezdsp5502_gpio.obj: ../ezdsp5502_gpio.h
-ezdsp5502_gpio.obj: ../ezdsp5502.h
+ezdsp5502_gpio.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp5502_gpio.h
+ezdsp5502_gpio.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp5502.h
 ezdsp5502_gpio.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl.h
 ezdsp5502_gpio.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/_csl.h
 ezdsp5502_gpio.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_chiphal.h
@@ -46,8 +46,8 @@ ezdsp5502_gpio.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxC
 ezdsp5502_gpio.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_chip.h
 
 ../ezdsp5502_gpio.c: 
-../ezdsp5502_gpio.h: 
-../ezdsp5502.h: 
+C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp5502_gpio.h: 
+C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp5502.h: 
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl.h: 
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/_csl.h: 
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_chiphal.h: 

@@ -1,8 +1,8 @@
 # FIXED
 
 ezdsp5502_mcbsp.obj: ../ezdsp5502_mcbsp.c
-ezdsp5502_mcbsp.obj: ../ezdsp5502_mcbsp.h
-ezdsp5502_mcbsp.obj: ../ezdsp5502.h
+ezdsp5502_mcbsp.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp5502_mcbsp.h
+ezdsp5502_mcbsp.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp5502.h
 ezdsp5502_mcbsp.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl.h
 ezdsp5502_mcbsp.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/_csl.h
 ezdsp5502_mcbsp.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_chiphal.h
@@ -44,8 +44,8 @@ ezdsp5502_mcbsp.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xx
 ezdsp5502_mcbsp.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_mcbsphal.h
 
 ../ezdsp5502_mcbsp.c: 
-../ezdsp5502_mcbsp.h: 
-../ezdsp5502.h: 
+C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp5502_mcbsp.h: 
+C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp5502.h: 
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl.h: 
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/_csl.h: 
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_chiphal.h: 

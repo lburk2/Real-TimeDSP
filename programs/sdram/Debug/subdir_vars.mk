@@ -15,12 +15,12 @@ OBJS += \
 ./sdram_test.obj 
 
 C_DEPS += \
-./main.d \
-./sdram_test.d 
+./main.pp \
+./sdram_test.pp 
 
 C_DEPS__QUOTED += \
-"main.d" \
-"sdram_test.d" 
+"main.pp" \
+"sdram_test.pp" 
 
 OBJS__QUOTED += \
 "main.obj" \

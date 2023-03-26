@@ -86,18 +86,6 @@ task.fxn      = prog.decl("taskFxn");
 task.arg0     = 10;
 
 
-bios.IDL.create("IDL1");
-bios.IDL.instance("IDL1").order = 6;
-bios.IDL.instance("IDL1").fxn = prog.extern("theButtons");
-bios.IDL.instance("IDL1").comment = "button and LED func";
-bios.HWI.instance("HWI_INT6").interruptMask0 = "all";
-bios.IDL.instance("IDL1").destroy();
-bios.SWI.instance("PRD_swi").order = 1;
-bios.SWI.create("SWI_Audio");
-bios.SWI.instance("SWI_Audio").order = 4;
-bios.SWI.instance("SWI_Audio").fxn = prog.extern("SWI_AudioProc");
-bios.TSK.instance("TSK_idle").order = 1;
-bios.TSK.instance("task").destroy();
 // !GRAPHICAL_CONFIG_TOOL_SCRIPT_INSERT_POINT!
 
 if (config.hasReportedError == false) {

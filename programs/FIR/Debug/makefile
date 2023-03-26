@@ -4,7 +4,7 @@
 
 SHELL = cmd.exe
 
-CG_TOOL_ROOT := C:/ti/ccsv6/tools/compiler/c5500_4.4.1
+CG_TOOL_ROOT := D:/ti/ccsv6/tools/compiler/c5500_4.4.1
 
 GEN_OPTS__FLAG := 
 GEN_CMDS__FLAG := 
@@ -126,26 +126,38 @@ endif
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXE_OUTPUTS += \
-aic3204.out \
+FIR.out \
 
 EXE_OUTPUTS__QUOTED += \
-"aic3204.out" \
+"FIR.out" \
+
+BIN_OUTPUTS += \
+FIR.hex \
+
+BIN_OUTPUTS__QUOTED += \
+"FIR.hex" \
 
 
 # All Target
-all: aic3204.out
+all: FIR.out
 
 # Tool invocations
-aic3204.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
+FIR.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: C5500 Linker'
-	"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 -g --diag_warning=225 --ptrdiff_size=32 --memory_model=large --opt_for_speed=5 -z -m"aic3204.map" --warn_sections -i"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/lib" -i"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include" -i"C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/lib" -i"C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/lib" --reread_libs --xml_link_info="aic3204_linkInfo.xml" --rom_model -o "aic3204.out" $(ORDERED_OBJS)
+	"D:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/cl55" --memory_model=small -g --display_error_number --diag_warning=225 --ptrdiff_size=16 -z -m"FIR.map" -i"D:/ti/ccsv6/tools/compiler/c5500_4.4.1/lib" -i"Z:/Semester8/Real-Time DSP/Projects/Real-TimeDSP/lib" -i"Z:/Semester8/Real-Time DSP/Projects/Real-TimeDSP/C55xxCSL/lib" -i"D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include" --reread_libs --display_error_number --warn_sections --xml_link_info="FIR_linkInfo.xml" --rom_model -o "FIR.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: $@'
+	@echo ' '
+
+FIR.hex: $(EXE_OUTPUTS)
+	@echo 'Invoking: C5500 Hex Utility'
+	"D:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/hex55"  -o "FIR.hex" $(EXE_OUTPUTS__QUOTED)
+	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(EXE_OUTPUTS__QUOTED)
+	-$(RM) $(EXE_OUTPUTS__QUOTED)$(BIN_OUTPUTS__QUOTED)
 	-$(RM) "aic3204.pp" "ezdsp5502.pp" "ezdsp5502_gpio.pp" "ezdsp5502_i2c.pp" "ezdsp5502_i2cgpio.pp" "ezdsp5502_mcbsp.pp" "main.pp" "myFIR.pp" 
 	-$(RM) "aic3204.obj" "ezdsp5502.obj" "ezdsp5502_gpio.obj" "ezdsp5502_i2c.obj" "ezdsp5502_i2cgpio.obj" "ezdsp5502_mcbsp.obj" "main.obj" "myFIR.obj" 
 	-@echo 'Finished clean'

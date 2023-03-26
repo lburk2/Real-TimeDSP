@@ -78,8 +78,6 @@
 	.global	_HWI_I2S_Rx
 	.global	_HWI_I2S_Tx
 	.global	_taskFxn
-	.global	_theButtons
-	.global	_SWI_AudioProc
 
 ;; MODULE PARAMETERS
 GBL$                .set 1
