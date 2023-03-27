@@ -6,7 +6,7 @@ audioProcessing.obj: C:/ti/bios_5_42_01_09/packages/ti/bios/include/tistdtypes.h
 audioProcessing.obj: C:/ti/bios_5_42_01_09/packages/ti/bios/include/log.h
 audioProcessing.obj: C:/ti/bios_5_42_01_09/packages/ti/bios/include/_log.h
 audioProcessing.obj: C:/ti/bios_5_42_01_09/packages/ti/bios/include/trc.h
-audioProcessing.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/programs/BIOS_HWI_IDL_3/Debug/hellocfg.h
+audioProcessing.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/programs/BIOS_HWI_TSK_PRD/Debug/hellocfg.h
 audioProcessing.obj: C:/ti/bios_5_42_01_09/packages/ti/bios/include/hst.h
 audioProcessing.obj: C:/ti/bios_5_42_01_09/packages/ti/bios/include/pip.h
 audioProcessing.obj: C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stddef.h
@@ -86,7 +86,7 @@ C:/ti/bios_5_42_01_09/packages/ti/bios/include/tistdtypes.h:
 C:/ti/bios_5_42_01_09/packages/ti/bios/include/log.h: 
 C:/ti/bios_5_42_01_09/packages/ti/bios/include/_log.h: 
 C:/ti/bios_5_42_01_09/packages/ti/bios/include/trc.h: 
-C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/programs/BIOS_HWI_IDL_3/Debug/hellocfg.h: 
+C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/programs/BIOS_HWI_TSK_PRD/Debug/hellocfg.h: 
 C:/ti/bios_5_42_01_09/packages/ti/bios/include/hst.h: 
 C:/ti/bios_5_42_01_09/packages/ti/bios/include/pip.h: 
 C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stddef.h: 

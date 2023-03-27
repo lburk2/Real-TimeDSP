@@ -29,19 +29,16 @@
 #include "aic3204.h"
 #include "ezdsp5502_mcbsp.h"
 #include "csl_mcbsp.h"
+//#include "Dsplib.h"
 
-#include "myNCO.h"
 #include "demo_filt.h"
 #include "highPass.h"
 
 extern void audioProcessingInit(void);
 
 volatile int counter = 0;
-int switch0;
 int switch1;
-int switch0Prev=1;
 int switch1Prev=1;
-int NCO;
 int filterMode=0;
 int16_t delayLineLP[70]={0};
 int16_t delayLineHP[67]={0};
@@ -71,16 +68,11 @@ void main(void)
 
     //audioProcessingInit();
 
-    EZDSP5502_I2CGPIO_configLine(  SW0, IN );
     EZDSP5502_I2CGPIO_configLine(  SW1, IN );
     //init leds
     EZDSP5502_I2CGPIO_configLine(  LED0, OUT );
     EZDSP5502_I2CGPIO_configLine(  LED1, OUT );
     EZDSP5502_I2CGPIO_configLine(  LED2, OUT );
-
-    //init NCO
-    nco_set_frequency(1000);
-    nco_set_attenuation(3);
 
     memset(delayLineLP, 0, sizeof delayLineLP);
     memset(delayLineHP, 0, sizeof delayLineHP);
@@ -121,17 +113,7 @@ void myIDLThread(void)
 {
 	counter++;
 
-
-	switch0=EZDSP5502_I2CGPIO_readLine(SW0);
 	switch1=EZDSP5502_I2CGPIO_readLine(SW1);
-	if(switch0 != switch0Prev)
-	{
-		if(!switch0)
-		{
-			NCO=1;
-		}
-		switch0Prev=switch0;
-	}
 
 	if(switch1 != switch1Prev)
 	{

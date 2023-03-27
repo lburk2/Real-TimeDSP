@@ -31,7 +31,7 @@ main.obj: C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stddef.h
 main.obj: C:/ti/bios_5_42_01_09/packages/ti/bios/include/_hook.h
 main.obj: C:/ti/bios_5_42_01_09/packages/ti/bios/include/gbl.h
 main.obj: C:/ti/bios_5_42_01_09/packages/ti/bios/include/c55.h
-main.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/programs/BIOS_HWI_IDL_3/Debug/hellocfg.h
+main.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/programs/BIOS_HWI_TSK_PRD/Debug/hellocfg.h
 main.obj: C:/ti/bios_5_42_01_09/packages/ti/bios/include/hst.h
 main.obj: C:/ti/bios_5_42_01_09/packages/ti/bios/include/pip.h
 main.obj: C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stddef.h
@@ -81,7 +81,6 @@ main.obj: ../aic3204.h
 main.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp5502_mcbsp.h
 main.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_mcbsp.h
 main.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_mcbsphal.h
-main.obj: ../myNCO.h
 main.obj: ../demo_filt.h
 main.obj: ../highPass.h
 
@@ -116,7 +115,7 @@ C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stddef.h:
 C:/ti/bios_5_42_01_09/packages/ti/bios/include/_hook.h: 
 C:/ti/bios_5_42_01_09/packages/ti/bios/include/gbl.h: 
 C:/ti/bios_5_42_01_09/packages/ti/bios/include/c55.h: 
-C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/programs/BIOS_HWI_IDL_3/Debug/hellocfg.h: 
+C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/programs/BIOS_HWI_TSK_PRD/Debug/hellocfg.h: 
 C:/ti/bios_5_42_01_09/packages/ti/bios/include/hst.h: 
 C:/ti/bios_5_42_01_09/packages/ti/bios/include/pip.h: 
 C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stddef.h: 
@@ -166,6 +165,5 @@ C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stdint.h:
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp5502_mcbsp.h: 
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_mcbsp.h: 
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_mcbsphal.h: 
-../myNCO.h: 
 ../demo_filt.h: 
 ../highPass.h: 
