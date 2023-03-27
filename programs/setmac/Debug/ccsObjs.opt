@@ -1,1 +1,1 @@
-"./enet.obj" "./setmac.obj" "../lnkx.cmd" -lezdsp5502bsl.lib -lcsl5502x.lib -lrts55x.lib 
+"./enet.obj" "./setmac.obj" "../lnkx.cmd" -l"ezdsp5502bsl.lib" -l"csl5502x.lib" -l"rts55x.lib" 

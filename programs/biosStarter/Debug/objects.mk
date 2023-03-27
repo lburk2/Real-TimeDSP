@@ -4,5 +4,5 @@
 
 USER_OBJS :=
 
-LIBS := -llibc.a -lcsl5502x.lib -lrts55x.lib
+LIBS := -l"libc.a" -l"csl5502x.lib" -l"rts55x.lib"
 

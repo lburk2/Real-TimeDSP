@@ -1,8 +1,8 @@
 # FIXED
 
 ezdsp5502_i2c.obj: ../ezdsp5502_i2c.c
-ezdsp5502_i2c.obj: ../ezdsp5502_i2c.h
-ezdsp5502_i2c.obj: ../ezdsp5502.h
+ezdsp5502_i2c.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp5502_i2c.h
+ezdsp5502_i2c.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp5502.h
 ezdsp5502_i2c.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl.h
 ezdsp5502_i2c.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/_csl.h
 ezdsp5502_i2c.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_chiphal.h
@@ -44,8 +44,8 @@ ezdsp5502_i2c.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCS
 ezdsp5502_i2c.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_i2chal.h
 
 ../ezdsp5502_i2c.c: 
-../ezdsp5502_i2c.h: 
-../ezdsp5502.h: 
+C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp5502_i2c.h: 
+C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp5502.h: 
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl.h: 
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/_csl.h: 
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_chiphal.h: 

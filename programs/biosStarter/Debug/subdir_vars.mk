@@ -40,18 +40,18 @@ GEN_HDRS += \
 ./hellocfg.h?? 
 
 S??_DEPS += \
-./hellocfg.d 
+./hellocfg.pp 
 
 C_DEPS += \
-./aic3204.d \
-./audioProcessing.d \
-./ezdsp5502.d \
-./ezdsp5502_gpio.d \
-./ezdsp5502_i2c.d \
-./ezdsp5502_i2cgpio.d \
-./ezdsp5502_mcbsp.d \
-./hellocfg_c.d \
-./main.d 
+./aic3204.pp \
+./audioProcessing.pp \
+./ezdsp5502.pp \
+./ezdsp5502_gpio.pp \
+./ezdsp5502_i2c.pp \
+./ezdsp5502_i2cgpio.pp \
+./ezdsp5502_mcbsp.pp \
+./hellocfg_c.pp \
+./main.pp 
 
 GEN_CMDS += \
 ./hellocfg.cmd 
@@ -74,18 +74,18 @@ GEN_FILES__QUOTED += \
 "hellocfg_c.c" 
 
 C_DEPS__QUOTED += \
-"aic3204.d" \
-"audioProcessing.d" \
-"ezdsp5502.d" \
-"ezdsp5502_gpio.d" \
-"ezdsp5502_i2c.d" \
-"ezdsp5502_i2cgpio.d" \
-"ezdsp5502_mcbsp.d" \
-"hellocfg_c.d" \
-"main.d" 
+"aic3204.pp" \
+"audioProcessing.pp" \
+"ezdsp5502.pp" \
+"ezdsp5502_gpio.pp" \
+"ezdsp5502_i2c.pp" \
+"ezdsp5502_i2cgpio.pp" \
+"ezdsp5502_mcbsp.pp" \
+"hellocfg_c.pp" \
+"main.pp" 
 
 S??_DEPS__QUOTED += \
-"hellocfg.d" 
+"hellocfg.pp" 
 
 OBJS__QUOTED += \
 "aic3204.obj" \

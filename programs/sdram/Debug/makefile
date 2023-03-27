@@ -14,9 +14,9 @@ ORDERED_OBJS += \
 "./sdram_test.obj" \
 "../lnkx.cmd" \
 $(GEN_CMDS__FLAG) \
--lcsl5502x.lib \
--lezdsp5502bsl.lib \
--lrts55x.lib \
+-l"csl5502x.lib" \
+-l"ezdsp5502bsl.lib" \
+-l"rts55x.lib" \
 
 -include ../makefile.init
 
@@ -47,9 +47,6 @@ ifneq ($(strip $(ASM_DEPS)),)
 endif
 ifneq ($(strip $(CC_DEPS)),)
 -include $(CC_DEPS)
-endif
-ifneq ($(strip $(SV7A_DEPS)),)
--include $(SV7A_DEPS)
 endif
 ifneq ($(strip $(S55_DEPS)),)
 -include $(S55_DEPS)
@@ -132,28 +129,24 @@ EXE_OUTPUTS__QUOTED += \
 # All Target
 all: sdram.out
 
-dependents:
-	-cd C:/Users/lando/iCloudDrive/Documents/Semester8/Real-Time\ DSP/ezdsp5502_v1_spring2023/ezdsp5502_v1_spring2023/lib/Debug && $(MAKE) clean all
-
 # Tool invocations
-sdram.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS) C:/Users/lando/iCloudDrive/Documents/Semester8/Real-Time\ DSP/ezdsp5502_v1_spring2023/ezdsp5502_v1_spring2023/lib/Debug/../ezdsp5502bsl.lib
+sdram.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: C5500 Linker'
-	"D:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 -g --diag_warning=225 --ptrdiff_size=32 --memory_model=large -z -m"sdram.map" --warn_sections -i"D:/ti/ccsv6/tools/compiler/c5500_4.4.1/lib" -i"D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include" -i"C:/Users/lando/iCloudDrive/Documents/Semester8/Real-Time DSP/ezdsp5502_v1_spring2023/ezdsp5502_v1_spring2023/C55xxCSL/lib" -i"C:/Users/lando/iCloudDrive/Documents/Semester8/Real-Time DSP/ezdsp5502_v1_spring2023/ezdsp5502_v1_spring2023/lib" --reread_libs --xml_link_info="sdram_linkInfo.xml" --rom_model -o "sdram.out" $(ORDERED_OBJS)
+	"D:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 -g --diag_warning=225 --ptrdiff_size=32 --memory_model=large -z -m"sdram.map" --warn_sections -i"D:/ti/ccsv6/tools/compiler/c5500_4.4.1/lib" -i"D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include" -i"Z:/Semester8/Real-Time DSP/Projects/Real-TimeDSP/C55xxCSL/lib" -i"Z:/Semester8/Real-Time DSP/Projects/Real-TimeDSP/lib" --reread_libs --xml_link_info="sdram_linkInfo.xml" --rom_model -o "sdram.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
 # Other Targets
 clean:
 	-$(RM) $(EXE_OUTPUTS__QUOTED)
-	-$(RM) "main.d" "sdram_test.d" 
+	-$(RM) "main.pp" "sdram_test.pp" 
 	-$(RM) "main.obj" "sdram_test.obj" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
 .PHONY: all clean dependents
 .SECONDARY:
-C:/Users/lando/iCloudDrive/Documents/Semester8/Real-Time\ DSP/ezdsp5502_v1_spring2023/ezdsp5502_v1_spring2023/lib/Debug/../ezdsp5502bsl.lib:
 
 -include ../makefile.targets
 

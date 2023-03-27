@@ -15,12 +15,12 @@ OBJS += \
 ./switch_test.obj 
 
 C_DEPS += \
-./main.d \
-./switch_test.d 
+./main.pp \
+./switch_test.pp 
 
 C_DEPS__QUOTED += \
-"main.d" \
-"switch_test.d" 
+"main.pp" \
+"switch_test.pp" 
 
 OBJS__QUOTED += \
 "main.obj" \

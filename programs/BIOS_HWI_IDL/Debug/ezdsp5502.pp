@@ -1,7 +1,7 @@
 # FIXED
 
 ezdsp5502.obj: ../ezdsp5502.c
-ezdsp5502.obj: ../ezdsp5502.h
+ezdsp5502.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp5502.h
 ezdsp5502.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl.h
 ezdsp5502.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/_csl.h
 ezdsp5502.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_chiphal.h
@@ -39,11 +39,11 @@ ezdsp5502.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/in
 ezdsp5502.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/_csl.h
 ezdsp5502.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_irqhal.h
 ezdsp5502.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_err.h
-ezdsp5502.obj: ../ezdsp5502_i2c.h
-ezdsp5502.obj: ../ezdsp5502_i2cgpio.h
+ezdsp5502.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp5502_i2c.h
+ezdsp5502.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp5502_i2cgpio.h
 
 ../ezdsp5502.c: 
-../ezdsp5502.h: 
+C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp5502.h: 
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl.h: 
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/_csl.h: 
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_chiphal.h: 
@@ -81,5 +81,5 @@ C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_irq.h
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/_csl.h: 
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_irqhal.h: 
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_err.h: 
-../ezdsp5502_i2c.h: 
-../ezdsp5502_i2cgpio.h: 
+C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp5502_i2c.h: 
+C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp5502_i2cgpio.h: 

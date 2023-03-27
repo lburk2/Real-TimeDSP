@@ -17,14 +17,14 @@ OBJS += \
 ./main.obj 
 
 C_DEPS += \
-./enet.d \
-./enet_test.d \
-./main.d 
+./enet.pp \
+./enet_test.pp \
+./main.pp 
 
 C_DEPS__QUOTED += \
-"enet.d" \
-"enet_test.d" \
-"main.d" 
+"enet.pp" \
+"enet_test.pp" \
+"main.pp" 
 
 OBJS__QUOTED += \
 "enet.obj" \

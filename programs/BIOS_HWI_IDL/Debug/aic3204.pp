@@ -1,7 +1,7 @@
 # FIXED
 
 aic3204.obj: ../aic3204.c
-aic3204.obj: ../ezdsp5502.h
+aic3204.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp5502.h
 aic3204.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl.h
 aic3204.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/_csl.h
 aic3204.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_chiphal.h
@@ -39,13 +39,13 @@ aic3204.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/incl
 aic3204.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/_csl.h
 aic3204.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_irqhal.h
 aic3204.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_err.h
-aic3204.obj: ../ezdsp5502_i2c.h
-aic3204.obj: ../ezdsp5502_i2cgpio.h
+aic3204.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp5502_i2c.h
+aic3204.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp5502_i2cgpio.h
 aic3204.obj: C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stdio.h
 aic3204.obj: C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stdarg.h
 
 ../aic3204.c: 
-../ezdsp5502.h: 
+C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp5502.h: 
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl.h: 
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/_csl.h: 
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_chiphal.h: 
@@ -83,7 +83,7 @@ C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_irq.h
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/_csl.h: 
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_irqhal.h: 
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_err.h: 
-../ezdsp5502_i2c.h: 
-../ezdsp5502_i2cgpio.h: 
+C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp5502_i2c.h: 
+C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp5502_i2cgpio.h: 
 C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stdio.h: 
 C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stdarg.h: 

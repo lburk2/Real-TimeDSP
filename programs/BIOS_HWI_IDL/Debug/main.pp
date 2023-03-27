@@ -30,11 +30,12 @@ main.obj: C:/ti/bios_5_42_01_09/packages/ti/bios/include/trg.h
 main.obj: C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stddef.h
 main.obj: C:/ti/bios_5_42_01_09/packages/ti/bios/include/_hook.h
 main.obj: C:/ti/bios_5_42_01_09/packages/ti/bios/include/gbl.h
-main.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/programs/BIOS_HWI_IDL/Debug/hellocfg.h
+main.obj: C:/ti/bios_5_42_01_09/packages/ti/bios/include/c55.h
+main.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/programs/BIOS_HWI_IDL_3/Debug/hellocfg.h
 main.obj: C:/ti/bios_5_42_01_09/packages/ti/bios/include/hst.h
 main.obj: C:/ti/bios_5_42_01_09/packages/ti/bios/include/pip.h
 main.obj: C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stddef.h
-main.obj: ../ezdsp5502.h
+main.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp5502.h
 main.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl.h
 main.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/_csl.h
 main.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_chiphal.h
@@ -72,20 +73,15 @@ main.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include
 main.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/_csl.h
 main.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_irqhal.h
 main.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_err.h
+main.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp5502_i2cgpio.h
 main.obj: C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stdint.h
-main.obj: C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stdbool.h
-main.obj: C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/yvals.h
-main.obj: C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stdarg.h
-main.obj: C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/_lock.h
 main.obj: ../aic3204.h
-main.obj: ../ezdsp5502_mcbsp.h
+main.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp5502_mcbsp.h
 main.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_mcbsp.h
 main.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_mcbsphal.h
-main.obj: ../ezdsp5502_i2cgpio.h
-main.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_gpio.h
-main.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_gpio5502.h
-main.obj: C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_gpio5502hal.h
-main.obj: ../highPassCoeffs.h
+main.obj: ../myNCO.h
+main.obj: ../demo_filt.h
+main.obj: ../highPass.h
 
 ../main.c: 
 C:/ti/bios_5_42_01_09/packages/ti/bios/include/std.h: 
@@ -117,11 +113,12 @@ C:/ti/bios_5_42_01_09/packages/ti/bios/include/trg.h:
 C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stddef.h: 
 C:/ti/bios_5_42_01_09/packages/ti/bios/include/_hook.h: 
 C:/ti/bios_5_42_01_09/packages/ti/bios/include/gbl.h: 
-C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/programs/BIOS_HWI_IDL/Debug/hellocfg.h: 
+C:/ti/bios_5_42_01_09/packages/ti/bios/include/c55.h: 
+C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/programs/BIOS_HWI_IDL_3/Debug/hellocfg.h: 
 C:/ti/bios_5_42_01_09/packages/ti/bios/include/hst.h: 
 C:/ti/bios_5_42_01_09/packages/ti/bios/include/pip.h: 
 C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stddef.h: 
-../ezdsp5502.h: 
+C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp5502.h: 
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl.h: 
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/_csl.h: 
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_chiphal.h: 
@@ -159,17 +156,12 @@ C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_irq.h
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/_csl.h: 
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_irqhal.h: 
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_err.h: 
+C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp5502_i2cgpio.h: 
 C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stdint.h: 
-C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stdbool.h: 
-C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/yvals.h: 
-C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stdarg.h: 
-C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/_lock.h: 
 ../aic3204.h: 
-../ezdsp5502_mcbsp.h: 
+C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include/ezdsp5502_mcbsp.h: 
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_mcbsp.h: 
 C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_mcbsphal.h: 
-../ezdsp5502_i2cgpio.h: 
-C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_gpio.h: 
-C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_gpio5502.h: 
-C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include/csl_gpio5502hal.h: 
-../highPassCoeffs.h: 
+../myNCO.h: 
+../demo_filt.h: 
+../highPass.h: 
