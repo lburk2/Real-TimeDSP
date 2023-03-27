@@ -15,14 +15,19 @@
 #include "aic3204.h"
 #include "ezdsp5502_mcbsp.h"
 #include "csl_mcbsp.h"
-//#include "Dsplib.h"
+#include "Dsplib.h"
+#include "ezdsp5502_i2cgpio.h"
 
-#include "myNCO.h"
-#include "myFIR.h"
+//#include "myNCO.h"
+//#include "myFIR.h"
+
+int switch1;
+int switch1Prev=1;
+int filterMode=0;
 
 //NEED TO MAKE HEADER
 
-void TSKUserInterface(Arg value_arg)
+void TSKUserInterfaceFxn(Arg value_arg)
 {
 	//prolog stuff to call at beginning
 
@@ -34,21 +39,53 @@ void TSKUserInterface(Arg value_arg)
         SEM_pend(&SEMI2C, SYS_FOREVER);
         //read switches on i2c
 
+        switch1=EZDSP5502_I2CGPIO_readLine(SW1);
+
+        	if(switch1 != switch1Prev)
+        	{
+        		if(!switch1)
+        		{
+        			filterMode++;
+        			if(filterMode>2)
+        			{
+        				filterMode=0;
+        			}
+        			switch(filterMode){
+        			case 0:
+        			    EZDSP5502_I2CGPIO_writeLine(   LED0, LOW );
+        			    EZDSP5502_I2CGPIO_writeLine(   LED1, HIGH );
+        			    EZDSP5502_I2CGPIO_writeLine(   LED2, HIGH );
+        			break;
+        			case 1:
+        			    EZDSP5502_I2CGPIO_writeLine(   LED0, HIGH );
+        			    EZDSP5502_I2CGPIO_writeLine(   LED1, LOW );
+        			    EZDSP5502_I2CGPIO_writeLine(   LED2, HIGH );
+        			break;
+        			case 2:
+        			    EZDSP5502_I2CGPIO_writeLine(   LED0, HIGH );
+        			    EZDSP5502_I2CGPIO_writeLine(   LED1, HIGH );
+        			    EZDSP5502_I2CGPIO_writeLine(   LED2, LOW );
+        			break;
+        			}
+        		}
+        		switch1Prev=switch1;
+        	}
+
         //SEM_post
-        SEM_pend(&SEMI2C);
+        SEM_post(&SEMI2C);
     }
 }
 
 
-//void PRDLedFxn(void) can't do this anymore, we have to figure something else out, turning off SWI would let us use this block and then sem would be gone
-//{
+void PRDLedFxn(void) //can't do this anymore, we have to figure something else out, turning off SWI would let us use this block and then sem would be gone
+{
 //	//runs in swi thread context
 //    SEM_pend(&SEMI2C, SYS_FOREVER);
 //    //toggle led
 //
 //    //SEM_post
-//    SEM_pend(&SEMI2C);
-//}
+//    SEM_post(&SEMI2C);
+}
 
 
 

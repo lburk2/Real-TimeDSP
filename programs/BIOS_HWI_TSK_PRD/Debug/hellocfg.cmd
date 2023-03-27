@@ -75,6 +75,7 @@ PWRM_PWRM_BOOTHOOKFXN = _FXN_F_nop;
 _VECT = VECT;
 _DARAM = DARAM;
 _PRD_clock = PRD_clock;
+_PRDHeartBeat = PRDHeartBeat;
 _RTA_fromHost = RTA_fromHost;
 _RTA_toHost = RTA_toHost;
 _HWI_RESET = HWI_RESET;
@@ -109,6 +110,7 @@ _HWI_SINT28 = HWI_SINT28;
 _HWI_SINT29 = HWI_SINT29;
 _HWI_SINT30 = HWI_SINT30;
 _HWI_SINT31 = HWI_SINT31;
+_PRD_swi = PRD_swi;
 _KNL_swi = KNL_swi;
 _TSK_idle = TSK_idle;
 _task = task;
@@ -120,7 +122,9 @@ _IDL_cpuLoad = IDL_cpuLoad;
 _IDL0 = IDL0;
 _LOG_system = LOG_system;
 _trace = trace;
+_SEMI2C = SEMI2C;
 _MBXAudio = MBXAudio;
+_MBXOutput = MBXOutput;
 _IDL_busyObj = IDL_busyObj;
 
 /* MODULE GBL */
@@ -177,7 +181,7 @@ SECTIONS {
        PRD_A_TABEND = PRD_A_TABENDb / 2;
    } > DARAM PAGE 0
 }
-PRD_A_TABLEN = 0;
+PRD_A_TABLEN = 1;
 
 /* MODULE RTDX */
 _RTDX_interrupt_mask = 0x0;
@@ -192,7 +196,7 @@ SECTIONS {
        SWI_A_TABEND = SWI_A_TABENDb / 2;
    } > DARAM PAGE 0
 }
-SWI_A_TABLEN = 1;
+SWI_A_TABLEN = 2;
 
 /* MODULE TSK */
 SECTIONS {
@@ -248,6 +252,8 @@ SECTIONS {
         .rtdx_text: {}  > DARAM PAGE 0
 
         .mbx: block(0x20000){} > DARAM PAGE 0
+
+        .sem: block(0x20000){} > DARAM PAGE 0
 
         .dsm: block(0x20000) {} > DARAM PAGE 0
 
@@ -312,6 +318,11 @@ SECTIONS {
         .MBXAudio$que: block(0x20000) align = 0x4 {
             MBXAudio$queElems = .;
             . += 104;
+        } > DARAM PAGE 0
+
+        .MBXOutput$que: block(0x20000) align = 0x4 {
+            MBXOutput$queElems = .;
+            . += 12;
         } > DARAM PAGE 0
 
         .trace: block(0x20000) fill = 0x0 {

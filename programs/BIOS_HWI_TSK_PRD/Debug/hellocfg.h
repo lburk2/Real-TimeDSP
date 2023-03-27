@@ -6,10 +6,12 @@
 
 /*  Include Header Files  */
 #include <std.h>
+#include <prd.h>
 #include <hst.h>
 #include <swi.h>
 #include <tsk.h>
 #include <log.h>
+#include <sem.h>
 #include <mbx.h>
 #include <sts.h>
 
@@ -17,8 +19,10 @@
 extern "C" {
 #endif
 
+extern PRD_Obj PRDHeartBeat;
 extern HST_Obj RTA_fromHost;
 extern HST_Obj RTA_toHost;
+extern SWI_Obj PRD_swi;
 extern SWI_Obj KNL_swi;
 extern TSK_Obj TSK_idle;
 extern TSK_Obj task;
@@ -26,7 +30,9 @@ extern TSK_Obj TaskAudioProcessing;
 extern TSK_Obj TSKUserInterface;
 extern LOG_Obj LOG_system;
 extern LOG_Obj trace;
+extern SEM_Obj SEMI2C;
 extern MBX_Obj MBXAudio;
+extern MBX_Obj MBXOutput;
 extern STS_Obj IDL_busyObj;
 
 

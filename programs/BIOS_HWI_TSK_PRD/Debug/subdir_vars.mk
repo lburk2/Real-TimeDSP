@@ -6,6 +6,9 @@
 TCF_SRCS += \
 ../hello.tcf 
 
+ASM_SRCS += \
+../fir2.asm 
+
 S??_SRCS += \
 ./hellocfg.s?? 
 
@@ -19,8 +22,7 @@ C_SRCS += \
 ../ezdsp5502_mcbsp.c \
 ./hellocfg_c.c \
 ../main.c \
-../myFIR.c \
-../myNCO.c 
+../userInterface.c 
 
 OBJS += \
 ./aic3204.obj \
@@ -30,14 +32,17 @@ OBJS += \
 ./ezdsp5502_i2c.obj \
 ./ezdsp5502_i2cgpio.obj \
 ./ezdsp5502_mcbsp.obj \
+./fir2.obj \
 ./hellocfg.obj \
 ./hellocfg_c.obj \
 ./main.obj \
-./myFIR.obj \
-./myNCO.obj 
+./userInterface.obj 
 
 GEN_MISC_FILES += \
 ./hello.cdb 
+
+ASM_DEPS += \
+./fir2.pp 
 
 GEN_HDRS += \
 ./hellocfg.h \
@@ -56,8 +61,7 @@ C_DEPS += \
 ./ezdsp5502_mcbsp.pp \
 ./hellocfg_c.pp \
 ./main.pp \
-./myFIR.pp \
-./myNCO.pp 
+./userInterface.pp 
 
 GEN_CMDS += \
 ./hellocfg.cmd 
@@ -89,8 +93,7 @@ C_DEPS__QUOTED += \
 "ezdsp5502_mcbsp.pp" \
 "hellocfg_c.pp" \
 "main.pp" \
-"myFIR.pp" \
-"myNCO.pp" 
+"userInterface.pp" 
 
 S??_DEPS__QUOTED += \
 "hellocfg.pp" 
@@ -103,11 +106,14 @@ OBJS__QUOTED += \
 "ezdsp5502_i2c.obj" \
 "ezdsp5502_i2cgpio.obj" \
 "ezdsp5502_mcbsp.obj" \
+"fir2.obj" \
 "hellocfg.obj" \
 "hellocfg_c.obj" \
 "main.obj" \
-"myFIR.obj" \
-"myNCO.obj" 
+"userInterface.obj" 
+
+ASM_DEPS__QUOTED += \
+"fir2.pp" 
 
 C_SRCS__QUOTED += \
 "../aic3204.c" \
@@ -119,8 +125,10 @@ C_SRCS__QUOTED += \
 "../ezdsp5502_mcbsp.c" \
 "./hellocfg_c.c" \
 "../main.c" \
-"../myFIR.c" \
-"../myNCO.c" 
+"../userInterface.c" 
+
+ASM_SRCS__QUOTED += \
+"../fir2.asm" 
 
 S??_SRCS__QUOTED += \
 "./hellocfg.s??" 

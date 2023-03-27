@@ -121,6 +121,7 @@ bios.PRD.create("PRDHeartBeat");
 bios.PRD.instance("PRDHeartBeat").order = 3;
 bios.PRD.instance("PRDHeartBeat").fxn = prog.extern("PRDLedFxn");
 bios.PRD.instance("PRDHeartBeat").period = 500;
+bios.TSK.instance("TaskAudioProcessing").fxn = prog.extern("TSKAudioProcessorFxn");
 // !GRAPHICAL_CONFIG_TOOL_SCRIPT_INSERT_POINT!
 
 if (config.hasReportedError == false) {

@@ -79,6 +79,10 @@
 	.global	_HWI_I2S_Tx
 	.global	_taskFxn
 	.global	_TSKAudioProcessor
+	.global	_TSKUserInterfaceFxn
+	.global	PRDLedFxn
+	.global	_PRDLedFxn
+	.global	_TSKAudioProcessorFxn
 
 ;; MODULE PARAMETERS
 GBL$                .set 1
@@ -140,7 +144,7 @@ CLK_LTIMEDIV        .set 01H
 CLK_LTIMEMULT       .set 0493e0H
 CLK_HTIMEPERLTIME   .set 0124f8H
 PRD$                .set 1
-PRD_SCALAR          .set 04000H
+PRD_SCALAR          .set 04H
 RTDX$               .set 1
 RTDX_USERTDX        .set 01H
 RTDX_USERTEXECUTION .set 00H
@@ -177,7 +181,7 @@ PIP$                .set 0
 PIP_gNumEmbed       .set 02H
 PIP_gNextId         .set 00H
 PIP_OBJSIZE         .set 064H
-SEM$                .set 0
+SEM$                .set 1
 MBX$                .set 1
 QUE$                .set 1
 LCK$                .set 1

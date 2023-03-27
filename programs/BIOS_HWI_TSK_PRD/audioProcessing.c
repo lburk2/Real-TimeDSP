@@ -10,11 +10,12 @@
 #include "aic3204.h"
 #include "ezdsp5502_mcbsp.h"
 #include "csl_mcbsp.h"
-//#include "Dsplib.h"
+#include "Dsplib.h"
 
-#include "myNCO.h"
-#include "myFIR.h"
+//#include "myNCO.h"
+//#include "myFIR.h"
 
+extern ushort fir2(DATA *, DATA *, DATA *, DATA *, ushort, ushort);
 
 extern MCBSP_Handle aicMcbsp;
 
@@ -26,7 +27,8 @@ int16_t txleftRightFlag = 0;
 int16_t output;
 int16_t outputLP;
 int16_t outputHP;
-int16_t filteredLeftSample[48]={0};
+//int16_t filteredLeftSample[48]={0};
+Int16 filteredLeftSample;
 
 extern int NCO;
 extern int filterMode;
@@ -34,7 +36,7 @@ extern int16_t* delayLineLPptr;
 extern int16_t* delayLineHPptr;
 extern const int16_t* demoFilterptr;
 extern const int16_t* highPassptr;
-volatile int indexIn;
+//volatile int indexIn;
 int txcounter=0;
 
 
@@ -86,8 +88,8 @@ void HWI_I2S_Tx(void)
 	MBX_pend(&MBXAudio, output, SYS_FOREVER);
 	if(txcounter<48)
 	{
-		filteredLeftSample=output[txcounter]
-		EZDSP5502_MCBSP_write(&filteredLeftSample);
+		filteredLeftSample=output[txcounter];
+		EZDSP5502_MCBSP_write(filteredLeftSample);
 	}
 
 }
@@ -104,29 +106,27 @@ void TSKAudioProcessorFxn(Arg value_arg)
 		//need to have semaphore in here or some kind of sleep or maybe mxb pend is the sleep
 		switch(filterMode){
 		case 1:
-			fir2(&msg,
-					demoFilterptr,
-					&filteredLeftSample,
-					delayLineLPptr,
-					48,
-					70);
+			fir2((DATA *)&msg,
+				 (DATA *)demoFilterptr,
+				 (DATA *)&filteredLeftSample,
+				 (DATA *)delayLineLPptr,
+				 (ushort)48,
+				 (ushort)70);
 			break;
 		case 2:
-			fir2(&msg,
-					highPassptr,
-					&filteredLeftSample,
-					delayLineHPptr,
-					48,
-					67);
+			fir2((DATA *)&msg,
+				 (DATA *)highPassptr,
+				 (DATA *)&filteredLeftSample,
+				 (DATA *)delayLineHPptr,
+				 (ushort)48,
+				 (ushort)67);
 			break;
 		default:
 			filteredLeftSample=rxLeftSample;
 			break;
-
-
-		MBX_post(&MBXOutput, &filteredLeftSample, SYS_FOREVER); //=0 when called from hardware interrupt
-		//DO NEED NEW MAILBOX
 		}
+		MBX_post(&MBXOutput, &filteredLeftSample, SYS_FOREVER); //=0 when called from hardware interrupt
+				//DO NEED NEW MAILBOX
 	}
 }
 

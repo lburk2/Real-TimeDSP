@@ -75,7 +75,7 @@ type GlobalStatus {
         prop Visible :: 0
         prop Writable :: 1
     }
-    global DATE :: "Sun Mar 26 20:00:03 2023" { 
+    global DATE :: "Mon Mar 27 18:42:06 2023" { 
         prop Type :: "{21455EA3-B96A-11cf-9BFE-0000C0AC14C7}"
         prop Visible :: 0
         prop Writable :: 0
@@ -2677,12 +2677,12 @@ type PRD {
         prop Writable :: 0
         prop NoGen :: 1
     }
-    global gNumOf :: 0 { 
+    global gNumOf :: 1 { 
         prop Visible :: 0
         prop Writable :: 0
         prop NoGen :: 1
     }
-    global gDirty :: 0 { 
+    global gDirty :: 1 { 
         prop Visible :: 0
         prop Writable :: 0
         prop NoGen :: 1
@@ -2871,7 +2871,7 @@ type PRD {
 
 object PRD_swi :: SWI {
     param iComment :: "This Software ISR executes all configured PRD functions"
-    param iIsUsed :: 0
+    param iIsUsed :: 1
     param iId :: 0
     param iDelUser :: "PRD"
     param iDelMsg :: "This object is automatically deleted when all PRD objects are deleted"
@@ -5204,7 +5204,7 @@ type SWI {
         prop Writable :: 0
         prop NoGen :: 1
     }
-    global gNumOf :: 1 { 
+    global gNumOf :: 2 { 
         prop Visible :: 0
         prop Writable :: 0
         prop NoGen :: 1
@@ -6687,12 +6687,12 @@ type SEM {
         prop Writable :: 0
         prop NoGen :: 1
     }
-    global gNumOf :: 0 { 
+    global gNumOf :: 1 { 
         prop Visible :: 0
         prop Writable :: 0
         prop NoGen :: 1
     }
-    global gDirty :: 0 { 
+    global gDirty :: 1 { 
         prop Visible :: 0
         prop Writable :: 0
         prop NoGen :: 1
@@ -6797,7 +6797,7 @@ type MBX {
         prop Writable :: 0
         prop NoGen :: 1
     }
-    global gNumOf :: 1 { 
+    global gNumOf :: 2 { 
         prop Visible :: 0
         prop Writable :: 0
         prop NoGen :: 1
@@ -7163,7 +7163,7 @@ type STS {
         prop Writable :: 1
         prop NoGen :: 1
     }
-    global gNumEmbed :: 4 { 
+    global gNumEmbed :: 6 { 
         prop Visible :: 0
         prop Writable :: 0
         prop NoGen :: 1
@@ -9371,7 +9371,7 @@ object TaskAudioProcessing :: TSK {
     param iId :: 0
     param iDelUser :: "USER"
     param iDelMsg :: "ok"
-    param iFXN :: @_TSKAudioProcessor
+    param iFXN :: @_TSKAudioProcessorFxn
     param iARG0 :: 0
     param iARG1 :: 0
     param iARG2 :: 0
@@ -9389,7 +9389,7 @@ object TaskAudioProcessing :: TSK {
     param iEXITFLAG :: 1
     param iUSETSKNAME :: 0
     param iSTATREG :: 0
-    param Order :: 4
+    param Order :: 3
     param filter :: 2
     param maxformat :: "%g inst"
     param sumformat :: "%g inst"
@@ -9405,7 +9405,7 @@ object TSKUserInterface :: TSK {
     param iId :: 0
     param iDelUser :: "USER"
     param iDelMsg :: "ok"
-    param iFXN :: @_FXN_F_nop
+    param iFXN :: @_TSKUserInterfaceFxn
     param iARG0 :: 0
     param iARG1 :: 0
     param iARG2 :: 0
@@ -9416,14 +9416,14 @@ object TSKUserInterface :: TSK {
     param iARG7 :: 0
     param iAUTOSTK :: 1
     param iMANSTK :: @null
-    param iSTKSZ :: 1024
+    param iSTKSZ :: 512
     param iSYSTKSZ :: 256
     param iPRI :: 8
     param iENV :: 0
     param iEXITFLAG :: 1
     param iUSETSKNAME :: 0
     param iSTATREG :: 0
-    param Order :: 5
+    param Order :: 4
     param filter :: 2
     param maxformat :: "%g inst"
     param sumformat :: "%g inst"
@@ -9442,5 +9442,45 @@ object MBXAudio :: MBX {
     param iMsgSize :: 48
     param iMbxLength :: 1
     param iMbxSeg :: DARAM
+}
+
+object MBXOutput :: MBX {
+    param iComment :: "<add comments here>"
+    param iIsUsed :: 1
+    param iId :: 0
+    param iDelUser :: "USER"
+    param iDelMsg :: "ok"
+    param iMsgSize :: 1
+    param iMbxLength :: 1
+    param iMbxSeg :: DARAM
+}
+
+object SEMI2C :: SEM {
+    param iComment :: "<add comments here>"
+    param iIsUsed :: 1
+    param iId :: 0
+    param iDelUser :: "USER"
+    param iDelMsg :: "ok"
+    param iCount :: 1
+}
+
+object PRDHeartBeat :: PRD {
+    param iComment :: "<add comments here>"
+    param iIsUsed :: 1
+    param iId :: 0
+    param iDelUser :: "USER"
+    param iDelMsg :: "ok"
+    param period :: 500
+    param mode :: "continuous"
+    param function :: @_PRDLedFxn
+    param arg0 :: 0
+    param arg1 :: 0
+    param Order :: 3
+    param iPri :: 0
+    param filter :: 0
+    param maxformat :: "%g ticks"
+    param sumformat :: "%g ticks"
+    param avgformat :: "%.2f ticks"
+    param unittype :: 2
 }
 

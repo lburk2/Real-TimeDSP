@@ -5,7 +5,7 @@
 ;; INPUT hello.cdb
 
 ;; CONFIGURATION/VERSION INFORMATION
-	.asg "Sun Mar 26 20:00:03 2023", VERS$DATE
+	.asg "Mon Mar 27 18:42:06 2023", VERS$DATE
 
 ;; PROLOGUE
 	.include hellocfg.h55
@@ -55,7 +55,7 @@ BUF$NUMOF           .set 0
 BUF$SETOF           .set 00H
 CLK$NUMOF           .set 1
 CLK$SETOF           .set 00H
-PRD$NUMOF           .set 0
+PRD$NUMOF           .set 1
 PRD$SETOF           .set 00H
 RTDX$NUMOF          .set 0
 RTDX$SETOF          .set 00H
@@ -63,7 +63,7 @@ HST$NUMOF           .set 2
 HST$SETOF           .set 03H
 HWI$NUMOF           .set 32
 HWI$SETOF           .set 0ffffH
-SWI$NUMOF           .set 1
+SWI$NUMOF           .set 2
 SWI$SETOF           .set 00H
 TSK$NUMOF           .set 4
 TSK$SETOF           .set 00H
@@ -75,9 +75,9 @@ LOG$NUMOF           .set 2
 LOG$SETOF           .set 00H
 PIP$NUMOF           .set 0
 PIP$SETOF           .set 00H
-SEM$NUMOF           .set 0
+SEM$NUMOF           .set 1
 SEM$SETOF           .set 00H
-MBX$NUMOF           .set 1
+MBX$NUMOF           .set 2
 MBX$SETOF           .set 00H
 QUE$NUMOF           .set 0
 QUE$SETOF           .set 00H
@@ -249,7 +249,7 @@ HOOK$SETOF          .set 00H
 	.global PIP_OBJSIZE              ; hellocfg.h55
 
 ;; module SEM ()
-	.global SEM$                     ; == 0
+	.global SEM$                     ; == 1
 
 ;; module MBX ()
 	.global MBX$                     ; == 1
@@ -403,7 +403,7 @@ HOOK$SETOF          .set 00H
 	CLK_config  _IMR0TINTMASK, _IMR1TINTMASK, _INTBIT, _TIMERIMRMASK, _REGS, _TIMERIMR, _TIMERIFR, _TIMERNUM, _USETIMER, _ENABLEHTIME, _MICROSECS, _TCR, _TDDR, _TDDRHIGH, _PRD, _PRDHIGH, _COUNTSPMS, _COUNTSPMSHIGH, _TIMEFXN, _HOOKFXN, _CLKDIV, _CALDIV, _CALMULT, _HTIMEDIV, _HTIMEMULT, _LTIMEDIV, _LTIMEMULT, _HTIMEPERLTIME
 
 ;; ======== PRD_config ========
-	.asg 04000H, _SCALAR
+	.asg 04H, _SCALAR
 	.asg KNL_tick_stub, _THOOKFXN
 	PRD_config  _SCALAR, _THOOKFXN
 
@@ -577,6 +577,24 @@ HOOK$SETOF          .set 00H
 	.global PRD_clock
 	.asg PRD_F_tick, _function
 	CLK_Obj 1, PRD_clock, 0, _function
+
+;; ======== PRD_Obj PRDHeartBeat ========
+;; <add comments here>
+;;
+;; PRD_Obj PRDHeartBeat (period, mode, function, arg0, arg1, Order, filter, maxformat, sumformat, avgformat, unittype)
+	.global PRDHeartBeat
+	.asg 01f4H, _period
+	.asg "continuous", _mode
+	.asg _PRDLedFxn, _function
+	.asg 00H, _arg0
+	.asg 00H, _arg1
+	.asg 03H, _Order
+	.asg 00H, _filter
+	.asg "%g ticks", _maxformat
+	.asg "%g ticks", _sumformat
+	.asg "%.2f ticks", _avgformat
+	.asg 02H, _unittype
+	PRD_Obj 1, PRDHeartBeat, 0, _period, _mode, _function, _arg0, _arg1, _Order, _filter, _maxformat, _sumformat, _avgformat, _unittype
 
 ;; ======== HST_Obj RTA_fromHost ========
 ;; Used to access LOG and STS data
@@ -1158,6 +1176,27 @@ HOOK$SETOF          .set 00H
 	.asg 08000H, _Ier1Mask
 	HWI_Obj 1, HWI_SINT31, 31, _function, _monitor, _addr, _dataType, _operation, _client, _iUseDispatcher, _iArg, _Ier0Mask, _Ier1Mask
 
+;; ======== SWI_Obj PRD_swi ========
+;; This Software ISR executes all configured PRD functions
+;;
+;; SWI_Obj PRD_swi (function, pri, mailbox, arg0, arg1, dorta, Order, filter, maxformat, sumformat, avgformat, filtmaxmult, filtsummult, unittype)
+	.global PRD_swi
+	.asg PRD_F_swi, _function
+	.asg 01H, _pri
+	.asg 00H, _mailbox
+	.asg 00H, _arg0
+	.asg 00H, _arg1
+	.asg 01H, _dorta
+	.asg 00H, _Order
+	.asg 02H, _filter
+	.asg "%g inst", _maxformat
+	.asg "%g inst", _sumformat
+	.asg "%.2f inst", _avgformat
+	.asg 01H, _filtmaxmult
+	.asg 01H, _filtsummult
+	.asg 00H, _unittype
+	SWI_Obj 1, PRD_swi, 0, _function, _pri, _mailbox, _arg0, _arg1, _dorta, _Order, _filter, _maxformat, _sumformat, _avgformat, _filtmaxmult, _filtsummult, _unittype
+
 ;; ======== SWI_Obj KNL_swi ========
 ;; This Software Interrupt calls the TSK scheduler
 ;;
@@ -1252,7 +1291,7 @@ HOOK$SETOF          .set 00H
 ;;
 ;; TSK_Obj TaskAudioProcessing (iFXN, iARG0, iARG1, iARG2, iARG3, iARG4, iARG5, iARG6, iARG7, iAUTOSTK, iMANSTK, iSTKSZ, iSYSTKSZ, iSTKSEG, iPRI, iENV, iEXITFLAG, iUSETSKNAME, iSTATREG, Order, filter, maxformat, sumformat, avgformat, filtmaxmult, filtsummult, unittype)
 	.global TaskAudioProcessing
-	.asg _TSKAudioProcessor, _iFXN
+	.asg _TSKAudioProcessorFxn, _iFXN
 	.asg 00H, _iARG0
 	.asg 00H, _iARG1
 	.asg 00H, _iARG2
@@ -1271,7 +1310,7 @@ HOOK$SETOF          .set 00H
 	.asg 01H, _iEXITFLAG
 	.asg 00H, _iUSETSKNAME
 	.asg 00H, _iSTATREG
-	.asg 04H, _Order
+	.asg 03H, _Order
 	.asg 02H, _filter
 	.asg "%g inst", _maxformat
 	.asg "%g inst", _sumformat
@@ -1286,7 +1325,7 @@ HOOK$SETOF          .set 00H
 ;;
 ;; TSK_Obj TSKUserInterface (iFXN, iARG0, iARG1, iARG2, iARG3, iARG4, iARG5, iARG6, iARG7, iAUTOSTK, iMANSTK, iSTKSZ, iSYSTKSZ, iSTKSEG, iPRI, iENV, iEXITFLAG, iUSETSKNAME, iSTATREG, Order, filter, maxformat, sumformat, avgformat, filtmaxmult, filtsummult, unittype)
 	.global TSKUserInterface
-	.asg _FXN_F_nop, _iFXN
+	.asg _TSKUserInterfaceFxn, _iFXN
 	.asg 00H, _iARG0
 	.asg 00H, _iARG1
 	.asg 00H, _iARG2
@@ -1297,7 +1336,7 @@ HOOK$SETOF          .set 00H
 	.asg 00H, _iARG7
 	.asg 01H, _iAUTOSTK
 	.asg null, _iMANSTK
-	.asg 0400H, _iSTKSZ
+	.asg 0200H, _iSTKSZ
 	.asg 0100H, _iSYSTKSZ
 	.asg DARAM, _iSTKSEG
 	.asg 08H, _iPRI
@@ -1305,7 +1344,7 @@ HOOK$SETOF          .set 00H
 	.asg 01H, _iEXITFLAG
 	.asg 00H, _iUSETSKNAME
 	.asg 00H, _iSTATREG
-	.asg 05H, _Order
+	.asg 04H, _Order
 	.asg 02H, _filter
 	.asg "%g inst", _maxformat
 	.asg "%g inst", _sumformat
@@ -1375,6 +1414,14 @@ HOOK$SETOF          .set 00H
 	.asg "0x%x, 0x%x, 0x%x", _iFormat
 	LOG_Obj 1, trace, 0, _bufseg, _buflen, _logtype, _iType, _iFormat
 
+;; ======== SEM_Obj SEMI2C ========
+;; <add comments here>
+;;
+;; SEM_Obj SEMI2C (iCount)
+	.global SEMI2C
+	.asg 01H, _iCount
+	SEM_Obj 1, SEMI2C, 0, _iCount
+
 ;; ======== MBX_Obj MBXAudio ========
 ;; <add comments here>
 ;;
@@ -1384,6 +1431,16 @@ HOOK$SETOF          .set 00H
 	.asg 01H, _iMbxLength
 	.asg DARAM, _iMbxSeg
 	MBX_Obj 1, MBXAudio, 0, _iMsgSize, _iMbxLength, _iMbxSeg
+
+;; ======== MBX_Obj MBXOutput ========
+;; <add comments here>
+;;
+;; MBX_Obj MBXOutput (iMsgSize, iMbxLength, iMbxSeg)
+	.global MBXOutput
+	.asg 01H, _iMsgSize
+	.asg 01H, _iMbxLength
+	.asg DARAM, _iMbxSeg
+	MBX_Obj 1, MBXOutput, 0, _iMsgSize, _iMbxLength, _iMbxSeg
 
 ;; ======== STS_Obj IDL_busyObj ========
 ;; This object is required by the system to accumulate CPU load statistics
