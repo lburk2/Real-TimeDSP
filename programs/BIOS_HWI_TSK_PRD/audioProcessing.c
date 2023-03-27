@@ -2,6 +2,7 @@
 #include <std.h>
 
 #include <log.h>
+#include <mbx.h>
 
 #include "hellocfg.h"
 #include "ezdsp5502.h"
@@ -44,6 +45,7 @@ int time;
 int16_t bufferIn[48]={0};
 volatile uint16_t indexIn=0;
 
+//have to protect the two lights with a semaphore
 void audioProcessingInit(void)
 {
 	rxRightSample = 0;
@@ -90,19 +92,19 @@ void HWI_I2S_Tx(void)
 
 }
 
-void TSKAudioProcessor()
+void TSKAudioProcessorFxn(Arg value_arg)
 {
-	int16_t msg[48];
+	int16_t msg[48]; //add something like this for the post
 
-	//prolog
+	//prolog aka init stuff
 
-	while(1)
+	while(1)//in general you don't return from task, one time thing? make it higher priority
 	{
 		MBX_pend(&MBXAudio, msg, SYS_FOREVER);
-
+		//need to have semaphore in here or some kind of sleep or maybe mxb pend is the sleep
 		switch(filterMode){
 		case 1:
-			myFIR(&msg,
+			fir2(&msg,
 					demoFilterptr,
 					&filteredLeftSample,
 					delayLineLPptr,
@@ -110,7 +112,7 @@ void TSKAudioProcessor()
 					70);
 			break;
 		case 2:
-			myFIR(&msg,
+			fir2(&msg,
 					highPassptr,
 					&filteredLeftSample,
 					delayLineHPptr,
@@ -122,7 +124,8 @@ void TSKAudioProcessor()
 			break;
 
 
-		MBX_post(&MBXAudio, &filteredLeftSample, 0); //=0 when called from hardware interrupt
+		MBX_post(&MBXOutput, &filteredLeftSample, SYS_FOREVER); //=0 when called from hardware interrupt
+		//DO NEED NEW MAILBOX
 		}
 	}
 }
