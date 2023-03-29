@@ -122,6 +122,19 @@ bios.PRD.instance("PRDHeartBeat").order = 3;
 bios.PRD.instance("PRDHeartBeat").fxn = prog.extern("PRDLedFxn");
 bios.PRD.instance("PRDHeartBeat").period = 500;
 bios.TSK.instance("TaskAudioProcessing").fxn = prog.extern("TSKAudioProcessorFxn");
+bios.TSK.instance("TaskAudioProcessing").order = 2;
+bios.TSK.instance("TSKUserInterface").order = 3;
+bios.TSK.instance("task").destroy();
+bios.IDL.instance("IDL0").destroy();
+bios.MBX.instance("MBXOutput").messageSize = 48;
+bios.MBX.instance("MBXAudio").messageSize = 1;
+bios.MBX.instance("MBXOutput").messageSize = 1;
+bios.MBX.instance("MBXAudio").messageSize = 48;
+bios.MBX.instance("MBXOutput").messageSize = 48;
+bios.SEM.create("SEMFilter");
+bios.SEM.instance("SEMFilter").count = 1;
+bios.TSK.instance("TSKUserInterface").priority = 15;
+bios.TSK.instance("TSKUserInterface").priority = 1;
 // !GRAPHICAL_CONFIG_TOOL_SCRIPT_INSERT_POINT!
 
 if (config.hasReportedError == false) {

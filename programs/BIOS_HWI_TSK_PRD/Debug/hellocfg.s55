@@ -5,7 +5,7 @@
 ;; INPUT hello.cdb
 
 ;; CONFIGURATION/VERSION INFORMATION
-	.asg "Mon Mar 27 18:42:06 2023", VERS$DATE
+	.asg "Tue Mar 28 21:02:43 2023", VERS$DATE
 
 ;; PROLOGUE
 	.include hellocfg.h55
@@ -65,9 +65,9 @@ HWI$NUMOF           .set 32
 HWI$SETOF           .set 0ffffH
 SWI$NUMOF           .set 2
 SWI$SETOF           .set 00H
-TSK$NUMOF           .set 4
+TSK$NUMOF           .set 3
 TSK$SETOF           .set 00H
-IDL$NUMOF           .set 4
+IDL$NUMOF           .set 3
 IDL$SETOF           .set 00H
 ISRC$NUMOF          .set 0
 ISRC$SETOF          .set 00H
@@ -75,7 +75,7 @@ LOG$NUMOF           .set 2
 LOG$SETOF           .set 00H
 PIP$NUMOF           .set 0
 PIP$SETOF           .set 00H
-SEM$NUMOF           .set 1
+SEM$NUMOF           .set 2
 SEM$SETOF           .set 00H
 MBX$NUMOF           .set 2
 MBX$SETOF           .set 00H
@@ -1252,40 +1252,6 @@ HOOK$SETOF          .set 00H
 	.asg 00H, _unittype
 	TSK_Obj 1, TSK_idle, 0, _iFXN, _iARG0, _iARG1, _iARG2, _iARG3, _iARG4, _iARG5, _iARG6, _iARG7, _iAUTOSTK, _iMANSTK, _iSTKSZ, _iSYSTKSZ, _iSTKSEG, _iPRI, _iENV, _iEXITFLAG, _iUSETSKNAME, _iSTATREG, _Order, _filter, _maxformat, _sumformat, _avgformat, _filtmaxmult, _filtsummult, _unittype
 
-;; ======== TSK_Obj task ========
-;; <add comments here>
-;;
-;; TSK_Obj task (iFXN, iARG0, iARG1, iARG2, iARG3, iARG4, iARG5, iARG6, iARG7, iAUTOSTK, iMANSTK, iSTKSZ, iSYSTKSZ, iSTKSEG, iPRI, iENV, iEXITFLAG, iUSETSKNAME, iSTATREG, Order, filter, maxformat, sumformat, avgformat, filtmaxmult, filtsummult, unittype)
-	.global task
-	.asg _taskFxn, _iFXN
-	.asg 0aH, _iARG0
-	.asg 00H, _iARG1
-	.asg 00H, _iARG2
-	.asg 00H, _iARG3
-	.asg 00H, _iARG4
-	.asg 00H, _iARG5
-	.asg 00H, _iARG6
-	.asg 00H, _iARG7
-	.asg 01H, _iAUTOSTK
-	.asg null, _iMANSTK
-	.asg 0400H, _iSTKSZ
-	.asg 0100H, _iSYSTKSZ
-	.asg DARAM, _iSTKSEG
-	.asg 01H, _iPRI
-	.asg 00H, _iENV
-	.asg 01H, _iEXITFLAG
-	.asg 00H, _iUSETSKNAME
-	.asg 00H, _iSTATREG
-	.asg 02H, _Order
-	.asg 02H, _filter
-	.asg "%g inst", _maxformat
-	.asg "%g inst", _sumformat
-	.asg "%.2f inst", _avgformat
-	.asg 01H, _filtmaxmult
-	.asg 01H, _filtsummult
-	.asg 00H, _unittype
-	TSK_Obj 1, task, 0, _iFXN, _iARG0, _iARG1, _iARG2, _iARG3, _iARG4, _iARG5, _iARG6, _iARG7, _iAUTOSTK, _iMANSTK, _iSTKSZ, _iSYSTKSZ, _iSTKSEG, _iPRI, _iENV, _iEXITFLAG, _iUSETSKNAME, _iSTATREG, _Order, _filter, _maxformat, _sumformat, _avgformat, _filtmaxmult, _filtsummult, _unittype
-
 ;; ======== TSK_Obj TaskAudioProcessing ========
 ;; <add comments here>
 ;;
@@ -1310,7 +1276,7 @@ HOOK$SETOF          .set 00H
 	.asg 01H, _iEXITFLAG
 	.asg 00H, _iUSETSKNAME
 	.asg 00H, _iSTATREG
-	.asg 03H, _Order
+	.asg 02H, _Order
 	.asg 02H, _filter
 	.asg "%g inst", _maxformat
 	.asg "%g inst", _sumformat
@@ -1339,12 +1305,12 @@ HOOK$SETOF          .set 00H
 	.asg 0200H, _iSTKSZ
 	.asg 0100H, _iSYSTKSZ
 	.asg DARAM, _iSTKSEG
-	.asg 08H, _iPRI
+	.asg 01H, _iPRI
 	.asg 00H, _iENV
 	.asg 01H, _iEXITFLAG
 	.asg 00H, _iUSETSKNAME
 	.asg 00H, _iSTATREG
-	.asg 04H, _Order
+	.asg 03H, _Order
 	.asg 02H, _filter
 	.asg "%g inst", _maxformat
 	.asg "%g inst", _sumformat
@@ -1381,15 +1347,6 @@ HOOK$SETOF          .set 00H
 	.asg 01H, _calibration
 	IDL_Obj 1, IDL_cpuLoad, 0, _function, _calibration
 
-;; ======== IDL_Obj IDL0 ========
-;; <add comments here>
-;;
-;; IDL_Obj IDL0 (function, calibration)
-	.global IDL0
-	.asg _myIDLThread, _function
-	.asg 01H, _calibration
-	IDL_Obj 1, IDL0, 0, _function, _calibration
-
 ;; ======== LOG_Obj LOG_system ========
 ;; This object is required by the system to accumulate execution trace information
 ;;
@@ -1422,6 +1379,14 @@ HOOK$SETOF          .set 00H
 	.asg 01H, _iCount
 	SEM_Obj 1, SEMI2C, 0, _iCount
 
+;; ======== SEM_Obj SEMFilter ========
+;; <add comments here>
+;;
+;; SEM_Obj SEMFilter (iCount)
+	.global SEMFilter
+	.asg 01H, _iCount
+	SEM_Obj 1, SEMFilter, 0, _iCount
+
 ;; ======== MBX_Obj MBXAudio ========
 ;; <add comments here>
 ;;
@@ -1437,7 +1402,7 @@ HOOK$SETOF          .set 00H
 ;;
 ;; MBX_Obj MBXOutput (iMsgSize, iMbxLength, iMbxSeg)
 	.global MBXOutput
-	.asg 01H, _iMsgSize
+	.asg 030H, _iMsgSize
 	.asg 01H, _iMbxLength
 	.asg DARAM, _iMbxSeg
 	MBX_Obj 1, MBXOutput, 0, _iMsgSize, _iMbxLength, _iMbxSeg

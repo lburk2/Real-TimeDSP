@@ -29,7 +29,7 @@
 #include "aic3204.h"
 #include "ezdsp5502_mcbsp.h"
 #include "csl_mcbsp.h"
-#include "Dsplib.h"
+//#include "Dsplib.h"
 
 #include "demo_filt.h"
 #include "highPass.h"
@@ -37,7 +37,6 @@
 extern void audioProcessingInit(void);
 
 volatile int counter = 0;
-
 int16_t delayLineLP[70]={0};
 int16_t delayLineHP[67]={0};
 const int16_t* restrict demoFilterptr;
@@ -80,67 +79,6 @@ void main(void)
     demoFilterptr=demoFilter;
     highPassptr=highPass;
     // after main() exits the DSP/BIOS scheduler starts
-}
 
-//#if 0
-Void taskFxn(Arg value_arg)
-{
-//    LgUns prevHtime, currHtime;
-//    uint32_t delta;
-//    float ncycles;
-//
-//    /* get cpu cycles per htime count */
-//    ncycles = CLK_cpuCyclesPerHtime();
-//
-//    while(1)
-//    {
-//        TSK_sleep(1);
-//        LOG_printf(&trace, "task running! Time is: %d ticks", (Int)TSK_time());
-//
-//        prevHtime = currHtime;
-//        currHtime = CLK_gethtime();
-//
-//        delta = (currHtime - prevHtime) * ncycles;
-//        LOG_printf(&trace, "CPU cycles = 0x%x %x", (uint16_t)(delta >> 16), (uint16_t)(delta));
-//
-//    }
-}
-//#endif
-
-void myIDLThread(void)
-{
-	counter++;
-
-//	switch1=EZDSP5502_I2CGPIO_readLine(SW1);
-//
-//	if(switch1 != switch1Prev)
-//	{
-//		if(!switch1)
-//		{
-//			filterMode++;
-//			if(filterMode>2)
-//			{
-//				filterMode=0;
-//			}
-//			switch(filterMode){
-//			case 0:
-//			    EZDSP5502_I2CGPIO_writeLine(   LED0, LOW );
-//			    EZDSP5502_I2CGPIO_writeLine(   LED1, HIGH );
-//			    EZDSP5502_I2CGPIO_writeLine(   LED2, HIGH );
-//			break;
-//			case 1:
-//			    EZDSP5502_I2CGPIO_writeLine(   LED0, HIGH );
-//			    EZDSP5502_I2CGPIO_writeLine(   LED1, LOW );
-//			    EZDSP5502_I2CGPIO_writeLine(   LED2, HIGH );
-//			break;
-//			case 2:
-//			    EZDSP5502_I2CGPIO_writeLine(   LED0, HIGH );
-//			    EZDSP5502_I2CGPIO_writeLine(   LED1, HIGH );
-//			    EZDSP5502_I2CGPIO_writeLine(   LED2, LOW );
-//			break;
-//			}
-//		}
-//		switch1Prev=switch1;
-//	}
 }
 

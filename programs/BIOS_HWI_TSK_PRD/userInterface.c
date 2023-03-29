@@ -18,14 +18,11 @@
 #include "Dsplib.h"
 #include "ezdsp5502_i2cgpio.h"
 
-//#include "myNCO.h"
-//#include "myFIR.h"
 
 int switch1;
 int switch1Prev=1;
 int filterMode=0;
 
-//NEED TO MAKE HEADER
 
 void TSKUserInterfaceFxn(Arg value_arg)
 {

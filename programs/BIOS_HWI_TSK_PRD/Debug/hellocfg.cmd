@@ -113,16 +113,15 @@ _HWI_SINT31 = HWI_SINT31;
 _PRD_swi = PRD_swi;
 _KNL_swi = KNL_swi;
 _TSK_idle = TSK_idle;
-_task = task;
 _TaskAudioProcessing = TaskAudioProcessing;
 _TSKUserInterface = TSKUserInterface;
 _LNK_dataPump = LNK_dataPump;
 _RTA_dispatcher = RTA_dispatcher;
 _IDL_cpuLoad = IDL_cpuLoad;
-_IDL0 = IDL0;
 _LOG_system = LOG_system;
 _trace = trace;
 _SEMI2C = SEMI2C;
+_SEMFilter = SEMFilter;
 _MBXAudio = MBXAudio;
 _MBXOutput = MBXOutput;
 _IDL_busyObj = IDL_busyObj;
@@ -281,10 +280,6 @@ SECTIONS {
             *(.TSK_idle$stk)
         } > DARAM PAGE 0
 
-        .task$stk: block(0x20000){
-            *(.task$stk)
-        } > DARAM PAGE 0
-
         .TaskAudioProcessing$stk: block(0x20000){
             *(.TaskAudioProcessing$stk)
         } > DARAM PAGE 0
@@ -322,7 +317,7 @@ SECTIONS {
 
         .MBXOutput$que: block(0x20000) align = 0x4 {
             MBXOutput$queElems = .;
-            . += 12;
+            . += 104;
         } > DARAM PAGE 0
 
         .trace: block(0x20000) fill = 0x0 {

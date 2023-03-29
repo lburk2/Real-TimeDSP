@@ -3,6 +3,7 @@
 
 #include <log.h>
 #include <mbx.h>
+#include <sem.h>
 
 #include "hellocfg.h"
 #include "ezdsp5502.h"
@@ -16,6 +17,7 @@
 //#include "myFIR.h"
 
 extern ushort fir2(DATA *, DATA *, DATA *, DATA *, ushort, ushort);
+void *memcpy(void *dest, const void * src, size_t n);
 
 extern MCBSP_Handle aicMcbsp;
 
@@ -24,11 +26,13 @@ int16_t rxLeftSample;
 int16_t leftRightFlag = 0;
 int16_t txleftRightFlag = 0;
 
-int16_t output;
+//int16_t output;
 int16_t outputLP;
 int16_t outputHP;
-//int16_t filteredLeftSample[48]={0};
-Int16 filteredLeftSample;
+int16_t filteredLeftSample[48]={0};
+int16_t msg[48]={0};
+int16_t output[48]={0};
+Int16 filteredLeftSampleOutput;
 
 extern int NCO;
 extern int filterMode;
@@ -83,20 +87,24 @@ void HWI_I2S_Rx(void)
 
 void HWI_I2S_Tx(void)
 {
-	int16_t output[48];
 
 	MBX_pend(&MBXAudio, output, SYS_FOREVER);
 	if(txcounter<48)
 	{
-		filteredLeftSample=output[txcounter];
-		EZDSP5502_MCBSP_write(filteredLeftSample);
+		filteredLeftSampleOutput=output[txcounter];
+		EZDSP5502_MCBSP_write(filteredLeftSampleOutput);
+		txcounter++;
+	}
+	if(txcounter>=48)
+	{
+		txcounter=0;
 	}
 
 }
 
 void TSKAudioProcessorFxn(Arg value_arg)
 {
-	int16_t msg[48]; //add something like this for the post
+	 //add something like this for the post
 
 	//prolog aka init stuff
 
@@ -104,6 +112,7 @@ void TSKAudioProcessorFxn(Arg value_arg)
 	{
 		MBX_pend(&MBXAudio, msg, SYS_FOREVER);
 		//need to have semaphore in here or some kind of sleep or maybe mxb pend is the sleep
+		//SEM_pend(&SEMFilter, SYS_FOREVER);
 		switch(filterMode){
 		case 1:
 			fir2((DATA *)&msg,
@@ -122,11 +131,14 @@ void TSKAudioProcessorFxn(Arg value_arg)
 				 (ushort)67);
 			break;
 		default:
-			filteredLeftSample=rxLeftSample;
+			memcpy(filteredLeftSample,msg,48);
+
 			break;
 		}
-		MBX_post(&MBXOutput, &filteredLeftSample, SYS_FOREVER); //=0 when called from hardware interrupt
-				//DO NEED NEW MAILBOX
+
+		//SEM_post(&SEMFilter);
+		MBX_post(&MBXOutput, filteredLeftSample, SYS_FOREVER);
+
 	}
 }
 

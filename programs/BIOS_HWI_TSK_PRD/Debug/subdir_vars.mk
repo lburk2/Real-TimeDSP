@@ -22,6 +22,7 @@ C_SRCS += \
 ../ezdsp5502_mcbsp.c \
 ./hellocfg_c.c \
 ../main.c \
+../myFIR.c \
 ../userInterface.c 
 
 OBJS += \
@@ -36,6 +37,7 @@ OBJS += \
 ./hellocfg.obj \
 ./hellocfg_c.obj \
 ./main.obj \
+./myFIR.obj \
 ./userInterface.obj 
 
 GEN_MISC_FILES += \
@@ -61,6 +63,7 @@ C_DEPS += \
 ./ezdsp5502_mcbsp.pp \
 ./hellocfg_c.pp \
 ./main.pp \
+./myFIR.pp \
 ./userInterface.pp 
 
 GEN_CMDS += \
@@ -93,6 +96,7 @@ C_DEPS__QUOTED += \
 "ezdsp5502_mcbsp.pp" \
 "hellocfg_c.pp" \
 "main.pp" \
+"myFIR.pp" \
 "userInterface.pp" 
 
 S??_DEPS__QUOTED += \
@@ -110,6 +114,7 @@ OBJS__QUOTED += \
 "hellocfg.obj" \
 "hellocfg_c.obj" \
 "main.obj" \
+"myFIR.obj" \
 "userInterface.obj" 
 
 ASM_DEPS__QUOTED += \
@@ -125,6 +130,7 @@ C_SRCS__QUOTED += \
 "../ezdsp5502_mcbsp.c" \
 "./hellocfg_c.c" \
 "../main.c" \
+"../myFIR.c" \
 "../userInterface.c" 
 
 ASM_SRCS__QUOTED += \
