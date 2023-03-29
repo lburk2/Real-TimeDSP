@@ -71,10 +71,10 @@ void HWI_I2S_Rx(void)
 			indexIn++;
 		}
 
-		if(indexIn>=48) //landon made me, dave used ==
+		if(indexIn>=48)
 		{
 			indexIn=0;
-			MBX_post(&MBXAudio, bufferIn, 0); //=0 when called from hardware interrupt
+			MBX_post(&MBXAudio, bufferIn, 0);
 		}
 
 	}
@@ -87,19 +87,28 @@ void HWI_I2S_Rx(void)
 
 void HWI_I2S_Tx(void)
 {
-
-	MBX_pend(&MBXAudio, output, SYS_FOREVER);
-	if(txcounter<48)
+	if (txleftRightFlag == 0)
 	{
-		filteredLeftSampleOutput=output[txcounter];
+		if(txcounter<48)
+		{
+			filteredLeftSampleOutput=output[txcounter];
+			EZDSP5502_MCBSP_write(filteredLeftSampleOutput);
+			txcounter++;
+			txleftRightFlag = 1;
+		}
+		if(txcounter>=48)
+		{
+			txcounter=0;
+			MBX_pend(&MBXOutput, output, 0);
+		}
+	}
+	else
+	{
+		//rxRightSample = MCBSP_read16(aicMcbsp);
 		EZDSP5502_MCBSP_write(filteredLeftSampleOutput);
-		txcounter++;
-	}
-	if(txcounter>=48)
-	{
-		txcounter=0;
-	}
 
+		txleftRightFlag = 0;
+	}
 }
 
 void TSKAudioProcessorFxn(Arg value_arg)
@@ -107,7 +116,6 @@ void TSKAudioProcessorFxn(Arg value_arg)
 	 //add something like this for the post
 
 	//prolog aka init stuff
-
 	while(1)//in general you don't return from task, one time thing? make it higher priority
 	{
 		MBX_pend(&MBXAudio, msg, SYS_FOREVER);
@@ -132,7 +140,6 @@ void TSKAudioProcessorFxn(Arg value_arg)
 			break;
 		default:
 			memcpy(filteredLeftSample,msg,48);
-
 			break;
 		}
 

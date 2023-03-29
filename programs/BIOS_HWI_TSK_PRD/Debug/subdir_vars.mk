@@ -3,6 +3,9 @@
 ################################################################################
 
 # Add inputs and outputs from these tool invocations to the build variables 
+CMD_SRCS += \
+../test.cmd 
+
 TCF_SRCS += \
 ../hello.tcf 
 

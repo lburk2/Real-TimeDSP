@@ -135,6 +135,10 @@ bios.SEM.create("SEMFilter");
 bios.SEM.instance("SEMFilter").count = 1;
 bios.TSK.instance("TSKUserInterface").priority = 15;
 bios.TSK.instance("TSKUserInterface").priority = 1;
+bios.MBX.instance("MBXOutput").length = 2;
+bios.MBX.instance("MBXAudio").length = 2;
+bios.MBX.instance("MBXAudio").length = 1;
+bios.MBX.instance("MBXOutput").length = 1;
 // !GRAPHICAL_CONFIG_TOOL_SCRIPT_INSERT_POINT!
 
 if (config.hasReportedError == false) {

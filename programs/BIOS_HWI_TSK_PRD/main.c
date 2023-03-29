@@ -36,14 +36,18 @@
 
 extern void audioProcessingInit(void);
 
-volatile int counter = 0;
+#pragma DATA_SECTION(delayLineLP, ".dbufferLP")
 int16_t delayLineLP[70]={0};
+#pragma DATA_SECTION(delayLineHP, ".dbufferHP")
 int16_t delayLineHP[67]={0};
+
 const int16_t* restrict demoFilterptr;
 int16_t* restrict delayLineLPptr;
 int16_t* restrict delayLineHPptr;
 const int16_t highPass[];
 const int16_t* restrict highPassptr;
+volatile int counter = 0;
+
 
 volatile int k;
 

@@ -26,6 +26,7 @@
  *   int16 filter coefficients.
  */
 const int BL = 67;
+#pragma DATA_SECTION(highPass, ".coeffs2")
 const int16_t highPass[67] = {
       311,   -254,   -174,   -111,    -51,     13,     79,    140,    181,
       190,    156,     78,    -35,   -167,   -289,   -373,   -390,   -321,

@@ -26,6 +26,7 @@
  *   int16 filter coefficients.
  */
 //const int BL = 70;
+#pragma DATA_SECTION(demoFilter, ".coeffs2")
 const int16_t demoFilter[70] = {
         6,      8,     12,     18,     25,     34,     46,     59,     76,
        95,    118,    143,    172,    205,    240,    279,    320,    365,
