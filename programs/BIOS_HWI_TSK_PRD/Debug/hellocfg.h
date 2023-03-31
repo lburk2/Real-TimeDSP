@@ -30,6 +30,7 @@ extern TSK_Obj TSKUserInterface;
 extern LOG_Obj LOG_system;
 extern LOG_Obj trace;
 extern SEM_Obj SEMI2C;
+extern SEM_Obj SEMLED;
 extern SEM_Obj SEMFilter;
 extern MBX_Obj MBXAudio;
 extern MBX_Obj MBXOutput;

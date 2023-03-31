@@ -5,7 +5,7 @@
 ;; INPUT hello.cdb
 
 ;; CONFIGURATION/VERSION INFORMATION
-	.asg "Wed Mar 29 10:14:04 2023", VERS$DATE
+	.asg "Thu Mar 30 19:55:48 2023", VERS$DATE
 
 ;; PROLOGUE
 	.include hellocfg.h55
@@ -75,7 +75,7 @@ LOG$NUMOF           .set 2
 LOG$SETOF           .set 00H
 PIP$NUMOF           .set 0
 PIP$SETOF           .set 00H
-SEM$NUMOF           .set 2
+SEM$NUMOF           .set 3
 SEM$SETOF           .set 00H
 MBX$NUMOF           .set 2
 MBX$SETOF           .set 00H
@@ -1271,7 +1271,7 @@ HOOK$SETOF          .set 00H
 	.asg 0400H, _iSTKSZ
 	.asg 0100H, _iSYSTKSZ
 	.asg DARAM, _iSTKSEG
-	.asg 08H, _iPRI
+	.asg 0fH, _iPRI
 	.asg 00H, _iENV
 	.asg 01H, _iEXITFLAG
 	.asg 00H, _iUSETSKNAME
@@ -1378,6 +1378,14 @@ HOOK$SETOF          .set 00H
 	.global SEMI2C
 	.asg 01H, _iCount
 	SEM_Obj 1, SEMI2C, 0, _iCount
+
+;; ======== SEM_Obj SEMLED ========
+;; <add comments here>
+;;
+;; SEM_Obj SEMLED (iCount)
+	.global SEMLED
+	.asg 01H, _iCount
+	SEM_Obj 1, SEMLED, 0, _iCount
 
 ;; ======== SEM_Obj SEMFilter ========
 ;; <add comments here>

@@ -13,7 +13,7 @@ aic3204.obj: ../aic3204.c $(GEN_OPTS) $(GEN_HDRS)
 audioProcessing.obj: ../audioProcessing.c $(GEN_OPTS) $(GEN_HDRS)
 	@echo 'Building file: $<'
 	@echo 'Invoking: C5500 Compiler'
-	"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 --memory_model=large -g --include_path="C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include" --include_path="C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include" --include_path="C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include" --include_path="C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/programs/BIOS_HWI_TSK_PRD/Debug" --include_path="C:/ti/bios_5_42_01_09/packages/ti/bios/include" --include_path="C:/ti/bios_5_42_01_09/packages/ti/rtdx/include/c5500" --define=c5502 --display_error_number --diag_warning=225 --ptrdiff_size=32 --preproc_with_compile --preproc_dependency="audioProcessing.pp" $(GEN_OPTS__FLAG) "$<"
+	"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 --memory_model=large -O3 -g --include_path="C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include" --include_path="C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include" --include_path="C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include" --include_path="C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/programs/BIOS_HWI_TSK_PRD/Debug" --include_path="C:/ti/bios_5_42_01_09/packages/ti/bios/include" --include_path="C:/ti/bios_5_42_01_09/packages/ti/rtdx/include/c5500" --define=c5502 --display_error_number --diag_warning=225 --ptrdiff_size=32 --preproc_with_compile --preproc_dependency="audioProcessing.pp" $(GEN_OPTS__FLAG) "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

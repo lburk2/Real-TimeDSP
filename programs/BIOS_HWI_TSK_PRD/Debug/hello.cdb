@@ -75,7 +75,7 @@ type GlobalStatus {
         prop Visible :: 0
         prop Writable :: 1
     }
-    global DATE :: "Wed Mar 29 10:14:04 2023" { 
+    global DATE :: "Thu Mar 30 19:55:48 2023" { 
         prop Type :: "{21455EA3-B96A-11cf-9BFE-0000C0AC14C7}"
         prop Visible :: 0
         prop Writable :: 0
@@ -6687,7 +6687,7 @@ type SEM {
         prop Writable :: 0
         prop NoGen :: 1
     }
-    global gNumOf :: 2 { 
+    global gNumOf :: 3 { 
         prop Visible :: 0
         prop Writable :: 0
         prop NoGen :: 1
@@ -9337,7 +9337,7 @@ object TaskAudioProcessing :: TSK {
     param iMANSTK :: @null
     param iSTKSZ :: 1024
     param iSYSTKSZ :: 256
-    param iPRI :: 8
+    param iPRI :: 15
     param iENV :: 0
     param iEXITFLAG :: 1
     param iUSETSKNAME :: 0
@@ -9435,6 +9435,15 @@ object PRDHeartBeat :: PRD {
     param sumformat :: "%g ticks"
     param avgformat :: "%.2f ticks"
     param unittype :: 2
+}
+
+object SEMLED :: SEM {
+    param iComment :: "<add comments here>"
+    param iIsUsed :: 1
+    param iId :: 0
+    param iDelUser :: "USER"
+    param iDelMsg :: "ok"
+    param iCount :: 1
 }
 
 object SEMFilter :: SEM {

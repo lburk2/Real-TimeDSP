@@ -125,7 +125,6 @@ ASM_DEPS__QUOTED += \
 
 C_SRCS__QUOTED += \
 "../aic3204.c" \
-"../audioProcessing.c" \
 "../ezdsp5502.c" \
 "../ezdsp5502_gpio.c" \
 "../ezdsp5502_i2c.c" \

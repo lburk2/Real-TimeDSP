@@ -22,20 +22,18 @@
 int switch1;
 int switch1Prev=1;
 int filterMode=0;
+int flagHighakadanger=0;
 
 
 void TSKUserInterfaceFxn(Arg value_arg)
 {
-	//prolog stuff to call at beginning
-
     while(1)
     {
         TSK_sleep(50);
 
-        //1st call SEM_pend for I2C (binary?) because two threads want to use
         SEM_pend(&SEMI2C, SYS_FOREVER);
-        //read switches on i2c
 
+        //read switches on i2c
         switch1=EZDSP5502_I2CGPIO_readLine(SW1);
 
         	if(switch1 != switch1Prev)
@@ -68,20 +66,25 @@ void TSKUserInterfaceFxn(Arg value_arg)
         		switch1Prev=switch1;
         	}
 
-        //SEM_post
+        EZDSP5502_I2CGPIO_writeLine(   LED3, flagHighakadanger );
         SEM_post(&SEMI2C);
     }
 }
 
 
-void PRDLedFxn(void) //can't do this anymore, we have to figure something else out, turning off SWI would let us use this block and then sem would be gone
+void PRDLedFxn(void)
 {
-//	//runs in swi thread context
-//    SEM_pend(&SEMI2C, SYS_FOREVER);
-//    //toggle led
-//
-//    //SEM_post
-//    SEM_post(&SEMI2C);
+    SEM_pend(&SEMI2C, SYS_POLL);//SYS_POLL to prove we read notes
+    //set flags to toggle led
+    if(flagHighakadanger==0)
+    {
+    	flagHighakadanger=1;
+    }
+    else
+    {
+    	flagHighakadanger=0;
+    }
+    SEM_post(&SEMI2C);
 }
 
 

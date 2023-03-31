@@ -139,6 +139,12 @@ bios.MBX.instance("MBXOutput").length = 2;
 bios.MBX.instance("MBXAudio").length = 2;
 bios.MBX.instance("MBXAudio").length = 1;
 bios.MBX.instance("MBXOutput").length = 1;
+bios.SEM.instance("SEMFilter").destroy();
+bios.SEM.create("SEMLED");
+bios.SEM.instance("SEMLED").count = 1;
+bios.TSK.instance("TaskAudioProcessing").priority = 15;
+bios.SEM.create("SEMFilter");
+bios.SEM.instance("SEMFilter").count = 1;
 // !GRAPHICAL_CONFIG_TOOL_SCRIPT_INSERT_POINT!
 
 if (config.hasReportedError == false) {

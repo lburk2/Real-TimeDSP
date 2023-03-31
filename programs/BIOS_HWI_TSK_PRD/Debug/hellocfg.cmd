@@ -121,6 +121,7 @@ _IDL_cpuLoad = IDL_cpuLoad;
 _LOG_system = LOG_system;
 _trace = trace;
 _SEMI2C = SEMI2C;
+_SEMLED = SEMLED;
 _SEMFilter = SEMFilter;
 _MBXAudio = MBXAudio;
 _MBXOutput = MBXOutput;

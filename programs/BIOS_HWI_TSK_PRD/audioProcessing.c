@@ -119,6 +119,7 @@ void TSKAudioProcessorFxn(Arg value_arg)
 	while(1)//in general you don't return from task, one time thing? make it higher priority
 	{
 		MBX_pend(&MBXAudio, msg, SYS_FOREVER);
+		//SWI_disable();
 		//need to have semaphore in here or some kind of sleep or maybe mxb pend is the sleep
 		//SEM_pend(&SEMFilter, SYS_FOREVER);
 		switch(filterMode){
@@ -144,6 +145,7 @@ void TSKAudioProcessorFxn(Arg value_arg)
 		}
 
 		//SEM_post(&SEMFilter);
+		//SWI_enable();
 		MBX_post(&MBXOutput, filteredLeftSample, SYS_FOREVER);
 
 	}
