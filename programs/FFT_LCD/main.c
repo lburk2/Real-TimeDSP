@@ -29,6 +29,7 @@
 #include "aic3204.h"
 #include "ezdsp5502_mcbsp.h"
 #include "csl_mcbsp.h"
+#include "lcd.h"
 //#include "Dsplib.h"
 
 #include "demo_filt.h"
@@ -66,6 +67,8 @@ void main(void)
     /* enable the interrupt with BIOS call */
     C55_enableInt(7); // reference technical manual, I2S2 tx interrupt
     C55_enableInt(6); // reference technical manual, I2S2 rx interrupt
+
+    osd9616_init( );
 
     //audioProcessingInit();
 

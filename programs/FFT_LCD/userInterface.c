@@ -74,20 +74,36 @@ void TSKUserInterfaceFxn(Arg value_arg)
 
 void PRDLedFxn(void)
 {
-    SEM_pend(&SEMI2C, SYS_POLL);//SYS_POLL to prove we read notes
-    //set flags to toggle led
-    if(flagHighakadanger==0)
-    {
-    	flagHighakadanger=1;
-    }
-    else
-    {
-    	flagHighakadanger=0;
-    }
-    SEM_post(&SEMI2C);
+//    SEM_pend(&SEMI2C, SYS_POLL);//SYS_POLL to prove we read notes
+//    //set flags to toggle led
+//    if(flagHighakadanger==0)
+//    {
+//    	flagHighakadanger=1;
+//    }
+//    else
+//    {
+//    	flagHighakadanger=0;
+//    }
+//    SEM_post(&SEMI2C);
 }
 
-
+/*
+ * our display is only 96 by 16 (two 8 bit rows  and 96 columns)
+ * we'll only use 64 columns (128/2)
+ *
+ * use veritcal addressing mode
+ *
+ * while(1){
+ * 	MBX_pend(&mbx1, msg, sys_forever)
+ * 	FFT(msg, output);
+ * 	//semaphore pend here??
+ * 	//write LCD
+ * 	//semaphore post here??
+ * 	//post mail box??
+ *
+ * }
+ *
+ */
 
 
 

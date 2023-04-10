@@ -4,7 +4,7 @@
 
 SHELL = cmd.exe
 
-CG_TOOL_ROOT := D:/ti/ccsv6/tools/compiler/c5500_4.4.1
+CG_TOOL_ROOT := C:/ti/ccsv6/tools/compiler/c5500_4.4.1
 
 GEN_OPTS__FLAG := 
 GEN_CMDS__FLAG := 
@@ -137,7 +137,7 @@ all: lcd-osk9616.out
 lcd-osk9616.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: C5500 Linker'
-	"D:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 -g --define=c5502 --diag_warning=225 --ptrdiff_size=32 --memory_model=large -z -m"lcd-osk9616.map" --stack_size=0x200 --heap_size=0x400 --warn_sections -i"D:/ti/ccsv6/tools/compiler/c5500_4.4.1/lib" -i"Z:/Semester8/Real-Time DSP/Projects/Real-TimeDSP/C55xxCSL/lib" -i"D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include" -i"Z:/Semester8/Real-Time DSP/Projects/Real-TimeDSP/lib" --reread_libs --xml_link_info="lcd-osk9616_linkInfo.xml" --rom_model --sys_stacksize=0x200 -o "lcd-osk9616.out" $(ORDERED_OBJS)
+	"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 -g --define=c5502 --diag_warning=225 --ptrdiff_size=32 --memory_model=large -z -m"lcd-osk9616.map" --stack_size=0x200 --heap_size=0x400 --warn_sections -i"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/lib" -i"Z:/Documents/Real-Time DSP/Real-TimeDSP/C55xxCSL/lib" -i"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include" -i"Z:/Documents/Real-Time DSP/Real-TimeDSP/lib" --reread_libs --xml_link_info="lcd-osk9616_linkInfo.xml" --rom_model --sys_stacksize=0x200 -o "lcd-osk9616.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
