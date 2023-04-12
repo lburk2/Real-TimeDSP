@@ -12,9 +12,9 @@
 #include "ezdsp5502_mcbsp.h"
 #include "csl_mcbsp.h"
 #include "Dsplib.h"
+#include "FFT.h"
+#include "lcd.h"
 
-//#include "myNCO.h"
-//#include "myFIR.h"
 
 extern ushort fir2(DATA *, DATA *, DATA *, DATA *, ushort, ushort);
 void *memcpy(void *dest, const void * src, size_t n);
@@ -32,6 +32,9 @@ int16_t outputHP;
 int16_t filteredLeftSample[48]={0};
 int16_t msg[48]={0};
 int16_t output[48]={0};
+int16_t spectrum[128]={0};
+int16_t spectrumOut[128]={0};
+uint16_t buffcount=0;
 Int16 filteredLeftSampleOutput;
 
 extern int NCO;
@@ -43,6 +46,7 @@ extern const int16_t* highPassptr;
 //volatile int indexIn;
 int txcounter=0;
 
+extern ExtU_FFT_T FFT_U;
 
 int start;
 int stop;
@@ -50,6 +54,8 @@ int time;
 
 int16_t bufferIn[48]={0};
 volatile uint16_t indexIn=0;
+
+void *memcpy(void *dest, const void *src, size_t n);
 
 //have to protect the two lights with a semaphore
 void audioProcessingInit(void)
@@ -148,7 +154,62 @@ void TSKAudioProcessorFxn(Arg value_arg)
 		//SWI_enable();
 		MBX_post(&MBXOutput, filteredLeftSample, SYS_FOREVER);
 
+		int i=0;
+		for(i;i<48;i++)
+		{
+			spectrum[buffcount]=filteredLeftSample[i];
+			buffcount++;
+			if(buffcount==128)
+			{
+				MBX_post(&MBXFFT, spectrum, 0);
+				buffcount=0;
+			}
+		}
+
+
 	}
+}
+
+void TSK_FFT(Arg value_arg)
+{
+	//call init
+	FFT_initialize();
+
+	while(1)
+	{
+		MBX_pend(&MBXFFT, spectrum, 0);
+
+		memcpy(FFT_U.In1, spectrum, 128);
+
+		FFT_step();
+
+		memcpy(spectrumOut, FFT_Y.Out1, 128); //output
+
+		SEM_pend(&SEMFFT, SYS_FOREVER);
+		int i=0;
+		for(i;i<128;i++)
+		{
+			osd9616_send(0,spectrumOut[i]);
+			i++;
+		}
+		SEM_post(&SEMFFT);
+
+	 /* our display is only 96 by 16 (two 8 bit rows  and 96 columns)
+	 * we'll only use 64 columns (128/2)
+	 *
+	 * use veritcal addressing mode
+	 *
+	 * while(1){
+	 * 	MBX_pend(&mbx1, msg, sys_forever)
+	 * 	FFT(msg, output);
+	 * 	//semaphore pend here??
+	 * 	//write LCD
+	 * 	//semaphore post here??
+	 * 	//post mail box??
+	 *
+	 * }*/
+	}
+
 }
 
 

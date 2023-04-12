@@ -68,7 +68,7 @@ void main(void)
     C55_enableInt(7); // reference technical manual, I2S2 tx interrupt
     C55_enableInt(6); // reference technical manual, I2S2 rx interrupt
 
-    osd9616_init( );
+    osd9616_init( ); //lcd init
 
     //audioProcessingInit();
 
@@ -85,7 +85,9 @@ void main(void)
     delayLineHPptr=delayLineHP;
     demoFilterptr=demoFilter;
     highPassptr=highPass;
+
     // after main() exits the DSP/BIOS scheduler starts
+
 
 }
 

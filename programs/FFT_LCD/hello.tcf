@@ -145,6 +145,13 @@ bios.SEM.instance("SEMLED").count = 1;
 bios.TSK.instance("TaskAudioProcessing").priority = 15;
 bios.SEM.create("SEMFilter");
 bios.SEM.instance("SEMFilter").count = 1;
+bios.PRD.instance("PRDHeartBeat").destroy();
+bios.TSK.create("TSK_FFT");
+bios.TSK.instance("TSK_FFT").order = 4;
+bios.MBX.create("MBXFFT");
+bios.MBX.instance("MBXFFT").messageSize = 48;
+bios.MBX.instance("MBXFFT").messageSize = 128;
+bios.SEM.create("SEMFFT");
 // !GRAPHICAL_CONFIG_TOOL_SCRIPT_INSERT_POINT!
 
 if (config.hasReportedError == false) {

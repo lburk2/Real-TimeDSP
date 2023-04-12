@@ -88,7 +88,7 @@ Int16 osd9616_init( )
     /* Set pre-charge period */
     cmd[0] = 0x00 & 0x00FF;
     cmd[1] = 0xd9;
-    cmd[2] = 0x22;
+    cmd[2] = 0x21;//change addressing to vertical
     osd9616_multiSend( cmd, 3 );
 
     /* Set com pins hardware configuration */

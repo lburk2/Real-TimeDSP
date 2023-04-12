@@ -10,6 +10,7 @@ GEN_OPTS__FLAG :=
 GEN_CMDS__FLAG := -l"./hellocfg.cmd"
 
 ORDERED_OBJS += \
+"./FFT.obj" \
 "./aic3204.obj" \
 "./audioProcessing.obj" \
 "./ezdsp5502.obj" \
@@ -20,8 +21,11 @@ ORDERED_OBJS += \
 "./fir2.obj" \
 "./hellocfg.obj" \
 "./hellocfg_c.obj" \
+"./lcd.obj" \
 "./main.obj" \
-"./myFIR.obj" \
+"./rtGetInf.obj" \
+"./rtGetNaN.obj" \
+"./rt_nonfinite.obj" \
 "./userInterface.obj" \
 "../test.cmd" \
 $(GEN_CMDS__FLAG) \
@@ -131,41 +135,41 @@ endif
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXE_OUTPUTS += \
-BIOS_HWI_TSK_PRD.out \
+FFT_LCD.out \
 
 EXE_OUTPUTS__QUOTED += \
-"BIOS_HWI_TSK_PRD.out" \
+"FFT_LCD.out" \
 
 BIN_OUTPUTS += \
-BIOS_HWI_TSK_PRD.hex \
+FFT_LCD.hex \
 
 BIN_OUTPUTS__QUOTED += \
-"BIOS_HWI_TSK_PRD.hex" \
+"FFT_LCD.hex" \
 
 
 # All Target
-all: BIOS_HWI_TSK_PRD.out
+all: FFT_LCD.out
 
 # Tool invocations
-BIOS_HWI_TSK_PRD.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
+FFT_LCD.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: C5500 Linker'
-	"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 --memory_model=large -g --define=c5502 --display_error_number --diag_warning=225 --ptrdiff_size=32 -z -m"BIOS_HWI_TSK_PRD.map" --stack_size=0x200 --heap_size=0x400 -i"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/lib" -i"Z:/Documents/Real-Time DSP/Real-TimeDSP/c55xx_csl/ccs_v4.0_examples/cslVC5505/Debug" -i"Z:/Documents/Real-Time DSP/Real-TimeDSP/C55xxCSL/lib" -i"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include" -i"C:/ti/bios_5_42_01_09/packages/ti/rtdx/lib/c5500" -i"C:/ti/bios_5_42_01_09/packages/ti/bios/lib" --reread_libs --display_error_number --warn_sections --xml_link_info="BIOS_HWI_TSK_PRD_linkInfo.xml" --rom_model --sys_stacksize=0x200 -o "BIOS_HWI_TSK_PRD.out" $(ORDERED_OBJS)
+	"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 --memory_model=large -g --define=c5502 --display_error_number --diag_warning=225 --ptrdiff_size=32 -z -m"FFT_LCD.map" --stack_size=0x200 --heap_size=0x400 -i"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/lib" -i"C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/c55xx_csl/ccs_v4.0_examples/cslVC5505/Debug" -i"C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/lib" -i"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include" -i"C:/ti/bios_5_42_01_09/packages/ti/rtdx/lib/c5500" -i"C:/ti/bios_5_42_01_09/packages/ti/bios/lib" --reread_libs --display_error_number --warn_sections --xml_link_info="FFT_LCD_linkInfo.xml" --rom_model --sys_stacksize=0x200 -o "FFT_LCD.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
-BIOS_HWI_TSK_PRD.hex: $(EXE_OUTPUTS)
+FFT_LCD.hex: $(EXE_OUTPUTS)
 	@echo 'Invoking: C5500 Hex Utility'
-	"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/hex55"  -o "BIOS_HWI_TSK_PRD.hex" $(EXE_OUTPUTS__QUOTED)
+	"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/hex55"  -o "FFT_LCD.hex" $(EXE_OUTPUTS__QUOTED)
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
 	-$(RM) $(GEN_HDRS__QUOTED)$(GEN_MISC_FILES__QUOTED)$(EXE_OUTPUTS__QUOTED)$(GEN_FILES__QUOTED)$(BIN_OUTPUTS__QUOTED)$(GEN_CMDS__QUOTED)
-	-$(RM) "aic3204.pp" "audioProcessing.pp" "ezdsp5502.pp" "ezdsp5502_gpio.pp" "ezdsp5502_i2c.pp" "ezdsp5502_i2cgpio.pp" "ezdsp5502_mcbsp.pp" "hellocfg_c.pp" "main.pp" "myFIR.pp" "userInterface.pp" 
+	-$(RM) "FFT.pp" "aic3204.pp" "audioProcessing.pp" "ezdsp5502.pp" "ezdsp5502_gpio.pp" "ezdsp5502_i2c.pp" "ezdsp5502_i2cgpio.pp" "ezdsp5502_mcbsp.pp" "hellocfg_c.pp" "lcd.pp" "main.pp" "rtGetInf.pp" "rtGetNaN.pp" "rt_nonfinite.pp" "userInterface.pp" 
 	-$(RM) "hellocfg.pp" 
-	-$(RM) "aic3204.obj" "audioProcessing.obj" "ezdsp5502.obj" "ezdsp5502_gpio.obj" "ezdsp5502_i2c.obj" "ezdsp5502_i2cgpio.obj" "ezdsp5502_mcbsp.obj" "fir2.obj" "hellocfg.obj" "hellocfg_c.obj" "main.obj" "myFIR.obj" "userInterface.obj" 
+	-$(RM) "FFT.obj" "aic3204.obj" "audioProcessing.obj" "ezdsp5502.obj" "ezdsp5502_gpio.obj" "ezdsp5502_i2c.obj" "ezdsp5502_i2cgpio.obj" "ezdsp5502_mcbsp.obj" "fir2.obj" "hellocfg.obj" "hellocfg_c.obj" "lcd.obj" "main.obj" "rtGetInf.obj" "rtGetNaN.obj" "rt_nonfinite.obj" "userInterface.obj" 
 	-$(RM) "fir2.pp" 
 	-@echo 'Finished clean'
 	-@echo ' '

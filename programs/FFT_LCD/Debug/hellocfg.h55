@@ -144,7 +144,7 @@ CLK_LTIMEDIV        .set 01H
 CLK_LTIMEMULT       .set 0493e0H
 CLK_HTIMEPERLTIME   .set 0124f8H
 PRD$                .set 1
-PRD_SCALAR          .set 04H
+PRD_SCALAR          .set 04000H
 RTDX$               .set 1
 RTDX_USERTDX        .set 01H
 RTDX_USERTEXECUTION .set 00H

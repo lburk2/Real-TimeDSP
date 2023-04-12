@@ -16,6 +16,7 @@ S??_SRCS += \
 ./hellocfg.s?? 
 
 C_SRCS += \
+../FFT.c \
 ../aic3204.c \
 ../audioProcessing.c \
 ../ezdsp5502.c \
@@ -24,11 +25,15 @@ C_SRCS += \
 ../ezdsp5502_i2cgpio.c \
 ../ezdsp5502_mcbsp.c \
 ./hellocfg_c.c \
+../lcd.c \
 ../main.c \
-../myFIR.c \
+../rtGetInf.c \
+../rtGetNaN.c \
+../rt_nonfinite.c \
 ../userInterface.c 
 
 OBJS += \
+./FFT.obj \
 ./aic3204.obj \
 ./audioProcessing.obj \
 ./ezdsp5502.obj \
@@ -39,8 +44,11 @@ OBJS += \
 ./fir2.obj \
 ./hellocfg.obj \
 ./hellocfg_c.obj \
+./lcd.obj \
 ./main.obj \
-./myFIR.obj \
+./rtGetInf.obj \
+./rtGetNaN.obj \
+./rt_nonfinite.obj \
 ./userInterface.obj 
 
 GEN_MISC_FILES += \
@@ -57,6 +65,7 @@ S??_DEPS += \
 ./hellocfg.pp 
 
 C_DEPS += \
+./FFT.pp \
 ./aic3204.pp \
 ./audioProcessing.pp \
 ./ezdsp5502.pp \
@@ -65,8 +74,11 @@ C_DEPS += \
 ./ezdsp5502_i2cgpio.pp \
 ./ezdsp5502_mcbsp.pp \
 ./hellocfg_c.pp \
+./lcd.pp \
 ./main.pp \
-./myFIR.pp \
+./rtGetInf.pp \
+./rtGetNaN.pp \
+./rt_nonfinite.pp \
 ./userInterface.pp 
 
 GEN_CMDS += \
@@ -90,6 +102,7 @@ GEN_FILES__QUOTED += \
 "hellocfg_c.c" 
 
 C_DEPS__QUOTED += \
+"FFT.pp" \
 "aic3204.pp" \
 "audioProcessing.pp" \
 "ezdsp5502.pp" \
@@ -98,14 +111,18 @@ C_DEPS__QUOTED += \
 "ezdsp5502_i2cgpio.pp" \
 "ezdsp5502_mcbsp.pp" \
 "hellocfg_c.pp" \
+"lcd.pp" \
 "main.pp" \
-"myFIR.pp" \
+"rtGetInf.pp" \
+"rtGetNaN.pp" \
+"rt_nonfinite.pp" \
 "userInterface.pp" 
 
 S??_DEPS__QUOTED += \
 "hellocfg.pp" 
 
 OBJS__QUOTED += \
+"FFT.obj" \
 "aic3204.obj" \
 "audioProcessing.obj" \
 "ezdsp5502.obj" \
@@ -116,14 +133,18 @@ OBJS__QUOTED += \
 "fir2.obj" \
 "hellocfg.obj" \
 "hellocfg_c.obj" \
+"lcd.obj" \
 "main.obj" \
-"myFIR.obj" \
+"rtGetInf.obj" \
+"rtGetNaN.obj" \
+"rt_nonfinite.obj" \
 "userInterface.obj" 
 
 ASM_DEPS__QUOTED += \
 "fir2.pp" 
 
 C_SRCS__QUOTED += \
+"../FFT.c" \
 "../aic3204.c" \
 "../ezdsp5502.c" \
 "../ezdsp5502_gpio.c" \
@@ -131,8 +152,11 @@ C_SRCS__QUOTED += \
 "../ezdsp5502_i2cgpio.c" \
 "../ezdsp5502_mcbsp.c" \
 "./hellocfg_c.c" \
+"../lcd.c" \
 "../main.c" \
-"../myFIR.c" \
+"../rtGetInf.c" \
+"../rtGetNaN.c" \
+"../rt_nonfinite.c" \
 "../userInterface.c" 
 
 ASM_SRCS__QUOTED += \
