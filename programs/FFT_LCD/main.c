@@ -69,26 +69,19 @@ void main(void)
     C55_enableInt(6); // reference technical manual, I2S2 rx interrupt
 
     osd9616_init( ); //lcd init
-	//osd9616_send(0x00,0x2e);  // Deactivate Scrolling
+	osd9616_send(0x00,0x2e);  // Deactivate Scrolling
 
 	/* Fill page 0 */
 	Int16 i;
 	i = osd9616_send(0x00,0x00);   // Set low column address
 	osd9616_send(0x00,0x10);   // Set high column address
 	osd9616_send(0x00,0xb0+0); // Set page for page 0 to page 5
-	for(i=0;i<128;i++)
+	for(i=0;i<1024;i++)
 	{
 		osd9616_send(0x40,0x00);
 	}
-//	/* Fill page 1*/
-//	osd9616_send(0x00,0x00);   // Set low column address
-//	osd9616_send(0x00,0x10);   // Set high column address
-//	osd9616_send(0x00,0xb0+1); // Set page for page 0 to page 5
-//	for(i=0;i<128;i++)
-//	{
-//		osd9616_send(0x40,0x00);
-//	}
-    //audioProcessingInit();
+	osd9616_send(0x40,0x00);
+    audioProcessingInit();
 
     EZDSP5502_I2CGPIO_configLine(  SW1, IN );
     //init leds
@@ -108,4 +101,3 @@ void main(void)
 
 
 }
-

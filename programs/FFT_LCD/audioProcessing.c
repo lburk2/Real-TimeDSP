@@ -1,5 +1,5 @@
-
-#include <std.h>
+#include <stdio.h>
+#include <stdint.h>
 
 #include <log.h>
 #include <mbx.h>
@@ -33,6 +33,7 @@ int16_t filteredLeftSample[48]={0};
 int16_t msg[48]={0};
 int16_t output[48]={0};
 uint16_t spectrum[128]={0};
+uint16_t FFTSamps[128]={0};
 uint16_t spectrumOut[128]={0};
 uint16_t buffcount=0;
 Int16 filteredLeftSampleOutput;
@@ -150,9 +151,9 @@ void TSKAudioProcessorFxn(Arg value_arg)
 			break;
 		}
 
-
 		MBX_post(&MBXOutput, filteredLeftSample, SYS_FOREVER);
-		int i=0;
+
+		volatile int i=0;
 		for(i;i<48;i++)
 		{
 			spectrum[buffcount]=filteredLeftSample[i];
@@ -163,7 +164,6 @@ void TSKAudioProcessorFxn(Arg value_arg)
 				buffcount=0;
 			}
 		}
-
 	}
 }
 
@@ -174,22 +174,38 @@ void TSKFFTfxn(Arg value_arg)
 
 	while(1)
 	{
-		MBX_pend(&MBXFFT, spectrum, 0);
+		MBX_pend(&MBXFFT, FFTSamps, 0);
 
-		memcpy(FFT_U.In1, spectrum, 128);
+		memcpy(FFT_U.In1, FFTSamps, 128);
 
 		FFT_step();
 
 		memcpy(spectrumOut, FFT_Y.Out1, 128); //output
 
-		SEM_pend(&SEMFFT, SYS_FOREVER);
-		int i=0;
-		for(i;i<128;i++)
+		SEM_pend(&SEMFFT, 0);
+		volatile int i=0;
+
+
+		for(i=0;i<1024;i++)
 		{
-			osd9616_send(0x40,0xff);
+			osd9616_send(0x40,0x00);
+		}
+		osd9616_send(0x00,0x21);
+		osd9616_send(0x00,0x00);
+		osd9616_send(0x00,0x7F);
+		osd9616_send(0x00,0x22);
+		osd9616_send(0x00,0x00);
+		osd9616_send(0x00,0x01);
+		for(i=0;i<128;i++)
+		{
+			osd9616_send(0x40,(spectrumOut[i]));
+			osd9616_send(0x40,0x00);
 			i++;
 		}
+//		osd9616_send(0x40,0x00);
+//		osd9616_multiSend((Uint16*)spectrumOut, 128);
 		SEM_post(&SEMFFT);
+		//MBX_post(&MBXFFT, FFTSamps, 0);
 
 	 /* our display is only 96 by 16 (two 8 bit rows  and 96 columns)
 	 * we'll only use 64 columns (128/2)
@@ -208,7 +224,3 @@ void TSKFFTfxn(Arg value_arg)
 	}
 
 }
-
-
-
-

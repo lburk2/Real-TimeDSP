@@ -28,7 +28,7 @@ void TSKUserInterfaceFxn(Arg value_arg)
 {
     while(1)
     {
-        TSK_sleep(50);
+        //TSK_sleep(50);
 
         SEM_pend(&SEMI2C, SYS_FOREVER);
 

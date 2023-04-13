@@ -5,7 +5,7 @@
 ;; INPUT hello.cdb
 
 ;; CONFIGURATION/VERSION INFORMATION
-	.asg "Wed Apr 12 20:43:59 2023", VERS$DATE
+	.asg "Thu Apr 13 00:33:30 2023", VERS$DATE
 
 ;; PROLOGUE
 	.include hellocfg.h55
@@ -1300,7 +1300,7 @@ HOOK$SETOF          .set 00H
 	.asg 0400H, _iSTKSZ
 	.asg 0100H, _iSYSTKSZ
 	.asg DARAM, _iSTKSEG
-	.asg 01H, _iPRI
+	.asg 02H, _iPRI
 	.asg 00H, _iENV
 	.asg 01H, _iEXITFLAG
 	.asg 00H, _iUSETSKNAME

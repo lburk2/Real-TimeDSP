@@ -84,7 +84,12 @@ Int16 osd9616_init( )
     osd9616_send(0x00,0x00); // Not offset
     osd9616_send(0x00,0xd5); // Set display clock divide ratio/oscillator frequency
     osd9616_send(0x00,0xf0); // Set divide ratio
-    osd9616_send(0x20,0x01); // set vertical addressing mode
+    osd9616_send(0x00,0x20); // set addressing mode
+    osd9616_send(0x00,0x01); // vertical addressing mode
+    osd9616_send(0x00,0xd3); // Set display offset
+    osd9616_send(0x00,0xC0); // set scan direction
+
+
 
     /* Set pre-charge period */
     cmd[0] = 0x00 & 0x00FF;
@@ -139,7 +144,7 @@ Int16 osd9616_send( Uint16 comdat, Uint16 data )
 Int16 osd9616_multiSend( Uint16* data, Uint16 len )
 {
     Uint16 x;
-    Uint16 cmd[10];
+    Uint16 cmd[129];
     for(x=0;x<len;x++)               // Command / Data
     {
         cmd[x] = data[x];

@@ -155,6 +155,9 @@ bios.SEM.create("SEMFFT");
 bios.TSK.instance("TSK_FFT").fxn = prog.extern("TSK_FFT");
 bios.TSK.instance("TSK_FFT").fxn = prog.extern("TSKFFT");
 bios.TSK.instance("TSK_FFT").fxn = prog.extern("TSKFFTfxn");
+bios.TSK.instance("TSK_FFT").priority = 2;
+bios.TSK.instance("TSK_FFT").priority = 1;
+bios.TSK.instance("TSK_FFT").priority = 2;
 // !GRAPHICAL_CONFIG_TOOL_SCRIPT_INSERT_POINT!
 
 if (config.hasReportedError == false) {
