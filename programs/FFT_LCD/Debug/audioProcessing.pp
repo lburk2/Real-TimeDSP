@@ -93,6 +93,9 @@ audioProcessing.obj: ../rt_nonfinite.h
 audioProcessing.obj: C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stddef.h
 audioProcessing.obj: ../rtGetInf.h
 audioProcessing.obj: C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stddef.h
+audioProcessing.obj: ../FFT.h
+audioProcessing.obj: ../FFT_private.h
+audioProcessing.obj: C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/limits.h
 audioProcessing.obj: ../lcd.h
 
 ../audioProcessing.c: 
@@ -188,4 +191,7 @@ C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/unaccess.h:
 C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stddef.h: 
 ../rtGetInf.h: 
 C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stddef.h: 
+../FFT.h: 
+../FFT_private.h: 
+C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/limits.h: 
 ../lcd.h: 

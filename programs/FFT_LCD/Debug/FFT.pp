@@ -15,6 +15,7 @@ FFT.obj: ../rt_nonfinite.h
 FFT.obj: C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stddef.h
 FFT.obj: ../rtGetInf.h
 FFT.obj: C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stddef.h
+FFT.obj: ../FFT.h
 FFT.obj: ../FFT_private.h
 FFT.obj: C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/limits.h
 
@@ -33,5 +34,6 @@ C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/unaccess.h:
 C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stddef.h: 
 ../rtGetInf.h: 
 C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stddef.h: 
+../FFT.h: 
 ../FFT_private.h: 
 C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/limits.h: 

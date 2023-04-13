@@ -83,6 +83,9 @@
 	.global	PRDLedFxn
 	.global	_PRDLedFxn
 	.global	_TSKAudioProcessorFxn
+	.global	_TSK_FFT
+	.global	_TSKFFT
+	.global	_TSKFFTfxn
 
 ;; MODULE PARAMETERS
 GBL$                .set 1

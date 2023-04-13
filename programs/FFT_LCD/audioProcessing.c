@@ -170,7 +170,7 @@ void TSKAudioProcessorFxn(Arg value_arg)
 	}
 }
 
-void TSK_FFT(Arg value_arg)
+void TSKFFTfxn(Arg value_arg)
 {
 	//call init
 	FFT_initialize();

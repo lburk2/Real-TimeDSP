@@ -29,6 +29,9 @@
 #include "rt_nonfinite.h"
 #include "rtGetInf.h"
 
+#include "FFT.h"
+#include "FFT_private.h"
+
 /* Macros for accessing real-time model data structure */
 #ifndef rtmGetErrorStatus
 #define rtmGetErrorStatus(rtm)         ((rtm)->errorStatus)

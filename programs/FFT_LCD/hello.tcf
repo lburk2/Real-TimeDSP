@@ -152,6 +152,9 @@ bios.MBX.create("MBXFFT");
 bios.MBX.instance("MBXFFT").messageSize = 48;
 bios.MBX.instance("MBXFFT").messageSize = 128;
 bios.SEM.create("SEMFFT");
+bios.TSK.instance("TSK_FFT").fxn = prog.extern("TSK_FFT");
+bios.TSK.instance("TSK_FFT").fxn = prog.extern("TSKFFT");
+bios.TSK.instance("TSK_FFT").fxn = prog.extern("TSKFFTfxn");
 // !GRAPHICAL_CONFIG_TOOL_SCRIPT_INSERT_POINT!
 
 if (config.hasReportedError == false) {
