@@ -19,8 +19,9 @@
 
 #include "FFT.h"
 #include "FFT_private.h"
+#include "FFT_types.h"
 
-extern const ConstP_FFT_T FFT_ConstP;
+const ConstP_FFT_T FFT_ConstP;
 /* External inputs (root inport signals with default storage) */
 ExtU_FFT_T FFT_U;
 

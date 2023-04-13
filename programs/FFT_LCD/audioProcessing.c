@@ -32,8 +32,8 @@ int16_t outputHP;
 int16_t filteredLeftSample[48]={0};
 int16_t msg[48]={0};
 int16_t output[48]={0};
-int16_t spectrum[128]={0};
-int16_t spectrumOut[128]={0};
+uint16_t spectrum[128]={0};
+uint16_t spectrumOut[128]={0};
 uint16_t buffcount=0;
 Int16 filteredLeftSampleOutput;
 
@@ -150,10 +150,8 @@ void TSKAudioProcessorFxn(Arg value_arg)
 			break;
 		}
 
-		//SEM_post(&SEMFilter);
-		//SWI_enable();
-		MBX_post(&MBXOutput, filteredLeftSample, SYS_FOREVER);
 
+		MBX_post(&MBXOutput, filteredLeftSample, SYS_FOREVER);
 		int i=0;
 		for(i;i<48;i++)
 		{
@@ -165,7 +163,6 @@ void TSKAudioProcessorFxn(Arg value_arg)
 				buffcount=0;
 			}
 		}
-
 
 	}
 }
@@ -189,7 +186,7 @@ void TSKFFTfxn(Arg value_arg)
 		int i=0;
 		for(i;i<128;i++)
 		{
-			osd9616_send(0,spectrumOut[i]);
+			osd9616_send(0x40,0xff);
 			i++;
 		}
 		SEM_post(&SEMFFT);

@@ -84,11 +84,12 @@ Int16 osd9616_init( )
     osd9616_send(0x00,0x00); // Not offset
     osd9616_send(0x00,0xd5); // Set display clock divide ratio/oscillator frequency
     osd9616_send(0x00,0xf0); // Set divide ratio
+    osd9616_send(0x20,0x01); // set vertical addressing mode
 
     /* Set pre-charge period */
     cmd[0] = 0x00 & 0x00FF;
     cmd[1] = 0xd9;
-    cmd[2] = 0x21;//change addressing to vertical
+    cmd[2] = 0x22;
     osd9616_multiSend( cmd, 3 );
 
     /* Set com pins hardware configuration */
