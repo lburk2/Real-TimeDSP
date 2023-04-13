@@ -18,6 +18,14 @@ FFT.obj: D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stddef.h
 FFT.obj: ../FFT.h
 FFT.obj: ../FFT_private.h
 FFT.obj: D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/limits.h
+FFT.obj: D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/inttypes.h
+FFT.obj: D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stdint.h
+FFT.obj: D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/_fmt_specifier.h
+FFT.obj: D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/linkage.h
+FFT.obj: D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stdio.h
+FFT.obj: D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stdarg.h
+FFT.obj: D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stdlib.h
+FFT.obj: D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/math.h
 
 ../FFT.c: 
 ../FFT.h: 
@@ -37,3 +45,11 @@ D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stddef.h:
 ../FFT.h: 
 ../FFT_private.h: 
 D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/limits.h: 
+D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/inttypes.h: 
+D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stdint.h: 
+D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/_fmt_specifier.h: 
+D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/linkage.h: 
+D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stdio.h: 
+D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stdarg.h: 
+D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stdlib.h: 
+D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/math.h: 

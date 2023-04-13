@@ -32,9 +32,9 @@ int16_t outputHP;
 int16_t filteredLeftSample[48]={0};
 int16_t msg[48]={0};
 int16_t output[48]={0};
-uint16_t spectrum[128]={0};
-uint16_t FFTSamps[128]={0};
-uint16_t spectrumOut[128]={0};
+int16_t spectrum[128]={0};
+int16_t FFTSamps[128]={0};
+int16_t spectrumOut[128]={0};
 uint16_t buffcount=0;
 Int16 filteredLeftSampleOutput;
 
@@ -176,11 +176,13 @@ void TSKFFTfxn(Arg value_arg)
 	{
 		MBX_pend(&MBXFFT, FFTSamps, 0);
 
-		memcpy(FFT_U.In1, FFTSamps, 128);
+//		memcpy(FFT_U.In1, FFTSamps, 128);
+//
+//		FFT_step();
+//
+//		memcpy(spectrumOut, FFT_Y.Out1, 128); //output
 
-		FFT_step();
-
-		memcpy(spectrumOut, FFT_Y.Out1, 128); //output
+		myfft( FFTSamps, spectrumOut, 128);
 
 		SEM_pend(&SEMFFT, 0);
 		volatile int i=0;
@@ -198,7 +200,7 @@ void TSKFFTfxn(Arg value_arg)
 		osd9616_send(0x00,0x01);
 		for(i=0;i<128;i++)
 		{
-			osd9616_send(0x40,(spectrumOut[i]));
+			osd9616_send(0x40,(int16_t)spectrumOut[i]);
 			osd9616_send(0x40,0x00);
 			i++;
 		}

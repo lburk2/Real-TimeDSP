@@ -31,6 +31,7 @@
 
 #include "FFT.h"
 #include "FFT_private.h"
+#include <inttypes.h>
 
 /* Macros for accessing real-time model data structure */
 #ifndef rtmGetErrorStatus
@@ -40,7 +41,7 @@
 #ifndef rtmSetErrorStatus
 #define rtmSetErrorStatus(rtm, val)    ((rtm)->errorStatus = (val))
 #endif
-
+#define PI 3.14159265358979323846
 /* Constant parameters (default storage) */
 typedef struct {
   /* Computed Parameter: FFT_TwiddleTable
@@ -77,6 +78,8 @@ extern const ConstP_FFT_T FFT_ConstP;
 extern void FFT_initialize(void);
 extern void FFT_step(void);
 extern void FFT_terminate(void);
+
+void myfft(int16_t *input, int16_t *output, int N);
 
 /* Real-time Model object */
 extern RT_MODEL_FFT_T *const FFT_M;

@@ -98,6 +98,8 @@ audioProcessing.obj: D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stddef.h
 audioProcessing.obj: ../FFT.h
 audioProcessing.obj: ../FFT_private.h
 audioProcessing.obj: D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/limits.h
+audioProcessing.obj: D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/inttypes.h
+audioProcessing.obj: D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/_fmt_specifier.h
 audioProcessing.obj: ../lcd.h
 
 ../audioProcessing.c: 
@@ -198,4 +200,6 @@ D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/stddef.h:
 ../FFT.h: 
 ../FFT_private.h: 
 D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/limits.h: 
+D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/inttypes.h: 
+D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include/_fmt_specifier.h: 
 ../lcd.h: 
