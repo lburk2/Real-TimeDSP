@@ -15,6 +15,9 @@
 #include "FFT.h"
 #include "lcd.h"
 
+#include "myNCO.h"
+
+
 
 extern ushort fir2(DATA *, DATA *, DATA *, DATA *, ushort, ushort);
 void *memcpy(void *dest, const void * src, size_t n);
@@ -34,6 +37,7 @@ int16_t msg[48]={0};
 int16_t output[48]={0};
 int16_t spectrum[128]={0};
 int16_t FFTSamps[128]={0};
+int16_t wave[128]={0}; //FOR TESTING PURPOSES
 int16_t spectrumOut[128]={0};
 uint16_t buffcount=0;
 Int16 filteredLeftSampleOutput;
@@ -153,10 +157,16 @@ void TSKAudioProcessorFxn(Arg value_arg)
 
 		MBX_post(&MBXOutput, filteredLeftSample, SYS_FOREVER);
 
+		volatile int x=0;
+		for(x;x<128;x++)
+		{
+			wave[x]=nco_run_sinusoid();
+		}
 		volatile int i=0;
 		for(i;i<48;i++)
 		{
-			spectrum[buffcount]=filteredLeftSample[i];
+			//spectrum[buffcount]=filteredLeftSample[i];
+			spectrum[buffcount]=wave[i];
 			buffcount++;
 			if(buffcount==128)
 			{
@@ -172,36 +182,39 @@ void TSKFFTfxn(Arg value_arg)
 	//call init
 	FFT_initialize();
 
+	osd9616_send(0x00,0x21); //setting start address
+	osd9616_send(0x00,0x00);
+	osd9616_send(0x00,0x3F); //end column
+	osd9616_send(0x00,0x22); //start page
+	osd9616_send(0x00,0x00);
+	osd9616_send(0x00,0x01);//end page
+	//osd9616_send(0x00,0xC8);//left to right display
+	volatile int i=0;
+	for(i=0;i<128;i++)
+	{
+		osd9616_send(0x40,0xff);//clears display
+	}
+	for(i=0;i<128;i++)
+	{
+		osd9616_send(0x40,0x00);//clears display
+	}
 	while(1)
 	{
 		MBX_pend(&MBXFFT, FFTSamps, 0);
 
-//		memcpy(FFT_U.In1, FFTSamps, 128);
-//
-//		FFT_step();
-//
-//		memcpy(spectrumOut, FFT_Y.Out1, 128); //output
+		memcpy(FFT_U.In1, FFTSamps, 128);
 
-		myfft( FFTSamps, spectrumOut, 128);
+		FFT_step();
+
+		memcpy(spectrumOut, FFT_Y.Out1, 128); //output
 
 		SEM_pend(&SEMFFT, 0);
 		volatile int i=0;
 
-
-		for(i=0;i<1024;i++)
+		for(i=0;i<64;i++)
 		{
-			osd9616_send(0x40,0x00);
-		}
-		osd9616_send(0x00,0x21);
-		osd9616_send(0x00,0x00);
-		osd9616_send(0x00,0x7F);
-		osd9616_send(0x00,0x22);
-		osd9616_send(0x00,0x00);
-		osd9616_send(0x00,0x01);
-		for(i=0;i<128;i++)
-		{
-			osd9616_send(0x40,(int16_t)spectrumOut[i]);
-			osd9616_send(0x40,0x00);
+			osd9616_send(0x40,spectrumOut[i]); //printing spectrum
+			//osd9616_send(0x40,0x00);
 			i++;
 		}
 //		osd9616_send(0x40,0x00);

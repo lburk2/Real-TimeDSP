@@ -17,6 +17,7 @@ S??_SRCS += \
 
 C_SRCS += \
 ../FFT.c \
+../FFT_data.c \
 ../aic3204.c \
 ../audioProcessing.c \
 ../ezdsp5502.c \
@@ -27,6 +28,7 @@ C_SRCS += \
 ./hellocfg_c.c \
 ../lcd.c \
 ../main.c \
+../myNCO.c \
 ../rtGetInf.c \
 ../rtGetNaN.c \
 ../rt_nonfinite.c \
@@ -34,6 +36,7 @@ C_SRCS += \
 
 OBJS += \
 ./FFT.obj \
+./FFT_data.obj \
 ./aic3204.obj \
 ./audioProcessing.obj \
 ./ezdsp5502.obj \
@@ -46,6 +49,7 @@ OBJS += \
 ./hellocfg_c.obj \
 ./lcd.obj \
 ./main.obj \
+./myNCO.obj \
 ./rtGetInf.obj \
 ./rtGetNaN.obj \
 ./rt_nonfinite.obj \
@@ -66,6 +70,7 @@ S??_DEPS += \
 
 C_DEPS += \
 ./FFT.pp \
+./FFT_data.pp \
 ./aic3204.pp \
 ./audioProcessing.pp \
 ./ezdsp5502.pp \
@@ -76,6 +81,7 @@ C_DEPS += \
 ./hellocfg_c.pp \
 ./lcd.pp \
 ./main.pp \
+./myNCO.pp \
 ./rtGetInf.pp \
 ./rtGetNaN.pp \
 ./rt_nonfinite.pp \
@@ -103,6 +109,7 @@ GEN_FILES__QUOTED += \
 
 C_DEPS__QUOTED += \
 "FFT.pp" \
+"FFT_data.pp" \
 "aic3204.pp" \
 "audioProcessing.pp" \
 "ezdsp5502.pp" \
@@ -113,6 +120,7 @@ C_DEPS__QUOTED += \
 "hellocfg_c.pp" \
 "lcd.pp" \
 "main.pp" \
+"myNCO.pp" \
 "rtGetInf.pp" \
 "rtGetNaN.pp" \
 "rt_nonfinite.pp" \
@@ -123,6 +131,7 @@ S??_DEPS__QUOTED += \
 
 OBJS__QUOTED += \
 "FFT.obj" \
+"FFT_data.obj" \
 "aic3204.obj" \
 "audioProcessing.obj" \
 "ezdsp5502.obj" \
@@ -135,6 +144,7 @@ OBJS__QUOTED += \
 "hellocfg_c.obj" \
 "lcd.obj" \
 "main.obj" \
+"myNCO.obj" \
 "rtGetInf.obj" \
 "rtGetNaN.obj" \
 "rt_nonfinite.obj" \
@@ -145,6 +155,7 @@ ASM_DEPS__QUOTED += \
 
 C_SRCS__QUOTED += \
 "../FFT.c" \
+"../FFT_data.c" \
 "../aic3204.c" \
 "../ezdsp5502.c" \
 "../ezdsp5502_gpio.c" \
@@ -154,6 +165,7 @@ C_SRCS__QUOTED += \
 "./hellocfg_c.c" \
 "../lcd.c" \
 "../main.c" \
+"../myNCO.c" \
 "../rtGetInf.c" \
 "../rtGetNaN.c" \
 "../rt_nonfinite.c" \

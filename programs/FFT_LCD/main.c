@@ -34,6 +34,8 @@
 
 #include "demo_filt.h"
 #include "highPass.h"
+#include "myNCO.h"
+
 
 extern void audioProcessingInit(void);
 
@@ -96,6 +98,9 @@ void main(void)
     delayLineHPptr=delayLineHP;
     demoFilterptr=demoFilter;
     highPassptr=highPass;
+
+    nco_set_frequency(1000);
+    nco_set_attenuation(0);
 
     // after main() exits the DSP/BIOS scheduler starts
 

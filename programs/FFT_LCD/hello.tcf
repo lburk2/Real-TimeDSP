@@ -158,6 +158,14 @@ bios.TSK.instance("TSK_FFT").fxn = prog.extern("TSKFFTfxn");
 bios.TSK.instance("TSK_FFT").priority = 2;
 bios.TSK.instance("TSK_FFT").priority = 1;
 bios.TSK.instance("TSK_FFT").priority = 2;
+bios.TSK.instance("TSK_FFT").sysStackSize = 8000;
+bios.SEM.instance("SEMFFT").count = 1;
+bios.TSK.instance("TSK_FFT").sysStackSize = 4000;
+bios.TSK.instance("TSK_FFT").sysStackSize = 4096;
+bios.TSK.instance("TSK_FFT").sysStackSize = 256;
+bios.TSK.instance("TSK_FFT").stackSize = 4096;
+bios.TSK.instance("TSK_FFT").stackSize = 3072;
+bios.TSK.instance("TSKUserInterface").priority = 3;
 // !GRAPHICAL_CONFIG_TOOL_SCRIPT_INSERT_POINT!
 
 if (config.hasReportedError == false) {

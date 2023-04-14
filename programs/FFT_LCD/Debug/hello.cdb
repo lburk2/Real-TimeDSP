@@ -75,7 +75,7 @@ type GlobalStatus {
         prop Visible :: 0
         prop Writable :: 1
     }
-    global DATE :: "Thu Apr 13 11:03:46 2023" { 
+    global DATE :: "Fri Apr 14 10:03:08 2023" { 
         prop Type :: "{21455EA3-B96A-11cf-9BFE-0000C0AC14C7}"
         prop Visible :: 0
         prop Writable :: 0
@@ -9371,7 +9371,7 @@ object TSKUserInterface :: TSK {
     param iMANSTK :: @null
     param iSTKSZ :: 512
     param iSYSTKSZ :: 256
-    param iPRI :: 1
+    param iPRI :: 3
     param iENV :: 0
     param iEXITFLAG :: 1
     param iUSETSKNAME :: 0
@@ -9452,7 +9452,7 @@ object TSK_FFT :: TSK {
     param iARG7 :: 0
     param iAUTOSTK :: 1
     param iMANSTK :: @null
-    param iSTKSZ :: 1024
+    param iSTKSZ :: 3072
     param iSYSTKSZ :: 256
     param iPRI :: 2
     param iENV :: 0
@@ -9486,6 +9486,6 @@ object SEMFFT :: SEM {
     param iId :: 0
     param iDelUser :: "USER"
     param iDelMsg :: "ok"
-    param iCount :: 0
+    param iCount :: 1
 }
 

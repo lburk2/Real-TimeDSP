@@ -20,12 +20,9 @@
 #include "FFT.h"
 #include "FFT_private.h"
 #include "FFT_types.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include <inttypes.h>
 
-const ConstP_FFT_T FFT_ConstP;
+
+
 /* External inputs (root inport signals with default storage) */
 ExtU_FFT_T FFT_U;
 
@@ -382,48 +379,4 @@ void FFT_terminate(void)
  */
 
 
-
-// Compute the FFT of the input array of length N
-void myfft(int16_t *input, int16_t *output, int N) {
-    // Allocate memory for the real and imaginary arrays
-    int16_t *real = malloc(sizeof(int16_t) * N);
-    int16_t *imag = malloc(sizeof(int16_t) * N);
-
-    volatile int i;
-    volatile int n;
-    volatile int k;
-    // Convert input to real and imaginary arrays
-    for( i = 0; i < N; i++) {
-        real[i] = input[i];
-        imag[i] = 0;
-    }
-
-    // Compute the FFT recursively using the Cooley-Tukey algorithm
-    for( n = N; n >= 2; n /= 2) {
-        for( k = 0; k < n/2; k++) {
-        	int16_t t_real = cos(2 * PI * k / n);
-        	int16_t t_imag = sin(2 * PI * k / n);
-            for(i = k; i < N; i += n) {
-            	int j = i + n/2;
-            	int16_t u_real = real[i];
-            	int16_t u_imag = imag[i];
-            	int16_t v_real = (int16_t)(((int32_t)real[j] * t_real - (int32_t)imag[j] * t_imag) / INT16_MAX);
-                int16_t v_imag = (int16_t)(((int32_t)real[j] * t_imag + (int32_t)imag[j] * t_real) / INT16_MAX);
-                real[i] = u_real + v_real;
-                imag[i] = u_imag + v_imag;
-                real[j] = u_real - v_real;
-                imag[j] = u_imag - v_imag;
-            }
-        }
-    }
-
-    // Compute the magnitude of the complex array and store it in the output array
-    for(i = 0; i < N; i++) {
-        output[i] = sqrt(real[i] * real[i] + imag[i] * imag[i]);
-    }
-
-    // Free the memory used by the real and imaginary arrays
-    free(real);
-    free(imag);
-}
 
