@@ -42,6 +42,8 @@ int16_t spectrumOut[128]={0};
 uint16_t buffcount=0;
 Int16 filteredLeftSampleOutput;
 
+const uint16_t sally[16]={0,1,3,7,15,31,63,127,255,511,1023,2047,4095,8191,16383,32767};
+
 extern int NCO;
 extern int filterMode;
 extern int16_t* delayLineLPptr;
@@ -124,15 +126,10 @@ void HWI_I2S_Tx(void)
 
 void TSKAudioProcessorFxn(Arg value_arg)
 {
-	 //add something like this for the post
-
-	//prolog aka init stuff
-	while(1)//in general you don't return from task, one time thing? make it higher priority
+	while(1)
 	{
 		MBX_pend(&MBXAudio, msg, SYS_FOREVER);
-		//SWI_disable();
-		//need to have semaphore in here or some kind of sleep or maybe mxb pend is the sleep
-		//SEM_pend(&SEMFilter, SYS_FOREVER);
+
 		switch(filterMode){
 		case 1:
 			fir2((DATA *)&msg,
@@ -198,6 +195,8 @@ void TSKFFTfxn(Arg value_arg)
 	{
 		osd9616_send(0x40,0x00);//clears display
 	}
+
+	uint16_t steve;
 	while(1)
 	{
 		MBX_pend(&MBXFFT, FFTSamps, 0);
@@ -208,18 +207,20 @@ void TSKFFTfxn(Arg value_arg)
 
 		memcpy(spectrumOut, FFT_Y.Out1, 128); //output
 
-		SEM_pend(&SEMFFT, 0);
+		SEM_pendBinary(&SEMFFT, SYS_FOREVER);
 		volatile int i=0;
 
 		for(i=0;i<64;i++)
 		{
-			osd9616_send(0x40,spectrumOut[i]); //printing spectrum
+			steve=spectrumOut[i]>>11;
+
+			osd9616_send(0x40,sally[steve&0xf]); //printing spectrum
 			//osd9616_send(0x40,0x00);
 			i++;
 		}
 //		osd9616_send(0x40,0x00);
 //		osd9616_multiSend((Uint16*)spectrumOut, 128);
-		SEM_post(&SEMFFT);
+		SEM_postBinary(&SEMFFT);
 		//MBX_post(&MBXFFT, FFTSamps, 0);
 
 	 /* our display is only 96 by 16 (two 8 bit rows  and 96 columns)
