@@ -178,6 +178,8 @@ bios.TSK.instance("TSK_idle").stackSize = 256;
 bios.TSK.instance("TSK_FFT").stackSize = 4096;
 bios.TSK.instance("TSK_FFT").priority = 8;
 bios.TSK.instance("TSK_FFT").priority = 3;
+bios.TSK.instance("TSK_FFT").priority = 8;
+bios.TSK.instance("TSK_FFT").priority = 7;
 // !GRAPHICAL_CONFIG_TOOL_SCRIPT_INSERT_POINT!
 
 if (config.hasReportedError == false) {

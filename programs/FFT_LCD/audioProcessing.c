@@ -42,7 +42,7 @@ int16_t spectrumOut[128]={0};
 uint16_t buffcount=0;
 Int16 filteredLeftSampleOutput;
 
-const uint16_t sally[16]={0,1,3,7,15,31,63,127,255,511,1023,2047,4095,8191,16383,32767};
+const uint16_t sally[16]={1,1,3,7,15,31,63,127,255,511,1023,2047,4095,8191,16383,32767};
 
 extern int NCO;
 extern int filterMode;
@@ -154,16 +154,16 @@ void TSKAudioProcessorFxn(Arg value_arg)
 
 		MBX_post(&MBXOutput, filteredLeftSample, SYS_FOREVER);
 
-		volatile int x=0;
-		for(x;x<128;x++)
-		{
-			wave[x]=nco_run_sinusoid();
-		}
+//		volatile int x=0;
+//		for(x;x<128;x++)
+//		{
+//			wave[x]=nco_run_sinusoid();
+//		}
 		volatile int i=0;
 		for(i;i<48;i++)
 		{
-			//spectrum[buffcount]=filteredLeftSample[i];
-			spectrum[buffcount]=wave[i];
+			spectrum[buffcount]=filteredLeftSample[i];
+			//spectrum[buffcount]=wave[i];
 			buffcount++;
 			if(buffcount==128)
 			{
@@ -179,24 +179,20 @@ void TSKFFTfxn(Arg value_arg)
 	//call init
 	FFT_initialize();
 
-	osd9616_send(0x00,0x21); //setting start address
-	osd9616_send(0x00,0x00);
-	osd9616_send(0x00,0x3F); //end column
-	osd9616_send(0x00,0x22); //start page
-	osd9616_send(0x00,0x00);
-	osd9616_send(0x00,0x01);//end page
-	//osd9616_send(0x00,0xC8);//left to right display
-	volatile int i=0;
-	for(i=0;i<128;i++)
-	{
-		osd9616_send(0x40,0xff);//clears display
-	}
-	for(i=0;i<128;i++)
-	{
-		osd9616_send(0x40,0x00);//clears display
-	}
 
-	uint16_t steve;
+	//osd9616_send(0x00,0xC8);//left to right display
+//	volatile int i=0;
+//	for(i=0;i<128;i++)
+//	{
+//		osd9616_send(0x40,0xff);//clears display
+//	}
+//	for(i=0;i<128;i++)
+//	{
+//		osd9616_send(0x40,0x00);//clears display
+//	}
+
+	uint16_t steve=0;
+	uint16_t sarah[128] = {0};
 	while(1)
 	{
 		MBX_pend(&MBXFFT, FFTSamps, 0);
@@ -207,20 +203,43 @@ void TSKFFTfxn(Arg value_arg)
 
 		memcpy(spectrumOut, FFT_Y.Out1, 128); //output
 
-		SEM_pendBinary(&SEMFFT, SYS_FOREVER);
 		volatile int i=0;
+		volatile int j=0;
+		double maxVal = 0.0;
 
-		for(i=0;i<64;i++)
+		for (j = 0 ; j < 128 ; j++)
 		{
-			steve=spectrumOut[i]>>11;
+			if (spectrumOut[j] > maxVal)
+			{
+				maxVal = spectrumOut[i];
+			}
+		}
 
-			osd9616_send(0x40,sally[steve&0xf]); //printing spectrum
+
+		for(i=0;i<128;i+=2)
+		{
+
+			steve=(uint16_t)(((double)spectrumOut[i]/maxVal)*16);
+
+			sarah[i] = sally[steve&0xf]>>8;
+			sarah[i+1] = sally[steve&0xf] & 0xFF;
 			//osd9616_send(0x40,0x00);
-			i++;
+
 		}
 //		osd9616_send(0x40,0x00);
-//		osd9616_multiSend((Uint16*)spectrumOut, 128);
-		SEM_postBinary(&SEMFFT);
+		SEM_pend(&SEMI2C, SYS_FOREVER);
+		//TSK_disable();
+		osd9616_send(0x00,0x21); //setting start address
+		osd9616_send(0x00,0x00);
+		osd9616_send(0x00,0x3F); //end column
+		osd9616_send(0x00,0x22); //start page
+		osd9616_send(0x00,0x00);
+		osd9616_send(0x00,0x01);//end page
+
+
+		osd9616_multiSend((Uint16*)sarah, 128);
+		//TSK_enable();
+		SEM_post(&SEMI2C);
 		//MBX_post(&MBXFFT, FFTSamps, 0);
 
 	 /* our display is only 96 by 16 (two 8 bit rows  and 96 columns)
