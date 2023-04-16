@@ -75,7 +75,7 @@ type GlobalStatus {
         prop Visible :: 0
         prop Writable :: 1
     }
-    global DATE :: "Sat Apr 15 16:55:11 2023" { 
+    global DATE :: "Sat Apr 15 19:49:52 2023" { 
         prop Type :: "{21455EA3-B96A-11cf-9BFE-0000C0AC14C7}"
         prop Visible :: 0
         prop Writable :: 0
@@ -9452,7 +9452,7 @@ object TSK_FFT :: TSK {
     param iARG7 :: 0
     param iAUTOSTK :: 1
     param iMANSTK :: @null
-    param iSTKSZ :: 4096
+    param iSTKSZ :: 2048
     param iSYSTKSZ :: 256
     param iPRI :: 7
     param iENV :: 0

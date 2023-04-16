@@ -215,23 +215,24 @@ void TSKFFTfxn(Arg value_arg)
 			}
 		}
 
-
-		for(i=0;i<128;i+=2)
+		j=0;
+		for(i=0;i<128;i+=4)
 		{
 
-			steve=(uint16_t)(((double)spectrumOut[i]/maxVal)*16);
+			steve=(uint16_t)(((double)spectrumOut[j]/maxVal)*16);
 
 			sarah[i] = sally[steve&0xf]>>8;
 			sarah[i+1] = sally[steve&0xf] & 0xFF;
-			//osd9616_send(0x40,0x00);
-
+			sarah[i+2] = sally[steve&0xf]>>8;
+			sarah[i+3] = sally[steve&0xf] & 0xFF;
+			j++;
 		}
 //		osd9616_send(0x40,0x00);
 		SEM_pend(&SEMI2C, SYS_FOREVER);
 		//TSK_disable();
 		osd9616_send(0x00,0x21); //setting start address
-		osd9616_send(0x00,0x00);
-		osd9616_send(0x00,0x3F); //end column
+		osd9616_send(0x00,0x20);
+		osd9616_send(0x00,0x60); //end column
 		osd9616_send(0x00,0x22); //start page
 		osd9616_send(0x00,0x00);
 		osd9616_send(0x00,0x01);//end page

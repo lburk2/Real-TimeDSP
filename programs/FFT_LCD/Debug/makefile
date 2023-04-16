@@ -4,7 +4,7 @@
 
 SHELL = cmd.exe
 
-CG_TOOL_ROOT := C:/ti/ccsv6/tools/compiler/c5500_4.4.1
+CG_TOOL_ROOT := D:/ti/ccsv6/tools/compiler/c5500_4.4.1
 
 GEN_OPTS__FLAG := 
 GEN_CMDS__FLAG := -l"./hellocfg.cmd"
@@ -156,13 +156,13 @@ all: FFT_LCD.out
 FFT_LCD.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: C5500 Linker'
-	"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 --memory_model=large -g --define=c5502 --display_error_number --diag_warning=225 --ptrdiff_size=32 -z -m"FFT_LCD.map" --stack_size=0x200 --heap_size=0x400 -i"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/lib" -i"C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/c55xx_csl/ccs_v4.0_examples/cslVC5505/Debug" -i"C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/lib" -i"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include" -i"C:/ti/bios_5_42_01_09/packages/ti/rtdx/lib/c5500" -i"C:/ti/bios_5_42_01_09/packages/ti/bios/lib" --reread_libs --display_error_number --warn_sections --xml_link_info="FFT_LCD_linkInfo.xml" --rom_model --sys_stacksize=0x200 -o "FFT_LCD.out" $(ORDERED_OBJS)
+	"D:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 --memory_model=large -g --define=c5502 --display_error_number --diag_warning=225 --ptrdiff_size=32 -z -m"FFT_LCD.map" --stack_size=0x200 --heap_size=0x400 -i"D:/ti/ccsv6/tools/compiler/c5500_4.4.1/lib" -i"Z:/Semester8/Real-Time DSP/Projects/Real-TimeDSP/c55xx_csl/ccs_v4.0_examples/cslVC5505/Debug" -i"Z:/Semester8/Real-Time DSP/Projects/Real-TimeDSP/C55xxCSL/lib" -i"D:/ti/ccsv6/tools/compiler/c5500_4.4.1/include" -i"D:/ti/bios_5_42_01_09/packages/ti/rtdx/lib/c5500" -i"D:/ti/bios_5_42_01_09/packages/ti/bios/lib" --reread_libs --display_error_number --warn_sections --xml_link_info="FFT_LCD_linkInfo.xml" --rom_model --sys_stacksize=0x200 -o "FFT_LCD.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
 FFT_LCD.hex: $(EXE_OUTPUTS)
 	@echo 'Invoking: C5500 Hex Utility'
-	"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/hex55"  -o "FFT_LCD.hex" $(EXE_OUTPUTS__QUOTED)
+	"D:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/hex55"  -o "FFT_LCD.hex" $(EXE_OUTPUTS__QUOTED)
 	@echo 'Finished building: $@'
 	@echo ' '
 

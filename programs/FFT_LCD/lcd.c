@@ -84,9 +84,6 @@ Int16 osd9616_init( )
     osd9616_send(0x00,0x00); // Not offset
     osd9616_send(0x00,0xd5); // Set display clock divide ratio/oscillator frequency
     osd9616_send(0x00,0xf0); // Set divide ratio
-    osd9616_send(0x00,0x20); // set addressing mode
-    osd9616_send(0x00,0x01); // vertical addressing mode
-    osd9616_send(0x00,0xC8); //
 
 
     /* Set pre-charge period */
@@ -110,7 +107,13 @@ Int16 osd9616_init( )
     cmd[2] = 0x14;
     osd9616_multiSend( cmd, 3 );
 
+    osd9616_send(0x00,0x20); // set addressing mode
+    osd9616_send(0x00,0x01); // vertical addressing mode
+    osd9616_send(0x00,0xC8); //
+   // osd9616_send(0x00,0xA0); // flips horizontally
+
     osd9616_send(0x00,0xaf); // Turn on oled panel
+
 
     return 0;
 }

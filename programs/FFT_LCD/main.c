@@ -78,21 +78,24 @@ void main(void)
 	i = osd9616_send(0x00,0x00);   // Set low column address
 	osd9616_send(0x00,0x10);   // Set high column address
 	osd9616_send(0x00,0xb0+0); // Set page for page 0 to page 5
-	for(i=0;i<128;i++)
+	for(i=0;i<2048;i++)
 	{
 		osd9616_send(0x40,0xff);
 	}
-
 	/* Write to page 0 */
 	osd9616_send(0x00,0x00);   // Set low column address
 	osd9616_send(0x00,0x10);   // Set high column address
 	osd9616_send(0x00,0xb0+0); // Set page for page 0 to page 5
-	for(i=0;i<22;i++)
+	for(i=0;i<2048;i++)
 	{
 		osd9616_send(0x40,0x00);  // Spaces
 	}
-	osd9616_send(0x00,0x20); // set addressing mode
-	osd9616_send(0x00,0x01); // vertical addressing mode
+
+	volatile int j = 0;
+	for(j=0;j<5000; j++){}
+
+	osd9616_send(0x00,0xA0); //column addres 0 mapped to seg0
+
 
     audioProcessingInit();
 
