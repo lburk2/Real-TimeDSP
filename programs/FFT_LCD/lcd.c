@@ -210,7 +210,7 @@ Int16 osd9616_send( Uint16 comdat, Uint16 data )
  *      Sends multiple bytes of data to the osd9616
  *
  */
-Int16 osd9616_multiSend( Uint16* data, Uint16 len )
+Int16 myosd9616_multiSend( Uint16* data, Uint16 len )
 {
     Uint16 x;
     Uint16 cmd[129];
@@ -219,9 +219,22 @@ Int16 osd9616_multiSend( Uint16* data, Uint16 len )
     {
         cmd[x] = data[x];
     }
-    
+
     /* Write len bytes to OSD9616 */
     return EZDSP5502_I2C_write( OSD9616_I2C_ADDR, cmd, len+1 );
+}
+
+Int16 osd9616_multiSend( Uint16* data, Uint16 len )
+{
+    Uint16 x;
+    Uint16 cmd[10];
+    for(x=0;x<len;x++)               // Command / Data
+    {
+        cmd[x] = data[x];
+    }
+    
+    /* Write len bytes to OSD9616 */
+    return EZDSP5502_I2C_write( OSD9616_I2C_ADDR, cmd, len );
 }
 
 /*

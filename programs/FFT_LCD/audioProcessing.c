@@ -15,7 +15,7 @@
 #include "FFT.h"
 #include "lcd.h"
 
-#include "myNCO.h"
+
 
 
 
@@ -38,7 +38,8 @@ int16_t output[48]={0};
 int16_t spectrum[128]={0};
 int16_t FFTSamps[128]={0};
 int16_t wave[128]={0}; //FOR TESTING PURPOSES
-int16_t spectrumOut[128]={0};
+uint16_t spectrumOut[128]={0};
+int16_t display[64]={0};
 uint16_t buffcount=0;
 Int16 filteredLeftSampleOutput;
 
@@ -201,32 +202,34 @@ void TSKFFTfxn(Arg value_arg)
 
 		FFT_step();
 
-		memcpy(spectrumOut, FFT_Y.Out1, 128); //output
+		memcpy(spectrumOut, FFT_Y.Out1, 128); //output, only care about 64
 
+
+//		for(i=0;i<128;i+=4)
+//		{
+//
+//			steve=(uint16_t)(((double)spectrumOut[j]/maxVal)*16);
+//
+//			sarah[i] = sally[steve&0xf]>>8;
+//			sarah[i+1] = sally[steve&0xf] & 0xFF;
+//			sarah[i+2] = sally[steve&0xf]>>8;
+//			sarah[i+3] = sally[steve&0xf] & 0xFF;
+//			j++;
+//		}
 		volatile int i=0;
-		volatile int j=0;
-		double maxVal = 0.0;
-
-		for (j = 0 ; j < 128 ; j++)
+		for(i=0;i<64;i++)
 		{
-			if (spectrumOut[j] > maxVal)
-			{
-				maxVal = spectrumOut[i];
-			}
+			display[i]=15;
+			//display[i]=spectrumOut[i]>>11;
+
+//			display[i] = sally[spectrumOut[i]>>11]>>8;
+//			display[i+1] = sally[spectrumOut[i]>>11] & 0xFF;
+//			display[i+2] = sally[spectrumOut[i]>>11]>>8;
+//			display[i+3] = sally[spectrumOut[i]>>11] & 0xFF;
+
 		}
 
-		j=0;
-		for(i=0;i<128;i+=4)
-		{
 
-			steve=(uint16_t)(((double)spectrumOut[j]/maxVal)*16);
-
-			sarah[i] = sally[steve&0xf]>>8;
-			sarah[i+1] = sally[steve&0xf] & 0xFF;
-			sarah[i+2] = sally[steve&0xf]>>8;
-			sarah[i+3] = sally[steve&0xf] & 0xFF;
-			j++;
-		}
 //		osd9616_send(0x40,0x00);
 		SEM_pend(&SEMI2C, SYS_FOREVER);
 		//TSK_disable();
@@ -238,25 +241,12 @@ void TSKFFTfxn(Arg value_arg)
 		osd9616_send(0x00,0x01);//end page
 
 
-		osd9616_multiSend((Uint16*)sarah, 128);
+		myosd9616_multiSend((Uint16*)display, 64);
 		//TSK_enable();
 		SEM_post(&SEMI2C);
 		//MBX_post(&MBXFFT, FFTSamps, 0);
 
-	 /* our display is only 96 by 16 (two 8 bit rows  and 96 columns)
-	 * we'll only use 64 columns (128/2)
-	 *
-	 * use veritcal addressing mode
-	 *
-	 * while(1){
-	 * 	MBX_pend(&mbx1, msg, sys_forever)
-	 * 	FFT(msg, output);
-	 * 	//semaphore pend here??
-	 * 	//write LCD
-	 * 	//semaphore post here??
-	 * 	//post mail box??
-	 *
-	 * }*/
+
 	}
 
 }
