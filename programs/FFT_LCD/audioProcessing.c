@@ -43,7 +43,7 @@ int16_t display[64]={0};
 uint16_t buffcount=0;
 Int16 filteredLeftSampleOutput;
 
-const uint16_t sally[16]={1,1,3,7,15,31,63,127,255,511,1023,2047,4095,8191,16383,32767};
+const uint16_t sally[16]={0,1,3,7,15,31,63,127,255,511,1023,2047,4095,8191,16383,32767};
 
 extern int NCO;
 extern int filterMode;
@@ -204,30 +204,31 @@ void TSKFFTfxn(Arg value_arg)
 
 		memcpy(spectrumOut, FFT_Y.Out1, 128); //output, only care about 64
 
-
-//		for(i=0;i<128;i+=4)
-//		{
-//
-//			steve=(uint16_t)(((double)spectrumOut[j]/maxVal)*16);
-//
-//			sarah[i] = sally[steve&0xf]>>8;
-//			sarah[i+1] = sally[steve&0xf] & 0xFF;
-//			sarah[i+2] = sally[steve&0xf]>>8;
-//			sarah[i+3] = sally[steve&0xf] & 0xFF;
-//			j++;
-//		}
 		volatile int i=0;
-		for(i=0;i<64;i++)
+		volatile int j=0;
+		for(i=0;i<128;i+=4)
 		{
-			display[i]=15;
-			//display[i]=spectrumOut[i]>>11;
 
-//			display[i] = sally[spectrumOut[i]>>11]>>8;
-//			display[i+1] = sally[spectrumOut[i]>>11] & 0xFF;
-//			display[i+2] = sally[spectrumOut[i]>>11]>>8;
-//			display[i+3] = sally[spectrumOut[i]>>11] & 0xFF;
+			steve=(uint16_t)(((double)spectrumOut[j]/2048)*16);
 
+			sarah[i] = sally[steve&0xf]>>8;
+			sarah[i+1] = sally[steve&0xf] & 0xFF;
+			sarah[i+2] = sally[steve&0xf]>>8;
+			sarah[i+3] = sally[steve&0xf] & 0xFF;
+			j++;
 		}
+//		volatile int i=0;
+//		for(i=0;i<64;i++)
+//		{
+//			display[i]=15;
+//			//display[i]=spectrumOut[i]>>11;
+//
+////			display[i] = sally[spectrumOut[i]>>11]>>8;
+////			display[i+1] = sally[spectrumOut[i]>>11] & 0xFF;
+////			display[i+2] = sally[spectrumOut[i]>>11]>>8;
+////			display[i+3] = sally[spectrumOut[i]>>11] & 0xFF;
+//
+//		}
 
 
 //		osd9616_send(0x40,0x00);
@@ -240,8 +241,8 @@ void TSKFFTfxn(Arg value_arg)
 		osd9616_send(0x00,0x00);
 		osd9616_send(0x00,0x01);//end page
 
-
-		myosd9616_multiSend((Uint16*)display, 64);
+		myosd9616_multiSend((Uint16*)sarah, 128);
+//		myosd9616_multiSend((Uint16*)display, 64);
 		//TSK_enable();
 		SEM_post(&SEMI2C);
 		//MBX_post(&MBXFFT, FFTSamps, 0);
