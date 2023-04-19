@@ -20,7 +20,6 @@
 #include <tsk.h>
 #include <gbl.h>
 #include <c55.h>
-//#include "clkcfg.h"
 
 #include "hellocfg.h"
 #include "ezdsp5502.h"
@@ -30,7 +29,7 @@
 #include "ezdsp5502_mcbsp.h"
 #include "csl_mcbsp.h"
 #include "lcd.h"
-//#include "Dsplib.h"
+
 
 #include "demo_filt.h"
 #include "highPass.h"
@@ -94,11 +93,11 @@ void main(void)
 	volatile int j = 0;
 	for(j=0;j<1000; j++){}// hard delay
 
-	osd9616_send(0x00,0xA0); //column addres 0 mapped to seg0
+	osd9616_send(0x00,0xA0); //column address 0 mapped to seg0
 
 
     audioProcessingInit();
-
+    //switch init
     EZDSP5502_I2CGPIO_configLine(  SW1, IN );
     //init leds
     EZDSP5502_I2CGPIO_configLine(  LED0, OUT );
@@ -108,14 +107,11 @@ void main(void)
     memset(delayLineLP, 0, sizeof delayLineLP);
     memset(delayLineHP, 0, sizeof delayLineHP);
 
+    //declare filter pointers
     delayLineLPptr=delayLineLP;
     delayLineHPptr=delayLineHP;
     demoFilterptr=demoFilter;
     highPassptr=highPass;
 
-
-
     // after main() exits the DSP/BIOS scheduler starts
-
-
 }

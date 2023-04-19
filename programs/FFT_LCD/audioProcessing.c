@@ -180,18 +180,6 @@ void TSKFFTfxn(Arg value_arg)
 	//call init
 	FFT_initialize();
 
-
-	//osd9616_send(0x00,0xC8);//left to right display
-//	volatile int i=0;
-//	for(i=0;i<128;i++)
-//	{
-//		osd9616_send(0x40,0xff);//clears display
-//	}
-//	for(i=0;i<128;i++)
-//	{
-//		osd9616_send(0x40,0x00);//clears display
-//	}
-
 	uint16_t steve=0;
 	uint16_t sarah[128] = {0};
 	while(1)
@@ -202,14 +190,13 @@ void TSKFFTfxn(Arg value_arg)
 
 		FFT_step();
 
-		memcpy(spectrumOut, FFT_Y.Out1, 128); //output, only care about 64
+		memcpy(spectrumOut, FFT_Y.Out1, 128);
 
 		volatile int i=0;
 		volatile int j=0;
 		for(i=0;i<128;i+=4)
 		{
-
-			steve=(uint16_t)(((double)spectrumOut[j]/2048)*16);
+			steve=(uint16_t)(((double)spectrumOut[j]/128.0));
 
 			sarah[i] = sally[steve&0xf]>>8;
 			sarah[i+1] = sally[steve&0xf] & 0xFF;
@@ -217,23 +204,112 @@ void TSKFFTfxn(Arg value_arg)
 			sarah[i+3] = sally[steve&0xf] & 0xFF;
 			j++;
 		}
-//		volatile int i=0;
-//		for(i=0;i<64;i++)
-//		{
-//			display[i]=15;
-//			//display[i]=spectrumOut[i]>>11;
+
+
+
+		    /*
+		     * convert FFT result to display buffer information
+		     * assume:
+		     * 1 - FFT is 128 points
+		     * 2 - dispBuff is 128 bytes (64 16-bit words)
+		     */
+
+//		    const uint16_t pixels_on_16 = 0xffff;
+//		    const uint16_t pixels_on_15 = 0x7fff; // assuming big endian, you may have to byte swap these
+//		    const uint16_t pixels_on_14 = 0x3fff;
+//		    const uint16_t pixels_on_13 = 0x1fff;
+//		    const uint16_t pixels_on_12 = 0x0fff;
+//		    const uint16_t pixels_on_11 = 0x07ff;
+//		    const uint16_t pixels_on_10 = 0x03ff;
+//		    const uint16_t pixels_on_9 = 0x01ff;
+//		    const uint16_t pixels_on_8 = 0x00ff;
+//		    const uint16_t pixels_on_7 = 0x007f;
+//		    const uint16_t pixels_on_6 = 0x003f;
+//		    const uint16_t pixels_on_5 = 0x001f;
+//		    const uint16_t pixels_on_4 = 0x000f;
+//		    const uint16_t pixels_on_3 = 0x0007;
+//		    const uint16_t pixels_on_2 = 0x0003;
+//		    const uint16_t pixels_on_1 = 0x0001;
 //
-////			display[i] = sally[spectrumOut[i]>>11]>>8;
-////			display[i+1] = sally[spectrumOut[i]>>11] & 0xFF;
-////			display[i+2] = sally[spectrumOut[i]>>11]>>8;
-////			display[i+3] = sally[spectrumOut[i]>>11] & 0xFF;
+//		    uint16_t i;
 //
+//		    for (i = 0; i < 64; i++)
+//		    {
+//		        /*
+//		         * This is kinda lame code, but you have complete control over thresholds and it is easy to follow
+//		         */
+//		        if (spectrumOut[i] > 30000)
+//		        {
+//		            sarah[i] = pixels_on_16;
+//		        }
+//		        else if (spectrumOut[i] > 28000)
+//		        {
+//		            sarah[i] = pixels_on_15;
+//		        }
+//		        else if (spectrumOut[i] > 26000)
+//		        {
+//		            sarah[i] = pixels_on_14;
+//		        }
+//		        else if (spectrumOut[i] > 24000)
+//				{
+//					sarah[i] = pixels_on_13;
+//				}
+//		        else if (spectrumOut[i] > 22000)
+//				{
+//					sarah[i] = pixels_on_12;
+//				}
+//		        else if (spectrumOut[i] > 20000)
+//				{
+//					sarah[i] = pixels_on_11;
+//				}
+//		        else if (spectrumOut[i] > 18000)
+//				{
+//					sarah[i] = pixels_on_10;
+//				}
+//		        else if (spectrumOut[i] > 16000)
+//				{
+//					sarah[i] = pixels_on_9;
+//				}
+//		        else if (spectrumOut[i] > 14000)
+//				{
+//					sarah[i] = pixels_on_8;
+//				}
+//		        else if (spectrumOut[i] > 12000)
+//				{
+//					sarah[i] = pixels_on_7;
+//				}
+//		        else if (spectrumOut[i] > 10000)
+//				{
+//					sarah[i] = pixels_on_6;
+//				}
+//		        else if (spectrumOut[i] > 8000)
+//				{
+//					sarah[i] = pixels_on_5;
+//				}
+//		        else if (spectrumOut[i] > 6000)
+//				{
+//					sarah[i] = pixels_on_4;
+//				}
+//		        else if (spectrumOut[i] > 4000)
+//				{
+//					sarah[i] = pixels_on_3;
+//				}
+//		        else if (spectrumOut[i] > 2000)
+//				{
+//					sarah[i] = pixels_on_2;
+//				}
+//		        else if (spectrumOut[i] > 1000)
+//				{
+//					sarah[i] = pixels_on_1;
+//				}
+//		        else
+//		        {
+//		            sarah[i] = 0;
+//		        }
+
 //		}
 
-
-//		osd9616_send(0x40,0x00);
 		SEM_pend(&SEMI2C, SYS_FOREVER);
-		//TSK_disable();
 		osd9616_send(0x00,0x21); //setting start address
 		osd9616_send(0x00,0x20);
 		osd9616_send(0x00,0x60); //end column
@@ -242,12 +318,6 @@ void TSKFFTfxn(Arg value_arg)
 		osd9616_send(0x00,0x01);//end page
 
 		myosd9616_multiSend((Uint16*)sarah, 128);
-//		myosd9616_multiSend((Uint16*)display, 64);
-		//TSK_enable();
 		SEM_post(&SEMI2C);
-		//MBX_post(&MBXFFT, FFTSamps, 0);
-
-
 	}
-
 }
