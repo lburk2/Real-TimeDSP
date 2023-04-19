@@ -309,7 +309,7 @@ void TSKFFTfxn(Arg value_arg)
 
 //		}
 
-		SEM_pend(&SEMI2C, SYS_FOREVER);
+		SEM_pend(&SEMI2C, SYS_FOREVER);//blocking the leds from writing to i2c bus during screen transmission
 		osd9616_send(0x00,0x21); //setting start address
 		osd9616_send(0x00,0x20);
 		osd9616_send(0x00,0x60); //end column
@@ -317,7 +317,8 @@ void TSKFFTfxn(Arg value_arg)
 		osd9616_send(0x00,0x00);
 		osd9616_send(0x00,0x01);//end page
 
-		myosd9616_multiSend((Uint16*)sarah, 128);
+
+		myosd9616_multiSend((Uint16*)sarah, 128);//send fft results to screen
 		SEM_post(&SEMI2C);
 	}
 }

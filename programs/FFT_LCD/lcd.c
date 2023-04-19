@@ -112,6 +112,8 @@ Int16 osd9616_init( )
     osd9616_send(0x00,0xC8); //
    // osd9616_send(0x00,0xA0); // flips horizontally
 
+	osd9616_send(0x00,0x2e);  // Deactivate Scrolling
+
     osd9616_send(0x00,0xaf); // Turn on oled panel
 
 
