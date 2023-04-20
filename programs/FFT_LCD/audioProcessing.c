@@ -42,6 +42,8 @@ uint16_t spectrumOut[128]={0};
 int16_t display[64]={0};
 uint16_t buffcount=0;
 Int16 filteredLeftSampleOutput;
+LgUns ticksbefore;
+LgUns ticksafter;
 
 const uint16_t sally[16]={0,1,3,7,15,31,63,127,255,511,1023,2047,4095,8191,16383,32767};
 
@@ -205,111 +207,9 @@ void TSKFFTfxn(Arg value_arg)
 			j++;
 		}
 
-
-
-		    /*
-		     * convert FFT result to display buffer information
-		     * assume:
-		     * 1 - FFT is 128 points
-		     * 2 - dispBuff is 128 bytes (64 16-bit words)
-		     */
-
-//		    const uint16_t pixels_on_16 = 0xffff;
-//		    const uint16_t pixels_on_15 = 0x7fff; // assuming big endian, you may have to byte swap these
-//		    const uint16_t pixels_on_14 = 0x3fff;
-//		    const uint16_t pixels_on_13 = 0x1fff;
-//		    const uint16_t pixels_on_12 = 0x0fff;
-//		    const uint16_t pixels_on_11 = 0x07ff;
-//		    const uint16_t pixels_on_10 = 0x03ff;
-//		    const uint16_t pixels_on_9 = 0x01ff;
-//		    const uint16_t pixels_on_8 = 0x00ff;
-//		    const uint16_t pixels_on_7 = 0x007f;
-//		    const uint16_t pixels_on_6 = 0x003f;
-//		    const uint16_t pixels_on_5 = 0x001f;
-//		    const uint16_t pixels_on_4 = 0x000f;
-//		    const uint16_t pixels_on_3 = 0x0007;
-//		    const uint16_t pixels_on_2 = 0x0003;
-//		    const uint16_t pixels_on_1 = 0x0001;
-//
-//		    uint16_t i;
-//
-//		    for (i = 0; i < 64; i++)
-//		    {
-//		        /*
-//		         * This is kinda lame code, but you have complete control over thresholds and it is easy to follow
-//		         */
-//		        if (spectrumOut[i] > 30000)
-//		        {
-//		            sarah[i] = pixels_on_16;
-//		        }
-//		        else if (spectrumOut[i] > 28000)
-//		        {
-//		            sarah[i] = pixels_on_15;
-//		        }
-//		        else if (spectrumOut[i] > 26000)
-//		        {
-//		            sarah[i] = pixels_on_14;
-//		        }
-//		        else if (spectrumOut[i] > 24000)
-//				{
-//					sarah[i] = pixels_on_13;
-//				}
-//		        else if (spectrumOut[i] > 22000)
-//				{
-//					sarah[i] = pixels_on_12;
-//				}
-//		        else if (spectrumOut[i] > 20000)
-//				{
-//					sarah[i] = pixels_on_11;
-//				}
-//		        else if (spectrumOut[i] > 18000)
-//				{
-//					sarah[i] = pixels_on_10;
-//				}
-//		        else if (spectrumOut[i] > 16000)
-//				{
-//					sarah[i] = pixels_on_9;
-//				}
-//		        else if (spectrumOut[i] > 14000)
-//				{
-//					sarah[i] = pixels_on_8;
-//				}
-//		        else if (spectrumOut[i] > 12000)
-//				{
-//					sarah[i] = pixels_on_7;
-//				}
-//		        else if (spectrumOut[i] > 10000)
-//				{
-//					sarah[i] = pixels_on_6;
-//				}
-//		        else if (spectrumOut[i] > 8000)
-//				{
-//					sarah[i] = pixels_on_5;
-//				}
-//		        else if (spectrumOut[i] > 6000)
-//				{
-//					sarah[i] = pixels_on_4;
-//				}
-//		        else if (spectrumOut[i] > 4000)
-//				{
-//					sarah[i] = pixels_on_3;
-//				}
-//		        else if (spectrumOut[i] > 2000)
-//				{
-//					sarah[i] = pixels_on_2;
-//				}
-//		        else if (spectrumOut[i] > 1000)
-//				{
-//					sarah[i] = pixels_on_1;
-//				}
-//		        else
-//		        {
-//		            sarah[i] = 0;
-//		        }
-
-//		}
-
 		SEM_pend(&SEMI2C, SYS_FOREVER);//blocking the leds from writing to i2c bus during screen transmission
+
+		//ticksbefore = PRD_getticks();
 		osd9616_send(0x00,0x21); //setting start address
 		osd9616_send(0x00,0x20);
 		osd9616_send(0x00,0x60); //end column
@@ -319,6 +219,8 @@ void TSKFFTfxn(Arg value_arg)
 
 
 		myosd9616_multiSend((Uint16*)sarah, 128);//send fft results to screen
+
+		//ticksafter = PRD_getticks();
 		SEM_post(&SEMI2C);
 	}
 }

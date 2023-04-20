@@ -114,6 +114,13 @@ main.obj: ../main.c $(GEN_OPTS) $(GEN_HDRS)
 	@echo 'Finished building: $<'
 	@echo ' '
 
+myNCO.obj: ../myNCO.c $(GEN_OPTS) $(GEN_HDRS)
+	@echo 'Building file: $<'
+	@echo 'Invoking: C5500 Compiler'
+	"C:/ti/ccsv6/tools/compiler/c5500_4.4.1/bin/cl55" -v5502 --memory_model=large -g --include_path="C:/ti/ccsv6/tools/compiler/c5500_4.4.1/include" --include_path="C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/C55xxCSL/include" --include_path="C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/include" --include_path="C:/Users/jisat/OneDrive/Documents/GitHub/Real-TimeDSP/programs/FFT_LCD/Debug" --include_path="C:/ti/bios_5_42_01_09/packages/ti/bios/include" --include_path="C:/ti/bios_5_42_01_09/packages/ti/rtdx/include/c5500" --define=c5502 --display_error_number --diag_warning=225 --ptrdiff_size=32 --preproc_with_compile --preproc_dependency="myNCO.pp" $(GEN_OPTS__FLAG) "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
 rtGetInf.obj: ../rtGetInf.c $(GEN_OPTS) $(GEN_HDRS)
 	@echo 'Building file: $<'
 	@echo 'Invoking: C5500 Compiler'

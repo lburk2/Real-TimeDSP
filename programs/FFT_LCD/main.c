@@ -82,11 +82,15 @@ void main(void)
 		osd9616_send(0x40,0xff);
 	}
 	/* Write to page 0 */
-	osd9616_send(0x00,0x00);   // Set low column address
-	osd9616_send(0x00,0x10);   // Set high column address
-	osd9616_send(0x00,0xb0+0); // Set page for page 0 to page 5
+	osd9616_send(0x00,0x21); //setting start address
+	osd9616_send(0x00,0x00);
+	osd9616_send(0x00,0x60); //end column
+	osd9616_send(0x00,0x22); //start page
+	osd9616_send(0x00,0x00);
+	osd9616_send(0x00,0x01);//end page
 	for(i=0;i<192;i++)
 	{
+
 		osd9616_send(0x40,0x00);  // Spaces
 	}
 

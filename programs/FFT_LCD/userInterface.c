@@ -31,7 +31,7 @@ void TSKUserInterfaceFxn(Arg value_arg)
         TSK_sleep(50);
 
         SEM_pend(&SEMI2C, SYS_FOREVER);
-        //TSK_disable();
+
         //read switches on i2c
         switch1=EZDSP5502_I2CGPIO_readLine(SW1);
 
@@ -64,7 +64,6 @@ void TSKUserInterfaceFxn(Arg value_arg)
         		}
         		switch1Prev=switch1;
         	}
-        //TSK_enable();
         SEM_post(&SEMI2C);
     }
 }

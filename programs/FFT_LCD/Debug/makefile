@@ -24,6 +24,7 @@ ORDERED_OBJS += \
 "./hellocfg_c.obj" \
 "./lcd.obj" \
 "./main.obj" \
+"./myNCO.obj" \
 "./rtGetInf.obj" \
 "./rtGetNaN.obj" \
 "./rt_nonfinite.obj" \
@@ -168,9 +169,9 @@ FFT_LCD.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(GEN_HDRS__QUOTED)$(GEN_MISC_FILES__QUOTED)$(EXE_OUTPUTS__QUOTED)$(GEN_FILES__QUOTED)$(BIN_OUTPUTS__QUOTED)$(GEN_CMDS__QUOTED)
-	-$(RM) "FFT.pp" "FFT_data.pp" "aic3204.pp" "audioProcessing.pp" "ezdsp5502.pp" "ezdsp5502_gpio.pp" "ezdsp5502_i2c.pp" "ezdsp5502_i2cgpio.pp" "ezdsp5502_mcbsp.pp" "hellocfg_c.pp" "lcd.pp" "main.pp" "rtGetInf.pp" "rtGetNaN.pp" "rt_nonfinite.pp" "userInterface.pp" 
+	-$(RM) "FFT.pp" "FFT_data.pp" "aic3204.pp" "audioProcessing.pp" "ezdsp5502.pp" "ezdsp5502_gpio.pp" "ezdsp5502_i2c.pp" "ezdsp5502_i2cgpio.pp" "ezdsp5502_mcbsp.pp" "hellocfg_c.pp" "lcd.pp" "main.pp" "myNCO.pp" "rtGetInf.pp" "rtGetNaN.pp" "rt_nonfinite.pp" "userInterface.pp" 
 	-$(RM) "hellocfg.pp" 
-	-$(RM) "FFT.obj" "FFT_data.obj" "aic3204.obj" "audioProcessing.obj" "ezdsp5502.obj" "ezdsp5502_gpio.obj" "ezdsp5502_i2c.obj" "ezdsp5502_i2cgpio.obj" "ezdsp5502_mcbsp.obj" "fir2.obj" "hellocfg.obj" "hellocfg_c.obj" "lcd.obj" "main.obj" "rtGetInf.obj" "rtGetNaN.obj" "rt_nonfinite.obj" "userInterface.obj" 
+	-$(RM) "FFT.obj" "FFT_data.obj" "aic3204.obj" "audioProcessing.obj" "ezdsp5502.obj" "ezdsp5502_gpio.obj" "ezdsp5502_i2c.obj" "ezdsp5502_i2cgpio.obj" "ezdsp5502_mcbsp.obj" "fir2.obj" "hellocfg.obj" "hellocfg_c.obj" "lcd.obj" "main.obj" "myNCO.obj" "rtGetInf.obj" "rtGetNaN.obj" "rt_nonfinite.obj" "userInterface.obj" 
 	-$(RM) "fir2.pp" 
 	-@echo 'Finished clean'
 	-@echo ' '

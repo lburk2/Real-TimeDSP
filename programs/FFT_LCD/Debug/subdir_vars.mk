@@ -28,6 +28,7 @@ C_SRCS += \
 ./hellocfg_c.c \
 ../lcd.c \
 ../main.c \
+../myNCO.c \
 ../rtGetInf.c \
 ../rtGetNaN.c \
 ../rt_nonfinite.c \
@@ -48,6 +49,7 @@ OBJS += \
 ./hellocfg_c.obj \
 ./lcd.obj \
 ./main.obj \
+./myNCO.obj \
 ./rtGetInf.obj \
 ./rtGetNaN.obj \
 ./rt_nonfinite.obj \
@@ -79,6 +81,7 @@ C_DEPS += \
 ./hellocfg_c.pp \
 ./lcd.pp \
 ./main.pp \
+./myNCO.pp \
 ./rtGetInf.pp \
 ./rtGetNaN.pp \
 ./rt_nonfinite.pp \
@@ -117,6 +120,7 @@ C_DEPS__QUOTED += \
 "hellocfg_c.pp" \
 "lcd.pp" \
 "main.pp" \
+"myNCO.pp" \
 "rtGetInf.pp" \
 "rtGetNaN.pp" \
 "rt_nonfinite.pp" \
@@ -140,6 +144,7 @@ OBJS__QUOTED += \
 "hellocfg_c.obj" \
 "lcd.obj" \
 "main.obj" \
+"myNCO.obj" \
 "rtGetInf.obj" \
 "rtGetNaN.obj" \
 "rt_nonfinite.obj" \
@@ -158,6 +163,7 @@ C_SRCS__QUOTED += \
 "./hellocfg_c.c" \
 "../lcd.c" \
 "../main.c" \
+"../myNCO.c" \
 "../userInterface.c" 
 
 ASM_SRCS__QUOTED += \
