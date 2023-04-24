@@ -42,7 +42,8 @@ extern const int16_t* demoFilterptr;
 extern const int16_t* highPassptr;
 //volatile int indexIn;
 int txcounter=0;
-
+int windowSize=3;
+int detector=o;
 
 int start;
 int stop;
@@ -113,39 +114,37 @@ void HWI_I2S_Tx(void)
 
 void TSKAudioProcessorFxn(Arg value_arg)
 {
-	 //add something like this for the post
-
 	//prolog aka init stuff
+	int i=0;
+	int j=0;
 	while(1)//in general you don't return from task, one time thing? make it higher priority
 	{
 		MBX_pend(&MBXAudio, msg, SYS_FOREVER);
-		//SWI_disable();
-		//need to have semaphore in here or some kind of sleep or maybe mxb pend is the sleep
-		//SEM_pend(&SEMFilter, SYS_FOREVER);
-		switch(filterMode){
-		case 1:
-			fir2((DATA *)&msg,
-				 (DATA *)demoFilterptr,
-				 (DATA *)&filteredLeftSample,
-				 (DATA *)delayLineLPptr,
-				 (ushort)48,
-				 (ushort)70);
-			break;
-		case 2:
-			fir2((DATA *)&msg,
-				 (DATA *)highPassptr,
-				 (DATA *)&filteredLeftSample,
-				 (DATA *)delayLineHPptr,
-				 (ushort)48,
-				 (ushort)67);
-			break;
-		default:
-			memcpy(filteredLeftSample,msg,48);
-			break;
+
+		if(filterMode)
+		{
+
+			for(i=0;i<48;i++)
+			{
+				detector+=msg[i]^2;
+
+				int sum=0;
+				for(j=i-windowSize/2;j<=i+windowSize;j++)
+				{
+					if(j>=0 && j<48)
+					{
+						sum+=msg[j];
+					}
+				}
+				filteredLeftSample[i]=int((float)sum/(float)windowSize);
+			}
+			detector=int((float)detector/(float)48);
+		}
+		if(!filterMode)
+		{
+
 		}
 
-		//SEM_post(&SEMFilter);
-		//SWI_enable();
 		MBX_post(&MBXOutput, filteredLeftSample, SYS_FOREVER);
 
 	}

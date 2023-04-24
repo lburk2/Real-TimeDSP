@@ -31,7 +31,7 @@ void TSKUserInterfaceFxn(Arg value_arg)
     {
         TSK_sleep(50);
 
-        SEM_pend(&SEMI2C, SYS_FOREVER);
+        //SEM_pend(&SEMI2C, SYS_FOREVER);
 
         //read switches on i2c
         switch1=EZDSP5502_I2CGPIO_readLine(SW1);
@@ -40,34 +40,16 @@ void TSKUserInterfaceFxn(Arg value_arg)
         	{
         		if(!switch1)
         		{
-        			filterMode++;
-        			if(filterMode>2)
-        			{
-        				filterMode=0;
-        			}
-        			switch(filterMode){
-        			case 0:
-        			    EZDSP5502_I2CGPIO_writeLine(   LED0, LOW );
-        			    EZDSP5502_I2CGPIO_writeLine(   LED1, HIGH );
-        			    EZDSP5502_I2CGPIO_writeLine(   LED2, HIGH );
-        			break;
-        			case 1:
-        			    EZDSP5502_I2CGPIO_writeLine(   LED0, HIGH );
-        			    EZDSP5502_I2CGPIO_writeLine(   LED1, LOW );
-        			    EZDSP5502_I2CGPIO_writeLine(   LED2, HIGH );
-        			break;
-        			case 2:
-        			    EZDSP5502_I2CGPIO_writeLine(   LED0, HIGH );
-        			    EZDSP5502_I2CGPIO_writeLine(   LED1, HIGH );
-        			    EZDSP5502_I2CGPIO_writeLine(   LED2, LOW );
-        			break;
-        			}
+        			filterMode=1; //button pressed
         		}
+        		if(switch1)
+				{
+					filterMode=0;
+				}
+
         		switch1Prev=switch1;
         	}
-
-        EZDSP5502_I2CGPIO_writeLine(   LED3, flagHighakadanger );
-        SEM_post(&SEMI2C);
+        //SEM_post(&SEMI2C);
     }
 }
 
