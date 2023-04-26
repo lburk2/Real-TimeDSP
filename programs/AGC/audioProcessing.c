@@ -43,7 +43,11 @@ extern const int16_t* highPassptr;
 //volatile int indexIn;
 int txcounter=0;
 int windowSize=3;
-int detector=o;
+int detector=0;
+int detector_array[48]={0};
+int ones[3]=[1,1,1];
+int setpoint=1;
+
 
 int start;
 int stop;
@@ -117,6 +121,8 @@ void TSKAudioProcessorFxn(Arg value_arg)
 	//prolog aka init stuff
 	int i=0;
 	int j=0;
+	int count=0;
+	int sum_output=0;
 	while(1)//in general you don't return from task, one time thing? make it higher priority
 	{
 		MBX_pend(&MBXAudio, msg, SYS_FOREVER);
@@ -128,17 +134,35 @@ void TSKAudioProcessorFxn(Arg value_arg)
 			{
 				detector+=msg[i]^2;
 
-				int sum=0;
-				for(j=i-windowSize/2;j<=i+windowSize;j++)
-				{
-					if(j>=0 && j<48)
-					{
-						sum+=msg[j];
-					}
-				}
-				filteredLeftSample[i]=int((float)sum/(float)windowSize);
 			}
 			detector=int((float)detector/(float)48);
+			detector_array[count]=detector;
+			count++;
+			if(count>=48)
+			{
+				count=0;
+			}
+			fir2((DATA *)&detector_array,
+					 (DATA *)ones,
+					 (DATA *)&filteredLeftSample,
+					 (DATA *)delayLineLPptr,
+					 (ushort)48,
+					 (ushort)3);
+
+			for(i=0;i<48;i++)
+			{
+				sum_output+=filteredLeftSample[i];
+			}
+			sum_output=sum_output/48;
+
+			if(sum_output>setpoint)
+			{
+
+			}
+			else
+			{
+
+			}
 		}
 		if(!filterMode)
 		{
