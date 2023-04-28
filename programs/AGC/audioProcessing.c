@@ -123,7 +123,14 @@ void TSKAudioProcessorFxn(Arg value_arg)
 	int j=0;
 	int count=0;
 	int sum_output=0;
-	while(1)//in general you don't return from task, one time thing? make it higher priority
+	int Fs = 10; //sample rate
+	int Ts = 1/Fs;
+	int T = 10; //length to run simulation in seconds
+	int tau = 0.83333333333; //Design for 3 tau at 2.5s
+	int k = 1 / (tau * Fs);
+	int out[48] = {0};
+
+	while(1)
 	{
 		MBX_pend(&MBXAudio, msg, SYS_FOREVER);
 
@@ -142,12 +149,15 @@ void TSKAudioProcessorFxn(Arg value_arg)
 			{
 				count=0;
 			}
-			fir2((DATA *)&detector_array,
-					 (DATA *)ones,
-					 (DATA *)&filteredLeftSample,
-					 (DATA *)delayLineLPptr,
-					 (ushort)48,
-					 (ushort)3);
+
+			//iir
+			out[0] = k * detector_array[0];
+			for( i=1;i<48;i++)
+			{
+			    out[i] = (1-k)*out[i-1] + k * detector_array[i];
+			}
+
+
 
 			for(i=0;i<48;i++)
 			{
