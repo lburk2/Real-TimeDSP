@@ -21,7 +21,7 @@
 
 int switch1;
 int switch1Prev=1;
-int filterMode=0;
+int filterMode=1;
 int flagHighakadanger=0;
 
 
@@ -40,13 +40,15 @@ void TSKUserInterfaceFxn(Arg value_arg)
         	{
         		if(!switch1)
         		{
-        			filterMode=1; //button pressed
+					if(filterMode==0)
+					{
+						filterMode=1; //button pressed
+					}
+					else if(filterMode==1)
+					{
+						filterMode=0;
+					}
         		}
-        		if(switch1)
-				{
-					filterMode=0;
-				}
-
         		switch1Prev=switch1;
         	}
         //SEM_post(&SEMI2C);

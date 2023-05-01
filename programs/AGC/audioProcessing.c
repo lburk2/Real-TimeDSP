@@ -45,8 +45,9 @@ int txcounter=0;
 int windowSize=3;
 int detector=0;
 int detector_array[48]={0};
-int ones[3]=[1,1,1];
+//int ones[3]=[1,1,1];
 int setpoint=1;
+int gain=0;
 
 
 int start;
@@ -134,15 +135,14 @@ void TSKAudioProcessorFxn(Arg value_arg)
 	{
 		MBX_pend(&MBXAudio, msg, SYS_FOREVER);
 
-		if(filterMode)
+		if(!filterMode)
 		{
 
 			for(i=0;i<48;i++)
 			{
 				detector+=msg[i]^2;
-
 			}
-			detector=int((float)detector/(float)48);
+			detector=(int)((float)detector/(float)48);
 			detector_array[count]=detector;
 			count++;
 			if(count>=48)
@@ -157,30 +157,31 @@ void TSKAudioProcessorFxn(Arg value_arg)
 			    out[i] = (1-k)*out[i-1] + k * detector_array[i];
 			}
 
-
-
 			for(i=0;i<48;i++)
 			{
 				sum_output+=filteredLeftSample[i];
 			}
 			sum_output=sum_output/48;
 
-			if(sum_output>setpoint)
+			if(sum_output<setpoint)
 			{
-
+				gain+=2;
+				for(i=0;i<48;i++)
+				{
+					msg[i]=msg[i]*gain;
+				}
 			}
 			else
 			{
-
+				gain-=2;
+				for(i=0;i<48;i++)
+				{
+					msg[i]=msg[i]*gain;
+				}
 			}
 		}
-		if(!filterMode)
-		{
 
-		}
-
-		MBX_post(&MBXOutput, filteredLeftSample, SYS_FOREVER);
-
+		MBX_post(&MBXOutput, msg, SYS_FOREVER);
 	}
 }
 
