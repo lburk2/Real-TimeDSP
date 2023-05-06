@@ -13,6 +13,9 @@
 #include "csl_mcbsp.h"
 #include "Dsplib.h"
 
+#define MAX_GAIN 10.0
+#define MIN_GAIN 0.0
+
 //#include "myNCO.h"
 //#include "myFIR.h"
 
@@ -43,11 +46,16 @@ extern const int16_t* highPassptr;
 //volatile int indexIn;
 int txcounter=0;
 int windowSize=3;
-int detector=0;
-int detector_array[48]={0};
-//int ones[3]=[1,1,1];
-int setpoint=1;
-int gain=0;
+float detector=0;
+float detector_array[48]={0};
+int ones[3]= {1,1,1};
+
+float sum_output=0;
+float setpoint=35724.0;
+float gain=1;
+float alpha = 1 /  (0.83333333333 * 48000.0);
+float out[48] = {0};
+
 
 
 int start;
@@ -121,15 +129,7 @@ void TSKAudioProcessorFxn(Arg value_arg)
 {
 	//prolog aka init stuff
 	int i=0;
-	int j=0;
 	int count=0;
-	int sum_output=0;
-	int Fs = 10; //sample rate
-	int Ts = 1/Fs;
-	int T = 10; //length to run simulation in seconds
-	int tau = 0.83333333333; //Design for 3 tau at 2.5s
-	int k = 1 / (tau * Fs);
-	int out[48] = {0};
 
 	while(1)
 	{
@@ -140,10 +140,10 @@ void TSKAudioProcessorFxn(Arg value_arg)
 
 			for(i=0;i<48;i++)
 			{
-				detector+=msg[i]^2;
+				detector+=((float)msg[i]*(float)msg[i]);
 			}
-			detector=(int)((float)detector/(float)48);
-			detector_array[count]=detector;
+			detector=detector/48.0;
+			detector_array[count]= detector;
 			count++;
 			if(count>=48)
 			{
@@ -151,33 +151,40 @@ void TSKAudioProcessorFxn(Arg value_arg)
 			}
 
 			//iir
-			out[0] = k * detector_array[0];
+			out[0] = alpha * detector_array[0];
 			for( i=1;i<48;i++)
 			{
-			    out[i] = (1-k)*out[i-1] + k * detector_array[i];
+			    out[i] = ((1.0-alpha)*out[i-1] + alpha *detector_array[i]);
 			}
+
 
 			for(i=0;i<48;i++)
 			{
-				sum_output+=filteredLeftSample[i];
+				sum_output+=out[i];
 			}
 			sum_output=sum_output/48;
 
-			if(sum_output<setpoint)
+		    // Limit gain to allowable range
+		    if (gain > MAX_GAIN) {
+		      gain = MAX_GAIN;
+		    } else if (gain < MIN_GAIN) {
+		      gain = MIN_GAIN;
+		    }
+
+//			if(sum_output < setpoint)
+//			{
+//				gain+=0.01;
+//			}
+//			else if (sum_output > setpoint)
+//			{
+//				gain-=0.01;
+//			}
+
+			gain = setpoint/sum_output;
+
+			for(i=0;i<48;i++)
 			{
-				gain+=2;
-				for(i=0;i<48;i++)
-				{
-					msg[i]=msg[i]*gain;
-				}
-			}
-			else
-			{
-				gain-=2;
-				for(i=0;i<48;i++)
-				{
-					msg[i]=msg[i]*gain;
-				}
+				msg[i]=(int)((float)msg[i]*gain);
 			}
 		}
 

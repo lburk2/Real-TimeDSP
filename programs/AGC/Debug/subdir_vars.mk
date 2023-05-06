@@ -26,7 +26,6 @@ C_SRCS += \
 ./hellocfg_c.c \
 ../main.c \
 ../myFIR.c \
-../myNCO.c \
 ../userInterface.c 
 
 OBJS += \
@@ -42,7 +41,6 @@ OBJS += \
 ./hellocfg_c.obj \
 ./main.obj \
 ./myFIR.obj \
-./myNCO.obj \
 ./userInterface.obj 
 
 GEN_MISC_FILES += \
@@ -69,7 +67,6 @@ C_DEPS += \
 ./hellocfg_c.pp \
 ./main.pp \
 ./myFIR.pp \
-./myNCO.pp \
 ./userInterface.pp 
 
 GEN_CMDS += \
@@ -103,7 +100,6 @@ C_DEPS__QUOTED += \
 "hellocfg_c.pp" \
 "main.pp" \
 "myFIR.pp" \
-"myNCO.pp" \
 "userInterface.pp" 
 
 S??_DEPS__QUOTED += \
@@ -122,7 +118,6 @@ OBJS__QUOTED += \
 "hellocfg_c.obj" \
 "main.obj" \
 "myFIR.obj" \
-"myNCO.obj" \
 "userInterface.obj" 
 
 ASM_DEPS__QUOTED += \
@@ -138,7 +133,6 @@ C_SRCS__QUOTED += \
 "./hellocfg_c.c" \
 "../main.c" \
 "../myFIR.c" \
-"../myNCO.c" \
 "../userInterface.c" 
 
 ASM_SRCS__QUOTED += \
