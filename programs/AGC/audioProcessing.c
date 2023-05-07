@@ -137,7 +137,7 @@ void TSKAudioProcessorFxn(Arg value_arg)
 
 		if(!filterMode)
 		{
-
+			// Compute Power
 			for(i=0;i<48;i++)
 			{
 				detector+=((float)msg[i]*(float)msg[i]);
@@ -157,7 +157,7 @@ void TSKAudioProcessorFxn(Arg value_arg)
 			    out[i] = ((1.0-alpha)*out[i-1] + alpha *detector_array[i]);
 			}
 
-
+			// Average filter output
 			for(i=0;i<48;i++)
 			{
 				sum_output+=out[i];
@@ -171,16 +171,17 @@ void TSKAudioProcessorFxn(Arg value_arg)
 		      gain = MIN_GAIN;
 		    }
 
-//			if(sum_output < setpoint)
-//			{
-//				gain+=0.01;
-//			}
-//			else if (sum_output > setpoint)
-//			{
-//				gain-=0.01;
-//			}
+		    //increase/decrease gain
+			if(sum_output < setpoint)
+			{
+				gain+=0.01;
+			}
+			else if (sum_output > setpoint)
+			{
+				gain-=0.01;
+			}
 
-			gain = setpoint/sum_output;
+//			gain = setpoint/sum_output;
 
 			for(i=0;i<48;i++)
 			{
