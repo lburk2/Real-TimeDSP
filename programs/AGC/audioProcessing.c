@@ -50,13 +50,13 @@ float gain=1;
 float desiredGain=1;
 float alpha = 1 /  (0.83333333333 * 48000.0);
 float out[BUFF_SIZE] = {0};
-float setpoint=14.0;
 
 /*
  * Tunable variables for AGC
  */
-float attack = 0.2;
-float decay = 0.001;
+float attack = 0.001;
+float decay = 0.2;
+float setpoint=14.0;
 
 
 int start;
@@ -139,51 +139,46 @@ void TSKAudioProcessorFxn(Arg value_arg)
 //		if(!filterMode)
 		if(1)
 		{
-			detector = 0;
+			detector = 0.0;
 			// find max amplitude
 			for(i=0;i<48;i++)
-			{
 				if ((float)msg[i]>detector)
 					detector =(float)msg[i];
-			}
 
 			detector_array[count]= detector;
 			count++;
 			if(count>=BUFF_SIZE)
-			{
 				count=0;
-			}
 
 			//iir LPF
 			out[0] = alpha * detector_array[0];
 			for( i=1;i<BUFF_SIZE;i++)
-			{
 			    out[i] = ((1.0-alpha)*out[i-1] + alpha *detector_array[i]);
-			}
 
 			// Average filter output
 			for(i=0;i<BUFF_SIZE;i++)
-			{
 				sum_output+=out[i];
-			}
-			sum_output=sum_output/200;
+
+			sum_output=sum_output/200.0;
 
 			//Compute Gain
-
 			desiredGain = setpoint/sum_output;
-			gain = ((1.0-attack)*desiredGain + attack *gain);
+
+			if (desiredGain > 1)
+				gain = ((1.0-attack)*desiredGain + attack *gain); //ask about this too
+			else if (desiredGain <= 1)
+				gain = ((1.0-decay)*desiredGain + decay*gain);
+			if (sum_output<0.01)  //is this the right idea??
+				gain=1;
 
 			// Limit gain to allowable range
-			if (gain > MAX_GAIN) {
+			if (gain > MAX_GAIN)
 			  gain = MAX_GAIN;
-			} else if (gain < MIN_GAIN) {
+			else if (gain < MIN_GAIN)
 			  gain = MIN_GAIN;
-			}
 
 			for(i=0;i<48;i++)
-			{
 				msg[i]=(int)((float)msg[i]*gain);
-			}
 		}
 
 		MBX_post(&MBXOutput, msg, SYS_FOREVER);
