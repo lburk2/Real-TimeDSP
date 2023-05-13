@@ -1,19 +1,18 @@
 BUFF_SIZE = 200;
-MAX_GAIN = 4;
+MAX_GAIN = 100;
 MIN_GAIN = 0.1;
 
-msg = zeros(1, 48);
-detector_array = zeros(1, BUFF_SIZE);
+msg = ones(1, 48);
+detector_array = ones(1, BUFF_SIZE);
 out = zeros(1, BUFF_SIZE);
 output = zeros(1, 240000);
 gain = ones(1, 5000);
 sum_output = 0;
 
 alpha = 1 /  (0.83333333333 * 48000.0);
-setpoint = 41;
-attack = 0.0000001;
-decay = 0.99999;
-
+setpoint = 42;
+attack = 0.0001;
+decay = 0.999;
 count = 0;
 
 
@@ -28,21 +27,21 @@ t = 0:1/fs:duration-1/fs;
 amplitude1 = 16384;
 amplitude2 = 32768;
 f = 100; % Hz
-x1 = [amplitude1*sin(2*pi*f*t(1:floor(length(t)/2))), ...
-    amplitude2*sin(2*pi*f*t(floor(length(t)/2)+1:end))];
+% x1 = [amplitude1*sin(2*pi*f*t(1:floor(length(t)/2))), ...
+%     amplitude2*sin(2*pi*f*t(floor(length(t)/2)+1:end))];
 
 % x1 = amplitude1*sin(2*pi*f*t(1:floor(length(t))));
 
-% 
-% x1 = [amplitude2*sin(2*pi*f*t(1:floor(length(t)/2))), ...
-%     amplitude1*sin(2*pi*f*t(floor(length(t)/2)+1:end))];
+
+x1 = [amplitude2*sin(2*pi*f*t(1:floor(length(t)/2))), ...
+    amplitude1*sin(2*pi*f*t(floor(length(t)/2)+1:end))];
 
 % main loop
-j=0;
+j=1;
 k=1;
 while j < 5000
     % Red input from somewhere
-     msg = x1((j*48)+1:(j+1)*48); 
+     msg = x1(((j-1)*48)+1:(j)*48); 
     j = j + 1;
     detector = 0.0;
     
@@ -76,9 +75,11 @@ while j < 5000
     desiredGain = setpoint / sum_output;
     
     if desiredGain > 1
-        gain(j) = (1 - attack) * desiredGain + attack * gain(j);
+        gain(j) = (1 - attack) * desiredGain + attack * gain(j-1);
+        % gain(j) = gain(j-1)+0.1;
     elseif desiredGain <= 1
-        gain(j) = (1 - decay) * desiredGain + decay * gain(j);
+        gain(j) = (1 - decay) * desiredGain + decay *  gain(j-1);
+         % gain(j) = gain(j-1)-0.1;
     end
     
     % if sum_output < 0.01
@@ -96,4 +97,8 @@ while j < 5000
         output(k) = round(msg(i) * gain(j));
         k = 1 + k;
     end
+     
 end
+
+plot(t,output,t, x1)
+axis([2.4 3 -75000 75000 ])
