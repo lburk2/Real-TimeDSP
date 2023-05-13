@@ -54,7 +54,7 @@ float out[BUFF_SIZE] = {0};
 /*
  * Tunable variables for AGC
  */
-float attack = 0.000001;
+float attack = 0.0001;
 float decay = 0.9999999;
 float setpoint=14.0;
 
@@ -175,10 +175,10 @@ void TSKAudioProcessorFxn(Arg value_arg)
 				  gain = MAX_GAIN;
 				else if (gain < MIN_GAIN)
 				  gain = MIN_GAIN;
-			}
+//			}
 			for(i=0;i<48;i++)
 				msg[i]=(int)((float)msg[i]*gain);
-//		}
+		}
 
 		MBX_post(&MBXOutput, msg, SYS_FOREVER);
 	}
