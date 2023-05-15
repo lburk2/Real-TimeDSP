@@ -55,8 +55,8 @@ float out[BUFF_SIZE] = {0};
  * Tunable variables for AGC
  */
 float attack = 0.0001;
-float decay = 0.9999999;
-float setpoint=14.0;
+float decay = 0.99;
+float setpoint=10.0;
 
 
 int start;
@@ -136,8 +136,7 @@ void TSKAudioProcessorFxn(Arg value_arg)
 	{
 		MBX_pend(&MBXAudio, msg, SYS_FOREVER);
 
-//		if(!filterMode)
-		if(1)
+		if(!filterMode)
 		{
 			detector = 0.0;
 			// find max amplitude
@@ -163,8 +162,8 @@ void TSKAudioProcessorFxn(Arg value_arg)
 
 			//Compute Gain
 			desiredGain = setpoint/sum_output;
-//			if(sum_output>0.001)
-//			{
+			if(sum_output>0.01)
+			{
 				if (desiredGain > 1)
 					gain = ((1.0-attack)*desiredGain + attack *gain);
 				else if (desiredGain <= 1)
@@ -175,7 +174,7 @@ void TSKAudioProcessorFxn(Arg value_arg)
 				  gain = MAX_GAIN;
 				else if (gain < MIN_GAIN)
 				  gain = MIN_GAIN;
-//			}
+			}
 			for(i=0;i<48;i++)
 				msg[i]=(int)((float)msg[i]*gain);
 		}
